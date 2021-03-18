@@ -7,5 +7,5 @@ A replacement for moodle and dualis.
 You can run the django project with the built in webserver via:
 
 ```
-python manage.py runserver
+python eCourse_backend/manage.py runserver
 ```
