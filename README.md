@@ -2,7 +2,7 @@
 
 A replacement for moodle and dualis.
 
-## Running django project
+## Running the django project
 
 You can run the django project with the built in webserver via:
 
