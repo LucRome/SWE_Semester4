@@ -6,9 +6,8 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - run: |
-        git config --global user.name 'LucRome'
-        git config --global user.email 'lucrome@users.noreply.github.com'
+      - run: git config --global user.name 'LucRome'
+      - run: git config --global user.email 'lucrome@users.noreply.github.com'
       - uses: actions/checkout@v2
         env:
           GIT_TERMINAL_PROMPT: 1
