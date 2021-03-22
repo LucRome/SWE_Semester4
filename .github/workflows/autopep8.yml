@@ -6,6 +6,7 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
+      - run: git config --global --add url."git@github.com:".insteadOf "https://github.com/"
       - uses: actions/checkout@v2
         env:
           GIT_TERMINAL_PROMPT: 1
