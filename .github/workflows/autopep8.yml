@@ -13,7 +13,7 @@ jobs:
         env:
           GIT_TERMINAL_PROMPT: 1
         with:
-          token: e0bfc7d6ac567c8d71d0684fcc2908955d0b540c 
+          token: ${{ secrets.PAT }}
           ref: ${{ github.head_ref }}
       - name: autopep8
         id: autopep8
