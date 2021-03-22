@@ -6,13 +6,13 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - run: git config --global user.name 'LucRome'
+      - run: git config --global user.name 'LucRome1'
       - run: git config --global user.email 'lucrome@users.noreply.github.com'
       - uses: actions/checkout@v2
         env:
           GIT_TERMINAL_PROMPT: 1
         with:
-          token: 6b4cdcc5da22bbcc485c95496dc1e55f2b721d9e 
+          token: e0bfc7d6ac567c8d71d0684fcc2908955d0b540c 
           ref: ${{ github.head_ref }}
       - name: autopep8
         id: autopep8
