@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        env:
+          GIT_TERMINAL_PROMPT: 1
         with:
           token: 6b4cdcc5da22bbcc485c95496dc1e55f2b721d9e 
           ref: ${{ github.head_ref }}
