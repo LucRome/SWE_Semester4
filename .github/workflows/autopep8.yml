@@ -5,10 +5,11 @@ jobs:
     # Check if the PR is not from a fork
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    environment: TaskEnvironment
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.PAT_BOT }}
           ref: ${{ github.head_ref }}
       - name: autopep8
         id: autopep8
