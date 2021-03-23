@@ -27,4 +27,4 @@ jobs:
         pip install -r eCourse_backend/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python eCourse_Backend/manage.py test
