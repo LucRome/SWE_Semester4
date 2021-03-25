@@ -19,8 +19,8 @@ class User(AbstractUser):
     matr_nr =  models.IntegerField(default=0)
 
 class Course(models.Model):
-    lecturer = models.ForeignKey(User, on_delete=models.CASCADE)
-    student = models.ManyToManyField(User)
+    lecturer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lecturer2course')
+    student = models.ManyToManyField(User, related_name='students2course')
     name = models.CharField(max_length=32)
     start_date = models.DateField()
     end_date = models.DateField()

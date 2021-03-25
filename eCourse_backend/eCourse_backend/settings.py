@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'eCourse_backend'
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'eCourse_backend.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
