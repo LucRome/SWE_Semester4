@@ -20,5 +20,5 @@ def main():
 
 if __name__ == '__main__':
     main()
- 	print('Help')
-	print('Wrong')
+    print('Help')
+    print('Wrong')
