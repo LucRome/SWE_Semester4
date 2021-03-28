@@ -11,7 +11,9 @@
 * **Klausurübersicht**
     * Schreenshot:
     ![](Pictures/Studentenseite_Klausurubersicht.png)
-
+    * Klausuren die mit anderen zusammenzählen gruppieren
+    * Wie bei Admin-Kursübersicht (so ähnlich)
+    * Gruppieren/Filtern nach Semester
 ## Dozenten:
 * **Kursübersicht**
     * [Website (read-only)](https://www.figma.com/file/LieeU1zBl6X0NmMaoXKqJ8/Untitled?node-id=0%3A1)
