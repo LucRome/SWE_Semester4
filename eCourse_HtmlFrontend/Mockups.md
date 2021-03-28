@@ -19,6 +19,7 @@
     * [Website (read-only)](https://www.figma.com/file/LieeU1zBl6X0NmMaoXKqJ8/Untitled?node-id=0%3A1)
     * Schreenshot:
     ![](Pictures/Dozenten_Kursuebersicht.png)
+    * Filten nach Jahrgang, ...
 * **Tasks**
     * Taskseite nur pro Kurs (Button "Anzeigen")
     * [Website (read-only)](https://www.figma.com/file/LieeU1zBl6X0NmMaoXKqJ8/Untitled?node-id=10%3A2)
