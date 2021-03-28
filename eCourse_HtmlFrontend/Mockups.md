@@ -17,6 +17,11 @@
     * [Website (read-only)](https://www.figma.com/file/LieeU1zBl6X0NmMaoXKqJ8/Untitled?node-id=0%3A1)
     * Schreenshot:
     ![](Pictures/Dozenten_Kursuebersicht.png)
+* **Tasks**
+    * Taskseite nur pro Kurs
+    * [Website (read-only)](https://www.figma.com/file/LieeU1zBl6X0NmMaoXKqJ8/Untitled?node-id=10%3A2)
+    * Schreenshot:
+    ![](Pictures/Dozenten_Tasks.png)
 
 ## Admin/Sekreteriat:
 * **Kursübersicht:**
