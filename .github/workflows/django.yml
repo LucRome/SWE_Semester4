@@ -2,10 +2,10 @@ name: Django CI
 
 on:
   push:
-    paths: "eCourse_backend"
+    paths: "eCourse_backend/**"
     branches: [ master ]
   pull_request:
-    paths: "eCourse_backend"
+    paths: "eCourse_backend/**"
     branches: [ master ]
 
 jobs:
