@@ -11,6 +11,7 @@
 * **Klausurübersicht**
     * Schreenshot:
     ![](Pictures/Studentenseite_Klausurubersicht.png)
+    * Klausuren die mit anderen zusammenzählen gruppieren
 
 ## Dozenten:
 * **Kursübersicht**
