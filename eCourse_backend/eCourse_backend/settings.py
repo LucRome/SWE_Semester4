@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC' # should be UTC+1, but django complains
+TIME_ZONE = 'UTC'  # should be UTC+1, but django complains
 
 USE_I18N = True
 
