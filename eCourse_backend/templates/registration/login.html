@@ -1,23 +1,53 @@
-<head>
-    <title>Login Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-    <!-- Navbar (Logo + Acc.) (not expandable) -->
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" style=""/>
-        </a>
-    </nav>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Do Stuff</button>
-    </form>
-</body>
+{% extends "base.html" %}
+
+{% block navbar-content %}
+<h2>Login</h2>
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="#">Sign up</a> <!-- TODO: make work -->
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block content %}
+<!-- TODO: Rückmeldungen -->
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<!-- Formular -->
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group form-inline">
+        <label for="email">{{ form.username.label_tag }}</label>
+        <!-- <input type="email" class="form-control" placeholder="Enter E-Mail" id="ema" -->
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="bi bi-person"></i>
+                </div>
+            </div>
+            <input id="id_username" class="form-control" type="text" name="username" autofocus=""
+            autocapitalize="none" autocomplete="username" maxlength="150" required="">
+        </div>
+    </div>
+
+    <div class="form-group form-inline">
+        <label for="password">{{form.password.label_tag}}</label>
+        <div> {{form.password }} </div>
+    </div>
+
+    <button type="submit">Do Stuff</button>
+</form>
+
+{% endblock %}
