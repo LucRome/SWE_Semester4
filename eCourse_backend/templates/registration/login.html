@@ -9,6 +9,9 @@
     .input-group-text {
         width: 40px;
     }
+    .errorIcon {
+        font-size: 2em;
+    }
 </style>
 {% endblock %}
 
@@ -25,7 +28,17 @@
 {% block content %}
 <!-- TODO: Rückmeldungen -->
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<div class="container-fluid border-dark border" style="background-color: lightgray;">
+    <div class="row">
+        <div class="col-sm-1 align-content-center">
+            <span class="bi bi-exclamation-octagon-fill text-danger errorIcon"></span>
+        </div>
+        <div class="col-sm-11">
+            <h5>Username and Password didn't match</h5>
+            <h5>Please try again!</h5>
+        </div>
+    </div>
+</div>
 {% endif %}
 
 {% if next %}
