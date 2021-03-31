@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+{% block additional-head %}
+<style>
+    input {
+        max-width: 400px;
+    }
+
+    .input-group-text {
+        width: 40px;
+    }
+</style>
+{% endblock %}
+
 {% block navbar-content %}
 <h2>Login</h2>
 <ul class="navbar-nav">
@@ -28,25 +40,43 @@
 <!-- Formular -->
 <form method="post">
     {% csrf_token %}
-    <div class="form-group form-inline">
-        <label for="email">{{ form.username.label_tag }}</label>
-        <!-- <input type="email" class="form-control" placeholder="Enter E-Mail" id="ema" -->
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <i class="bi bi-person"></i>
-                </div>
-            </div>
-            <input id="id_username" class="form-control" type="text" name="username" autofocus=""
-            autocapitalize="none" autocomplete="username" maxlength="150" required="">
-        </div>
-    </div>
-
-    <div class="form-group form-inline">
-        <label for="password">{{form.password.label_tag}}</label>
-        <div> {{form.password }} </div>
-    </div>
-
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td style="width: 0px;">
+                    <label for="id_username">{{ form.username.label_tag }}</label>
+                </td>
+                <td>
+                    <!-- <input type="email" class="form-control" placeholder="Enter E-Mail" id="ema" -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <input id="id_username" class="form-control" type="text" name="username" autofocus=""
+                        autocapitalize="none" autocomplete="username" maxlength="150" required="">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_password">{{form.password.label_tag}}</label>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                *
+                            </div>
+                        </div>
+                        <input id="id_password" class="form-control" type="password" name="password" 
+                        autocomplete="current-password" required=""> 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <button type="submit">Do Stuff</button>
 </form>
 
