@@ -43,10 +43,28 @@
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+    <div class="container-fluid border-dark border" style="background-color: lightgray;">
+        <div class="row">
+            <div class="col-sm-1 align-content-center">
+                <span class="bi bi-exclamation-octagon-fill text-danger errorIcon"></span>
+            </div>
+            <div class="col-sm-11">
+                <h5>Your account doesn't have access to this page.</h5>
+                <h5>To proceed, please login with an account that has access.</h5>
+            </div>
+        </div>
+    </div>
     {% else %}
-    <p>Please login to see this page.</p>
+    <div class="container-fluid border-dark border" style="background-color: lightgray;">
+        <div class="row">
+            <div class="col-sm-1 align-content-center">
+                <span class="bi bi-exclamation-octagon-fill text-danger errorIcon"></span>
+            </div>
+            <div class="col-sm-11">
+                <h5>Please login to see this page.</h5>
+            </div>
+        </div>
+    </div>
     {% endif %}
 {% endif %}
 
