@@ -45,9 +45,7 @@
     * Möglichkeit Gruppen zu erstellen oder Möglichkeit Kurse mit Tags zu versehen und danach zu filtern
     * Verweis auf Kurserstell-Seite
 * **Userverwaltung**
-    * [Website(read-only)](https://www.figma.com/file/HQCHNlbmD0fFJlmD9y4E0A/Untitled?node-id=1%3A132)
-    * Schreenshot:
-    ![](Pictures/Admin_UserVerw.png)
+    
     * Änderungen:
       * Kurs-bearbeiten: Seite nur für 1 Kurs (über Edit-Button in Kursübersicht hin)
       * Kurs/Studentengruppen-Erstellen: Kurs / Studentengruppen erstellen und Leute zuweisen
