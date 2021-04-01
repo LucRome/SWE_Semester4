@@ -19,6 +19,7 @@
     * Klausuren die mit anderen zusammenzählen gruppieren
     * Wie bei Admin-Kursübersicht (so ähnlich)
     * Gruppieren/Filtern nach Semester
+      *  Gruppierung wird vom Admin vorgegeben
 
 ## Dozenten:
 * **Kursübersicht**
@@ -42,10 +43,12 @@
     * Schreenshot:
     ![](Pictures/Admin_Uebersicht.png)
     * Möglichkeit Gruppen zu erstellen oder Möglichkeit Kurse mit Tags zu versehen und danach zu filtern
+    * Verweis auf Kurserstell-Seite
 * **Userverwaltung**
     * [Website(read-only)](https://www.figma.com/file/HQCHNlbmD0fFJlmD9y4E0A/Untitled?node-id=1%3A132)
     * Schreenshot:
     ![](Pictures/Admin_UserVerw.png)
     * Änderungen:
       * Kurs-bearbeiten: Seite nur für 1 Kurs (über Edit-Button in Kursübersicht hin)
-      * User-Verwaltung: Nur Nutzer anlegen/entfernen
+      * Kurs/Studentengruppen-Erstellen: Kurs / Studentengruppen erstellen und Leute zuweisen
+      * User-Verwaltung: Nur Nutzer anlegen/entfernen/Rollen festlegen
