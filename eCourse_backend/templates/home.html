@@ -1,26 +1,15 @@
-<!-- templates/home.html -->
-{% extends 'base.html' %}
+  {% comment %} 
+    Determine which page to show 
+    Depending on user
+  {% endcomment %}
 
-{% block title %}Home{% endblock %}
 
-{% block userbar-content %}
-  {% if user.is_authenticated %}
-    {# Userpic + name #}
-    <div class="float-right">
-      <h3 class="text-white">
-        {{ user.username }}
-      </h3>
-      <img class="logo bg-white" src="https://spng.pngfind.com/pngs/s/16-168603_download-login-icon-svg-hd-png-download.png">
-    </div>
-  {% endif %}
-{%endblock%}
-
-{% block content %}
 {% if user.is_authenticated %}
-  {# Determine role of the user #}
-  Hi, {{user.username}}
+  {% if user.is_superuser %}
+    {% include "home_admin.html" %}
+  {% else %}
+    {% include "home_auth.html" %}
+  {% endif %}
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %}
+  {% include "home_notAuth.html" %}
+{%endif%}
