@@ -12,18 +12,18 @@ Im jeweiligen Unterkapitel der Programmiersprache wird auch nochmals explizit au
 Wie auch in allen hier verwendeten Standards wird Wert auf die Lesbarkeit des Codes gelegt.\\
 Wirkt also eine Regel an einer bestimmten Stelle der Lesbarkeit des Codes entgegen, so wird immer die Lesbarkeit des Codes bevorzugt gegenüber der Befolgung der Regel.\\
 Um ein Beispiel für eine solche Situation zu nennen:
-Dateinamen sollen nach Richtlinie immer im lower\_case geschrieben sein. Allerdings repräsentiert eine Datei einen bestimmten Eigennamen. Hier wird dann bevorzugt, den Eigennamen korrekt zu verwenden, als ihn an die Richtlinie anzupassen.\\
+Dateinamen sollen nach Richtlinie immer im snake\_case geschrieben sein. Allerdings repräsentiert eine Datei einen bestimmten Eigennamen. Hier wird dann bevorzugt, den Eigennamen korrekt zu verwenden, als ihn an die Richtlinie anzupassen.\\
 \section{Allgemein}
 Vorab einige Allgemeine Richtlinien, auf die sich das Projektteam geeinigt hat.
 \begin{itemize}
-\item Dateinamen werden im lower\_case geschrieben (Bsp.: das\_ist\_lowercase)
+\item Dateinamen werden im snake\_case geschrieben (Bsp.: das\_ist\_snake\_case)
 \item Jede Datei erhält einen Dateiheader, in dem die Inhalte der Datei kurz zusammengefasst werden
 \item Der Programmcode wird auf Englisch geschrieben. Von dieser Regel sind alle Inhalte die für den Nutzer der Software sichtbar sind ausgenommen.
 \item Dateien werden mit UTF-8 codiert
 \end{itemize}
 
 \section{Python}
-Für die Programmiersprache Python wird die Codierungsrichtlinie PEP 8 verwendet. Eine ausführliche Version der Richtlinie findet sich auf \url{https://pep8.org/}. \\
+Für die Programmiersprache Python wird die Codierungsrichtlinie PEP 8 verwendet. Eine ausführliche Version der Richtlinie findet sich \href{https://pep8.org/}{hier}. \\
 \textbf{Einrückung}\\
 Für die Einrückung werden 4 Leerzeichen verwendet, keine Tabs.\\
 Weitergeführte Zeilen werden ebenfalls durch Einrückung oder durch Klammern gekennzeichnet \\
@@ -169,12 +169,12 @@ Bezeichnern auf folgende Buchstaben verzichtet werden:\\
 \> O (großes o)\\
 \> I (großes I)
 \end{tabbing}
-\textit{Module} haben kurze Namen und sind im lower\_case geschrieben. \\
+\textit{Module} haben kurze Namen und sind im snake\_case geschrieben. \\
 \textit{Klassen} haben Bezeichner die im CamelCase geschrieben sind.\\
 \textit{Exceptions} sind Klassen und sollten \glqq Error\grqq\: als Suffix erhalten.\\
-\textit {Funktionen} haben Bezeichner die im lower\_case geschrieben sind.\\
+\textit {Funktionen} haben Bezeichner die im snake\_case geschrieben sind.\\
 \textit{Methoden und Instanzvariablen} werden wie Funktionen behandelt.\\
-\textit{Konstanten} werden für ein ganzes Modul definiert und sind in CAPITAL\_LETTERN geschrieben.\\
+\textit{Konstanten} werden für ein ganzes Modul definiert und sind in CONSTANT\_CASE geschrieben.\\
 
 \textbf{Vererbung}\\
 Ist eine Klasse auf Vererbung ausgelegt, sollten alle Methoden und Instanzvaraiblen nicht-öffentlich deklariert werden.\\
@@ -193,10 +193,12 @@ def foo(x):
 \end{lstlisting}
 
 \section{HTML und CSS}
-Die Codierungsrichtlinien von HTML und CSS die im Folgenden zusammengefasst sind, beziehen sich auf die Codierungsrichtlinien für HTML und CSS von Google. Die Gesamtheit der Codierungsrichtlinien findet sich unter \url{https://google.github.io/styleguide/htmlcssguide.html}.
+Die Codierungsrichtlinien von HTML und CSS die im Folgenden zusammengefasst sind, beziehen sich auf die Codierungsrichtlinien für HTML und CSS von Google. Die Gesamtheit der Codierungsrichtlinien findet sich unter \href{https://google.github.io/styleguide/htmlcssguide.html}{diesem Link}.
+
 \subsection{Allgemein}
 \textbf{Protokolle}\\
 Es sollte immer das https-Protokoll verwendet werden. http ist nur in Ausnahmefällen erlaubt, wenn das Dokument nicht mit https erreicht werden kann.\\
+Auf die strikte Beachtung dieser Regel wird in diesem Projekt verzichtet, da das Projekt auf die Entwicklung der Anwendung abzielt und nicht auf die Entwicklung der Infrastruktur.
 
 \textbf{Einrückung}\\
 Jedes Level wird mit 2 Leerzeichen eingerückt. Tabs sollten nicht verwendet werden.\\
@@ -280,7 +282,8 @@ Es sollten immer doppelte Anführungszeichen (\grqq \grqq) verwendet werden.\\
 \textbf{ID- und Klassennamen}\\
 Die Namen sollten immer den Sinn des Elements widerspiegeln. Dadurch sollten entweder bedeutende Namen oder generische Namen verwendet werden.\\ 
 Außerdem sollten die Namen so kurz wie möglich und so lang als nötig sein.\\
-Die Namen sollten zur besseren Lesbarkeit durch Bindestriche getrennt sein.
+Die Namen sollten zur besseren Lesbarkeit durch Bindestriche getrennt sein. \\
+Es wird also dash-case verwendet.
 \begin{lstlisting}[language = HTML, caption = ID- und Klassennamen, label = doctype]
 #video-id {}
 .ads-sample {}
