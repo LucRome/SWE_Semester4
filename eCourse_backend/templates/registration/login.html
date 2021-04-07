@@ -28,17 +28,7 @@
 {% block content %}
 <!-- TODO: Rückmeldungen -->
 {% if form.errors %}
-<div class="container-fluid border-dark border" style="background-color: lightgray;">
-    <div class="row">
-        <div class="col-sm-1 align-content-center">
-            <span class="bi bi-exclamation-octagon-fill text-danger errorIcon"></span>
-        </div>
-        <div class="col-sm-11">
-            <h5>Username and Password didn't match</h5>
-            <h5>Please try again!</h5>
-        </div>
-    </div>
-</div>
+
 {% endif %}
 
 {% if next %}
@@ -71,47 +61,9 @@
 <!-- Formular -->
 <form method="post">
     {% csrf_token %}
-    <table class="table table-borderless">
-        <tbody>
-            <tr>
-                <td style="width: 0px;">
-                    <label for="id_username">
-                        <h5>Username:</h5>
-                    </label>
-                </td>
-                <td>
-                    <!-- <input type="email" class="form-control" placeholder="Enter E-Mail" id="ema" -->
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="bi bi-person"></i>
-                            </div>
-                        </div>
-                        <input id="id_username" class="form-control" type="text" name="username" autofocus=""
-                        autocapitalize="none" autocomplete="username" maxlength="150" required="">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="id_password">
-                        <h5>Password:</h5>
-                    </label>
-                </td>
-                <td>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                *
-                            </div>
-                        </div>
-                        <input id="id_password" class="form-control" type="password" name="password" 
-                        autocomplete="current-password" required=""> 
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    
+    {% include 'forms/bs4_text_form.html' with form=form %}
+
     <div class="container-fluid">
         <button class="btn btn-lg btn-danger" type="submit">Login</button>
     </div>
