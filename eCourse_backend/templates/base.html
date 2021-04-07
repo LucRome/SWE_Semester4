@@ -25,14 +25,14 @@
 
 <body>
     <!-- user Leiste -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark d-flex">
         <a class="navbar-brand" href="#">
             <img class="logo" src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" /> 
         </a>
         {% block userbar-content %} {% endblock %}
     </nav>
     <!-- navigation bar -->
-    <nav class="navbar navbar-dark bg-danger" style="color: white;">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-danger d-flex" style="color: white;">
         {% block navbar-content %} {% endblock %}
     </nav>
     <main>
