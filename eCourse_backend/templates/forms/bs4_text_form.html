@@ -19,11 +19,11 @@
 {% if form.non_field_errors %}
   {% for error in form.non_field_errors %}
     <div class="container-fluid border-dark border" style="background-color: lightgray;">
-        <div class="row">
-            <div class="col-sm-1 align-content-center">
+        <div class="d-sm-flex">
+            <div class="align-content-center mr-sm-1">
                 <span class="bi bi-exclamation-octagon-fill text-danger error-icon"></span>
             </div>
-            <div class="col-sm-11  d-flex flex-wrap align-content-center">
+            <div class="d-flex flex-wrap align-content-center">
               {{ error }}
             </div>
         </div>
