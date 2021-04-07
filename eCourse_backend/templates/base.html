@@ -15,13 +15,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     {% block additional-head %} {% endblock %}
+    <style>
+        .logo {
+            max-height: 80px;
+            width: auto;
+        }
+    </style>
 </head>
 
 <body>
     <!-- user Leiste -->
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
-            <img style="max-height: 80px; width: auto;" src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" /> 
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" /> 
         </a>
         {% block userbar-content %} {% endblock %}
     </nav>

@@ -3,9 +3,22 @@
 
 {% block title %}Home{% endblock %}
 
+{% block userbar-content %}
+  {% if user.is_authenticated %}
+    {# Userpic + name #}
+    <div class="float-right">
+      <h3 class="text-white">
+        {{ user.username }}
+      </h3>
+      <img class="logo bg-white" src="https://spng.pngfind.com/pngs/s/16-168603_download-login-icon-svg-hd-png-download.png">
+    </div>
+  {% endif %}
+{%endblock%}
+
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
+  {# Determine role of the user #}
+  Hi, {{user.username}}
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>
