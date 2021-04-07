@@ -6,10 +6,10 @@
 
 {% if user.is_authenticated %}
   {% if user.is_superuser %}
-    {% include "home_admin.html" %}
+    {% include "admin/home_admin.html" %}
   {% else %}
-    {% include "home_auth.html" %}
+    {% include "home/home_auth.html" %}
   {% endif %}
 {% else %}
-  {% include "home_notAuth.html" %}
+  {% include "home/home_notAuth.html" %}
 {%endif%}
