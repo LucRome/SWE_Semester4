@@ -15,7 +15,7 @@
   {{hidden_field}}
 {% endfor %}
 
-{% comment %} general error messages {% endcomment %}
+{# general error messages #}
 {% if form.non_field_errors %}
   {% for error in form.non_field_errors %}
     <div class="container-fluid border-dark border" style="background-color: lightgray;">
@@ -31,16 +31,16 @@
   {% endfor %}
 {% endif %}
 
-{% comment %} input fields of the form {% endcomment %}
+{# input fields of the form #}
 <table class="table table-borderless">
   {% for field in form.visible_fields %}
     <tr>
-      {% comment %} Label {% endcomment %}
+      {# Label #}
       <td style="width: 0;">
         {{field.label_tag}}
       </td>
       <td>
-        {% comment %} Input field {% endcomment %}
+        {# Input field #}
         {% if form.is_bound and field.errors %}
           {# field with errors in prev. input #}
           {% render_field field class="form-control is-invalid input"%}
@@ -53,7 +53,7 @@
           {# field without errors in prv. input #}
           {% render_field field class="form-control input"%}
         {% endif %}
-        {% comment %} Help-text to the field {% endcomment %}
+        {# Help-text to the field #}
         {% if field.help_text %}
           <small class="form-text text-muted">{{ field.help_text }}</small>
         {% endif %}
