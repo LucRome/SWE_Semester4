@@ -11,4 +11,5 @@
 .logo {
     max-height: 80px;
     width: auto;
+    border-radius: 4px;
 }

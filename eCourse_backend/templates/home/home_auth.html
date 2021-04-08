@@ -6,8 +6,8 @@
 {% block userbar-content %}
   {% if user.is_authenticated %}
     {# Userpic + name #}
-    <div class="float-right">
-      <h3 class="text-white">
+    <div class="d-flex ml-auto">
+      <h3 class="d-flex flex-wrap align-content-center text-white mr-3">
         {{ user.username }}
       </h3>
       <img class="logo bg-white" src="https://spng.pngfind.com/pngs/s/16-168603_download-login-icon-svg-hd-png-download.png">
