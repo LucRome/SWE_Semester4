@@ -1,0 +1,63 @@
+{% comment %} 
+  A template to show Forms that process text-input
+  Uses app widget_tweaks to improve the design of the forms
+
+  !!! shall be surrounded by <form ...> </form> !!!
+  !!! doesn't provide the button !!!
+{% endcomment %}
+
+{% load widget_tweaks%}
+
+{% comment %} show hidden fields 
+    TODO: improve
+{% endcomment %}
+{% for hidden_field in form.hidden_fields %}
+  {{hidden_field}}
+{% endfor %}
+
+{# general error messages #}
+{% if form.non_field_errors %}
+  {% for error in form.non_field_errors %}
+    <div class="container-fluid border-dark border" style="background-color: lightgray;">
+        <div class="d-sm-flex">
+            <div class="align-content-center mr-sm-1">
+                <span class="bi bi-exclamation-octagon-fill text-danger error-icon"></span>
+            </div>
+            <div class="d-flex flex-wrap align-content-center">
+              {{ error }}
+            </div>
+        </div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+{# input fields of the form #}
+<table class="table table-borderless">
+  {% for field in form.visible_fields %}
+    <tr>
+      {# Label #}
+      <td style="width: 0;">
+        {{field.label_tag}}
+      </td>
+      <td>
+        {# Input field #}
+        {% if form.is_bound and field.errors %}
+          {# field with errors in prev. input #}
+          {% render_field field class="form-control is-invalid input"%}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+          {% endfor %}
+        {% else %}
+          {# field without errors in prv. input #}
+          {% render_field field class="form-control input"%}
+        {% endif %}
+        {# Help-text to the field #}
+        {% if field.help_text %}
+          <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
