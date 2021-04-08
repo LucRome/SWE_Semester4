@@ -1,18 +1,18 @@
 %!TEX root = ../../main.tex
 
 \chapter{Codierungsrichtlinien}\label{sec:Chap2}
-In diesem Abschnitt sind die wichtigsten Codierungsrichtlinien, die im Projekt gelten, zusammengefasst. Es handelt sich dabei um eine Auswahl der wichtigsten und am häufigsten vorkommenden Situationen.\\
+In diesem Abschnitt sind die wichtigsten Codierungsrichtlinien, die im Projekt gelten, zusammengefasst. Es handelt sich dabei um eine Auswahl der wichtigsten und am häufigsten vorkommenden Situationen.
 
-Das Projektteam hat sich für jede Programmiersprache bereits gültige Codierungsrichtlinien gesucht. Diese sollen im Projekt umgesetzt werden. \\
+Das Projektteam hat sich für jede Programmiersprache bereits gültige Codierungsrichtlinien gesucht. Diese sollen im Projekt umgesetzt werden. 
 
-Damit für die am häufigsten auftretenden Situationen nicht immer der geltende Standard gelesen werden muss, sind an dieser Stelle die wichtigsten Informationen zusammengefasst. \\
+Damit für die am häufigsten auftretenden Situationen nicht immer der geltende Standard gelesen werden muss, sind an dieser Stelle die wichtigsten Informationen zusammengefasst. 
 
-Im jeweiligen Unterkapitel der Programmiersprache wird auch nochmals explizit auf den verwendeten Standard verwiesen.\\
+Im jeweiligen Unterkapitel der Programmiersprache wird auch nochmals explizit auf den verwendeten Standard verwiesen.
 
 Wie auch in allen hier verwendeten Standards wird Wert auf die Lesbarkeit des Codes gelegt.\\
 Wirkt also eine Regel an einer bestimmten Stelle der Lesbarkeit des Codes entgegen, so wird immer die Lesbarkeit des Codes bevorzugt gegenüber der Befolgung der Regel.\\
 Um ein Beispiel für eine solche Situation zu nennen:
-Dateinamen sollen nach Richtlinie immer im snake\_case geschrieben sein. Allerdings repräsentiert eine Datei einen bestimmten Eigennamen. Hier wird dann bevorzugt, den Eigennamen korrekt zu verwenden, als ihn an die Richtlinie anzupassen.\\
+Dateinamen sollen nach Richtlinie immer im snake\_case geschrieben sein. Allerdings repräsentiert eine Datei einen bestimmten Eigennamen. Hier wird dann bevorzugt, den Eigennamen korrekt zu verwenden, als ihn an die Richtlinie anzupassen.
 \section{Allgemein}
 Vorab einige Allgemeine Richtlinien, auf die sich das Projektteam geeinigt hat.
 \begin{itemize}
@@ -24,6 +24,7 @@ Vorab einige Allgemeine Richtlinien, auf die sich das Projektteam geeinigt hat.
 
 \section{Python}
 Für die Programmiersprache Python wird die Codierungsrichtlinie PEP 8 verwendet. Eine ausführliche Version der Richtlinie findet sich \href{https://pep8.org/}{hier}. \\
+
 \textbf{Einrückung}\\
 Für die Einrückung werden 4 Leerzeichen verwendet, keine Tabs.\\
 Weitergeführte Zeilen werden ebenfalls durch Einrückung oder durch Klammern gekennzeichnet \\
@@ -74,9 +75,9 @@ Jeder import-Befehl wird in eine separate Zeile geschrieben.\\
 import-Befehle stehen in den Dateien immer auf der höchsten Ebene, direkt unter Modulkommentaren und Docstrings.
 \begin{tabbing}
 import-\= Befehle sind gruppiert nach folgender Reihenfolge:\\
-\> 1.Standard-Bibliotheken \\
-\> 2.verwandte Bibliotheken \\
-\> 3.lokale Applikationen und Bibliotheken\\
+\> 1. Standard-Bibliotheken \\
+\> 2. verwandte Bibliotheken \\
+\> 3. lokale Applikationen und Bibliotheken\\
 \end{tabbing}
 Jede dieser Gruppen wird durch eine Leerzeile von den anderen separiert.\\
 Es werden wenn immer mögliche absolute imports verwendet. 
@@ -160,9 +161,8 @@ Kommentare werden in englischer Sprache verfasst.
 \textit{Inline Kommentare} stehen in der selben Zeile wie ein Code-Statement. Sie sollten sparsam eingesetzt werden und werden weggelassen, wenn sie das offensichtliche Erklären. Sie sind mindestens ein Leerzeichen vom Code den sie beschreiben entfernt und beginnen mit einem \# und einem darauf folgenden Leerzeichen. 
 
 \textit{Documentation Strings} werden für alle sichtbaren Module, Funktionen, Klassen und Methoden erstellt. Sie sind nicht nötig für nicht-sichtbare Methoden. Diese sollten mit Blockkommentaren versehen werden. Documentation Strings beginnen mit drei Anführungszeichen und enden mit drei Anführungszeichen. Die schließenden Anführungszeichen stehen dabei in einer eigenen Zeile. Diese Regel gilt nicht für einzeilige Kommentare, bei diesen stehen die schließenden Anführungszeichen in der gleichen Zeile.
-
-\textbf{Namenskonventionen}\\
 \begin{tabbing}
+\textbf{Namenskonventionen}\\
 Neben \= der Beachtung der nachfolgenden Regeln sollte als erster Buchstabe in den \\
 Bezeichnern auf folgende Buchstaben verzichtet werden:\\
 \> l (kleines L) \\
@@ -236,7 +236,7 @@ In diesem Todo sollte vermerkt sein, was noch zu tun ist und eventuell falls bek
 
 \textbf{Dokumententyp}\\
 HTML-Dokuemente werden mit HTML 5 geschrieben.\\
-Dies sollte durch den Doctype im Dokumentekopf angezeigt werden.
+Dies sollte durch den DOCTYPE im Dokumentekopf angezeigt werden.
 \begin{lstlisting}[language = HTML, caption = Kennzeichnung des Dokumententyps, label = doctype]
 <!DOCTYPE html>
 \end{lstlisting}
