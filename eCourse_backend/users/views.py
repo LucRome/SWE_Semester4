@@ -7,6 +7,7 @@ from .models import User
 
 # Create your views here.
 
+
 @login_required
 @permission_required('users.manage_users')
 def overview(request):
@@ -14,6 +15,7 @@ def overview(request):
     if request.method == 'GET':
         all_users = User.objects.all()
         return render(request, 'users/overview.html', {'users': all_users})
+
 
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
@@ -27,6 +29,7 @@ def create_user(request):
 
     return render(request, 'users/create_user.html', {'form': form})
 
+
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
 def delete_user(request, id):
@@ -37,9 +40,10 @@ def delete_user(request, id):
     user_to_delete.delete()
     context = {
         'matr_nr': matr_nr,
-        'name' : name,
+        'name': name,
     }
-    return render(request, 'users/deleted_user.html', context) 
+    return render(request, 'users/deleted_user.html', context)
+
 
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
@@ -52,4 +56,4 @@ def alter_user(request, id):
         user_object = get_object_or_404(User, pk=id)
         form = UserForm(model_to_dict(user_object))
 
-    return render(request, 'users/alter_user.html', {'form': form })
+    return render(request, 'users/alter_user.html', {'form': form})

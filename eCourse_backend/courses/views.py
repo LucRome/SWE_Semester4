@@ -6,12 +6,14 @@ from .models import Course
 
 # Create your views here.
 
+
 @login_required
 @permission_required('courses.create_course', raise_exception=True)
 def overview(request):
     if request.method == 'GET':
         courses = Course.objects.all()
         return render(request, 'courses/overview.html', {'courses': courses})
+
 
 @login_required
 @permission_required('courses.create_course', raise_exception=True)
@@ -23,8 +25,8 @@ def create_course(request):
             form.save()
     else:
         form = CourseForm()
-    
-    return render(request, 'courses/create_course.html', {'form': form })
+
+    return render(request, 'courses/create_course.html', {'form': form})
 
 
 @login_required
@@ -37,14 +39,15 @@ def alter_course(request, id):
     else:
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
-    
-    return render(request, 'courses/alter_course.html', {'form': form })
+
+    return render(request, 'courses/alter_course.html', {'form': form})
+
 
 @login_required
 @permission_required('courses.delete_course', raise_exception=True)
 def delete_course(request, id):
     course_to_delete = get_object_or_404(Course, pk=id)
-    name = course_to_delete.name 
+    name = course_to_delete.name
     course_to_delete.delete()
-    
+
     return render(request, 'courses/deleted_course.html', {'name': name})

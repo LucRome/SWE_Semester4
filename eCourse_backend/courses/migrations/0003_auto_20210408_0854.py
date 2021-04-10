@@ -15,11 +15,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='course',
             name='lecturer',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='courses', to='users.lecturer'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='courses',
+                to='users.lecturer'),
         ),
         migrations.AlterField(
             model_name='course',
             name='student',
-            field=models.ManyToManyField(to='users.Student'),
+            field=models.ManyToManyField(
+                to='users.Student'),
         ),
     ]

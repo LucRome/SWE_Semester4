@@ -2,6 +2,8 @@ from django.db import models
 from users.models import Lecturer, Student
 
 # Create your models here.
+
+
 class Course(models.Model):
     lecturer = models.ForeignKey(
         Lecturer,
