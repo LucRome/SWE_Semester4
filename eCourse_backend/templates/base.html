@@ -36,6 +36,9 @@
     </nav>
     <!-- navigation bar -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-danger d-flex" style="color: white;">
+        <h2>
+            {% block site-title %} {% endblock %}
+        </h2>
         {% block navbar-content %} {% endblock %}
     </nav>
     <main>

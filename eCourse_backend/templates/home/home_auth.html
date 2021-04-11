@@ -3,6 +3,10 @@
 
 {% block title %}Home{% endblock %}
 
+{% block site-title %}
+  Home
+{% endblock %}
+
 {% block userbar-content %}
   {% if user.is_authenticated %}
     {# Userpic + name #}
