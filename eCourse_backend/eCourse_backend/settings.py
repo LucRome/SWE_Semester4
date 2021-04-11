@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'eCourse_backend',
     'users',
     'file_exchange',
-    'courses'
+    'courses',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
