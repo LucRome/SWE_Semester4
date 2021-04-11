@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+    <h1> User overview </h1>
+    
+    {# We get the users object from the backend which is an array of all users #}
+    {# It should be printed as a table with an 'edit' link pointing to /users/alter/id #}
+    {# with id being the primary key of the user #}
+    {# delete button to users/delete/id #}
+    <a href="{% url 'create_user' %}"> 
+        <button>Create user</button>
+    </a>
+    
+    {% endblock %} 

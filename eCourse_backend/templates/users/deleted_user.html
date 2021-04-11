@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+    <h1> deleted user</h1>
+
+    <p>
+        User with {{ name }} and matr nr {{ matr_nr }} deleted 
+    </p>
+
+    <a href="{% url 'overview' %}"> 
+        <button> overview</button>
+    </a>
+
+{% endblock %}
