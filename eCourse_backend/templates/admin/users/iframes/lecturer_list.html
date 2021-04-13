@@ -1,0 +1,53 @@
+{% extends 'iframe_template.html' %}
+
+{% block title %}Admin Lecturer List{% endblock %}
+
+{% block content %}
+  {# TODO: add filter form #}
+  
+  {# List (in form of a table #}
+  <div class="table-responsive">
+    <table class="table table-hover">
+      {# table header #}
+      <thead class="thead-light">
+        <tr>
+          <th>E-Mail</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Username</th>
+          <th>Aktiv</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      {# table body #}
+      <tbody>
+        {% for leturer in lecturers %}
+          <tr>
+            <td>{{leturer.email}}</td>
+            <td>{{leturer.first_name}}</td>
+            <td>{{leturer.last_name}}</td>
+            <td>{{leturer.username}}</td>
+            <td>
+              {% if lecturer.is_active %}
+                <i class="bi bi-x"></i>
+              {% else %}
+                <i class="bi bi-check"></i>
+              {% endif %}
+            </td>
+            {# edit button #}
+            <td>
+              <div class="container no-gutters">
+                <a href="#"> {# TODO: add correct link #}
+                  <button class="btn-sm btn-danger">
+                    edit
+                  </button>
+                </a>
+              </div>
+            </td>
+          </tr>        
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock  %}
