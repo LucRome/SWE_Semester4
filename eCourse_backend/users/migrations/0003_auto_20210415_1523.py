@@ -12,10 +12,22 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='lecturer',
-            options={'permissions': [('alter_courses', 'Can alter course')]},
+            options={
+                'permissions': [
+                    ('alter_courses',
+                     'Can alter course')]},
         ),
         migrations.AlterModelOptions(
             name='office',
-            options={'permissions': [('alter_courses', 'Can alter course'), ('create_courses', 'Can create course'), ('delete_courses', 'Can delete course'), ('manage_users', 'Can manage user')]},
+            options={
+                'permissions': [
+                    ('alter_courses',
+                     'Can alter course'),
+                    ('create_courses',
+                     'Can create course'),
+                    ('delete_courses',
+                     'Can delete course'),
+                    ('manage_users',
+                     'Can manage user')]},
         ),
     ]

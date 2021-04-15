@@ -33,15 +33,15 @@ def create_user(request):
                 form.save()
             elif u_type == 'office':
                 form = OfficeUserForm(request.POST)
-                form.save() 
+                form.save()
     else:
         user_form = UserForm()
         type_form = UsertypeChooseForm()
 
     context = {
-            'form': user_form,
-            'usertype_form': type_form,
-            }
+        'form': user_form,
+        'usertype_form': type_form,
+    }
     return render(request, 'users/create_user.html', context)
 
 
