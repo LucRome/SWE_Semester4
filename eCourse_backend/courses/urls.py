@@ -23,4 +23,5 @@ urlpatterns = [
     path('create/', create_course, name='create_course'),
     path('alter/<id>', alter_course, name='alter_course'),
     path('delete/<id>', delete_course, name='delte_course'),
+    path('edit/<id>', edit_course, name='edit_course'),
 ]

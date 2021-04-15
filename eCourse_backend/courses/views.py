@@ -51,3 +51,17 @@ def delete_course(request, id):
     course_to_delete.delete()
 
     return render(request, 'courses/deleted_course.html', {'name': name})
+
+
+@login_required
+@permission_required('courses.alter_course', raise_exception=True)
+def edit_course(request, id):
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        course_object = get_object_or_404(Course, pk=id)
+        form = CourseForm(model_to_dict(course_object))
+
+    return render(request, 'admin/edit_course.html', {'form': form})
