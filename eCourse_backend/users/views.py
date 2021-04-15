@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from django.forms.models import model_to_dict
 from eCourse_backend.models import *
-from .forms import UserForm
+from .forms import *
 from .models import User
 
 # Create your views here.
@@ -21,13 +21,28 @@ def overview(request):
 @permission_required('users.manage_users', raise_exception=True)
 def create_user(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = UserForm(request.POST)
+        type_form = UsertypeChooseForm(request.POST)
+        if type_form.is_valid() and user_form.is_valid():
+            u_type = type_form.cleaned_data['user_type']
+            if u_type == 'student':
+                form = StudentForm(request.POST)
+                form.save()
+            elif u_type == 'lecturer':
+                form = LecturerForm(request.POST)
+                form.save()
+            elif u_type == 'office':
+                form = OfficeUserForm(request.POST)
+                form.save() 
     else:
-        form = UserForm()
+        user_form = UserForm()
+        type_form = UsertypeChooseForm()
 
-    return render(request, 'users/create_user.html', {'form': form})
+    context = {
+            'form': user_form,
+            'usertype_form': type_form,
+            }
+    return render(request, 'users/create_user.html', context)
 
 
 @login_required
