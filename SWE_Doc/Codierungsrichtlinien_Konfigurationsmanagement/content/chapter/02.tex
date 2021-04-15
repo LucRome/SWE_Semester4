@@ -224,6 +224,15 @@ Kommentare \= sollten dann auftauchen, wenn sich der Leser folgende Fragen stell
 \> Welchen Zweck hat der Code\\
 \> Warum wurde diese Lösung verwendet
 \end{tabbing}
+Kommentare werden nach folgenden Richtlinien in den Code integriert:
+\begin{lstlisting}[language = HTML, caption = Kommentare, label = comments]
+{# Einzeiliger Kommentar #}
+
+{% comment %}
+  Mehrzeiliger
+  Kommentar
+{% endcomment %}
+\end{lstlisting}
 
 \textbf{Handlungspunkte}\\
 Kann an einer Stelle der Code noch nicht vollständig geschrieben werden bzw. ist man an einer gewissen Stelle auf einen anderen Entwickler angewiesen, sollte die Stelle mit einem Todo markiert werden.\\
