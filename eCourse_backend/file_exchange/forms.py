@@ -6,4 +6,7 @@ from .models import Submission
 class FileForm(forms.ModelForm):
     class Meta:
         model = Submission
-        fields = '__all__'
+        fields = ['exercise', 'name', 'file']
+
+
+
