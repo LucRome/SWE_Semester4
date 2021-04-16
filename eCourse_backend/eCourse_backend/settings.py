@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'widget_tweaks',
     'eCourse_backend',
     'users',
     'file_exchange',
