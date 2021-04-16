@@ -1,4 +1,4 @@
-"""eCourse_backend URL Configuration
+"""courses URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -16,34 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from .views import *
 
 urlpatterns = [
-    path(
-        'admin_dev/',
-        admin.site.urls),
-    path(
-        'accounts/',
-        include('django.contrib.auth.urls')),
-    path(
-        '',
-        TemplateView.as_view(
-            template_name='home.html'),
-        name='home'),
-    path(
-        'admin/',
-        TemplateView.as_view(
-            template_name='admin.html'),
-        name='admin'),
-    path(
-        'courses/',
-        include('courses.urls'),
-        name='courses'),
-    path(
-        'users/',
-        include('users.urls'),
-        name='users'),
-    path(
-        'file_exchange/',
-        include('file_exchange.urls'),
-        name='file_exchange')
+    path('upload/', upload_file, name='upload'),
 ]
