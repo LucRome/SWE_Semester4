@@ -20,4 +20,5 @@ from .views import *
 
 urlpatterns = [
     path('upload/', upload_file, name='upload'),
+    path('download/<id>', download_file, name='download')
 ]
