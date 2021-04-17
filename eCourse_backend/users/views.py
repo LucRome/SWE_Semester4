@@ -89,24 +89,76 @@ def user_administration_admin(request):
         return render(request, 'admin/users/administration.html', {})
 
 # IFrames
-# create user
+# create lecturer
 
 
 @xframe_options_exempt  # can be solved better
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
-def create_user_iframe(request):
+def create_lecturer_iframe(request):
     save_success = False
     if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = LecturerForm(request.POST)
+        if user_form.is_valid():
+            user_form.save()
             save_success = True
     else:
-        form = UserForm()
+        user_form = LecturerForm()
 
-    return render(request, 'admin/users/iframes/create_user.html',
-                  {'form': form, 'success': save_success})
+    context = {
+        'user_form': user_form,
+        'success': save_success,
+    }
+
+    return render(request, 'admin/users/iframes/create_user/create_lecturer.html', context)
+
+
+# create officeuser
+
+
+@xframe_options_exempt  # can be solved better
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def create_officeuser_iframe(request):
+    save_success = False
+    if request.method == 'POST':
+        user_form = OfficeUserForm(request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            save_success = True
+    else:
+        user_form = OfficeUserForm()
+
+    context = {
+        'user_form': user_form,
+        'success': save_success,
+    }
+
+    return render(request, 'admin/users/iframes/create_user/create_officeuser.html', context)
+
+
+# create student
+
+
+@xframe_options_exempt  # can be solved better
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def create_student_iframe(request):
+    save_success = False
+    if request.method == 'POST':
+        user_form = StudentForm(request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            save_success = True
+    else:
+        user_form = StudentForm()
+
+    context = {
+        'user_form': user_form,
+        'success': save_success,
+    }
+
+    return render(request, 'admin/users/iframes/create_user/create_student.html', context)
 
 # Student list
 

@@ -1,8 +1,11 @@
 {% extends 'iframe_template.html' %}
 
-{# TODO: Determine 'position' of user #}
+{% comment %} 
+  general template for a create user iframe
+{% endcomment %}
 
 {% block content %}
+  {# success message #}
   {% if success %}
     <div class="alert alert-success alert-dismissible d-flex flex-wrap align-content-center">
       <i class="bi bi-check-circle-fill success-icon mr-2"></i>
@@ -13,10 +16,19 @@
     </div>
   {% endif %}
 
+  {# dropdown to choose the correct form #}
+  {# TODO: same table format as the form#}
+	<div class="d-flex flex-wrap ml-2">
+		<label class="mr-5" for="usertype_dropdown">Usertyp</label>
+		<div class="dropdown" id="usertype_dropdown">
+			{% block dropdown_content %}{% endblock %}
+		</div>
+	</div>
+
+  {# form #}
   <form method="post">
     {% csrf_token %}
-
-    {% include 'forms/bs4_text_form.html' with form=form %}
+    {% include 'forms/bs4_text_form.html' with form=user_form %}
     <button class="btn btn btn-danger" type="submit">User Erstellen</button>
   </form>
 {% endblock %}
