@@ -168,9 +168,28 @@ def create_student_iframe(request):
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
 def student_list_iframe(request, page=1):
-    # TODO: filter + split into multiple pages
-    students = Student.objects.all()
-    return render(request, 'admin/users/iframes/student_list.html', {'students': students})
+    if request.method == 'POST':
+        filter_form = StudentFilterForm(
+            request.POST, )
+        if filter_form.is_valid():
+            # Filter
+            students = Lecturer.objects.filter(
+                matr_nr__contains=filter_form['matr_nr'].data,
+                first_name__contains=filter_form['first_name'].data,
+                last_name__contains=filter_form['last_name'].data,
+                username__contains=filter_form['username'].data)
+    else:
+        filter_form = StudentFilterForm()
+        students = Student.objects.all()
+
+    paginator = Paginator(students, 10)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+        'filter_form': filter_form,
+    }
+    return render(request, 'admin/users/iframes/student_list.html', context)
 
 
 # Lecturer list
@@ -179,7 +198,6 @@ def student_list_iframe(request, page=1):
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
 def lecturer_list_iframe(request, page=1):
-    # TODO: filter + split into multiple pages
     if request.method == 'POST':
         filter_form = LecturerFilterForm(
             request.POST, )
@@ -187,7 +205,8 @@ def lecturer_list_iframe(request, page=1):
             # Filter
             lecturers = Lecturer.objects.filter(
                 first_name__contains=filter_form['first_name'].data,
-                last_name__contains=filter_form['last_name'].data)
+                last_name__contains=filter_form['last_name'].data,
+                username__contains=filter_form['username'].data)
     else:
         filter_form = LecturerFilterForm()
         lecturers = Lecturer.objects.all()
