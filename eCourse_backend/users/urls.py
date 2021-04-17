@@ -39,4 +39,7 @@ urlpatterns = [
     # lecturerlist iframe
     path('admin_s/iframes/lecturerlist/page<int:page>',
          lecturer_list_iframe, name='lecturerlist_admin_iframe'),
+    # admin + staff list (iframe)
+    path('admin_s/iframes/adminstafflist/page<int:page>',
+         staff_admin_list_iframe, name='adminlist_admin_iframe'),
 ]

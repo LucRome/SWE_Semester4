@@ -219,3 +219,31 @@ def lecturer_list_iframe(request, page=1):
         'filter_form': filter_form,
     }
     return render(request, 'admin/users/iframes/lecturer_list.html', context)
+
+
+# Staff and Admin List
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def staff_admin_list_iframe(request, page=1):
+    if request.method == 'POST':
+        filter_form = AdminStaffFilterForm(
+            request.POST, )
+        if filter_form.is_valid():
+            # Filter
+            users = Office.objects.filter(
+                first_name__contains=filter_form['first_name'].data,
+                last_name__contains=filter_form['last_name'].data,
+                username__contains=filter_form['username'].data)
+    else:
+        filter_form = AdminStaffFilterForm()
+        users = Office.objects.all()
+
+    paginator = Paginator(users, 10)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+        'filter_form': filter_form,
+    }
+    return render(request, 'admin/users/iframes/staff_admin_list.html', context)
