@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Form, ChoiceField
+from django.forms import ModelForm, Form, ChoiceField, CharField
 from users.models import User, Student, Lecturer, Office
 
 
@@ -34,3 +34,10 @@ class UsertypeChooseForm(Form):
     ]
 
     user_type = ChoiceField(choices=CHOICES)
+
+
+# useradministration: filter forms
+
+class LecturerFilterForm(Form):
+    first_name = CharField(max_length=50, label="Vorname", required=False)
+    last_name = CharField(max_length=50, label="Nachname", required=False)

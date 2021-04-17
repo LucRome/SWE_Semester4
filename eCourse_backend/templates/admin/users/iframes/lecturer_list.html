@@ -3,7 +3,17 @@
 {% block title %}Admin Lecturer List{% endblock %}
 
 {% block content %}
-  {# TODO: add filter form #}
+  {# filter form #}
+  <div class="card">
+    <div class="card-header">Filter</div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {% include 'forms/bs4_text_form.html' with form=filter_form %}
+        <button class="btn btn btn-danger" type="submit">Filtern</button>
+      </form>
+    </div>
+  </div>
   
   {# List (in form of a table #}
   <div class="table-responsive">

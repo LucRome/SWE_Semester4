@@ -179,5 +179,20 @@ def student_list_iframe(request, page=1):
 @permission_required('users.manage_users', raise_exception=True)
 def lecturer_list_iframe(request, page=1):
     # TODO: filter + split into multiple pages
-    lecturers = Lecturer.objects.all()
-    return render(request, 'admin/users/iframes/lecturer_list.html', {'lecturers': lecturers})
+    if request.method == 'POST':
+        filter_form = LecturerFilterForm(
+            request.POST, )
+        if filter_form.is_valid():
+            # Filter
+            lecturers = Lecturer.objects.filter(
+                first_name__contains=filter_form['first_name'].data,
+                last_name__contains=filter_form['last_name'].data)
+    else:
+        filter_form = LecturerFilterForm()
+        lecturers = Lecturer.objects.all()
+
+    context = {
+        'lecturers': lecturers,
+        'filter_form': filter_form,
+    }
+    return render(request, 'admin/users/iframes/lecturer_list.html', context)
