@@ -1,3 +1,39 @@
 %!TEX root = ../../main.tex
 
-\chapter{Konfiguartionsmanagement}
+\chapter{Funktionale Anforderungen}
+Unter den funktionalen Anforderungen sind alle Anforderungen zu verstehen, die klar definiert sind. Der Stand ihrer Umsetzung kann eindeutig bestimmt werden. \\
+Für das Projekt eCourse sind die funktionalen Anforderungen die vom Projektteam umgesetzt werden im folgenden zusammengefasst.\\
+\begin{enumerate}
+	\item Benutzer- und Rechtesteuerung mit 3 Benutzergruppen
+	\begin{enumerate}
+		\item Verwaltungsangestellte der Hochschule
+		\item Dozierende
+		\item Studierende
+	\end{enumerate}
+	\item a-priori Landing-Page, die für alle Besucher einheitlich ist und keine sensiblen Daten enthält
+	\item Login und Logout
+	\begin{enumerate}
+		\item erfolgreicher Login leitet auf die a-posteriori Landing-Page weiter
+		\item erfolgloser Login führt zu einer Fehlermeldung
+		\item erfolgreicher Logout führt zurück auf die a-priori Landing-Page
+	\end{enumerate}
+	\item a-posteriori Landing-Page, die für alle Benutzergruppen individuell ist und an ihre Bedürfnisse angepasst ist, aber für alle Benutzergruppen eine Kursübersicht enthält
+	\item Studierende haben von der Kursübersicht zugriff auf eine Klausurübersicht oder auf eine kursspezifische Seite
+	\item Studierende haben sowohl in der Kursübersicht, als auch in der Klausurübersicht und den kursspezifischen Seiten die Möglichkeit eine bearbeitete Abgabe zu einer bestimmten Aufgabe hochzuladen
+	\item Studierende haben sowohl in der Kursübersicht, als auch in der Klausurübersicht und den kursspezifischen Seiten die Möglichkeit eine bestimmte Aufgabe herunterzuladen
+	\item Dozierende können von der Kursübersicht aus einen Kurs anlegen
+	\item Dozierende können von der Kursübersicht aus einen Kurs bearbeiten, dies impliziert auch, Aufgaben für diesen Kurs hochzuladen
+	\item Dozierende können von der Kursübersicht auf eine Klausurübersicht gelangen
+	\item Dozierende können in der Klausurübersicht die bearbeiteten Abgaben der Studierenden herunterladen
+	\item Verwaltungsangestellte von der Hochschule können aussgehend von der Kursübersicht verschiedene Unterseiten aufrufen
+	\begin{enumerate}
+		\item Kurse anlegen
+	 	\item Gruppen von Studierenden anlegen
+		\item Kursgruppen anlegen
+		\item Kurse bearbeiten (bearbeiten, löschen)
+		\item Benutzer verwalten (anlegen, bearbeiten, löschen)
+	\end{enumerate}	 
+	\item die Datenbank, die an das Backend anschließt soll gegen verschiedene relationale Datenbanken austauschbar sein
+\end{enumerate}
+
+\textcolor{magenta}{Hier noch weitere funktionale Anforderungen einfügen}

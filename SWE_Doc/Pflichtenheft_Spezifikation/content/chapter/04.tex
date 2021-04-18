@@ -1,1 +1,25 @@
-\chapter{Architekturdokument}
+\chapter{Nicht-Funktionale Anforderungen}
+Im Folgenden werden Nicht-Funktionale Anforderungen an die Anwendung eCourse aufgeführt. Nicht-Funktionale Anforderungen sind dabei definiert als subjektive Forderungen, deren zu Grunde liegendes Bedürfnis eine nicht gegenständliche Eigenschaft ist. \\
+Da die Umsetzung also im Gegensatz zu den Funktionalen Anforderungen nicht eindeutig bestimmt werden kann, wurden zusätzlich zur Anforderung auch Prüfkriterien definiert. Diese sind in Tabelle \ref{tab:nicht-funktionale_Anforderungen} aufgeführt. \\
+Zur Definition der Anforderungen und ihrer Prüfkriterien wurde die ISO/IEC 25010:2011 als Referenzquelle herangezogen.
+
+\begin{table}
+\centering
+	\begin{tabularx}{\textwidth}[H]{|X|X|}
+		\hline
+		Benutzbarkeit & Jeder Anwender kann die Anwendung ohne Einarbeitungszeit direkt verwenden \\
+		\hline 
+		Kompatibilität & die Software kann mit verschiedenen relationalen Datenbanken kombiniert werden \\
+		\hline 
+		\quad & die Anwendung kann in den gängigen Browsertypen Firefox, Chrome und Opera ohne weitere Fehler ausgeführt werden \\
+		\hline
+		Zuverlässigkeit & die Software ist getestet und besteht alle Softwaretests\\
+		\hline
+		Wartbarkeit & der Sourcecode und alle Änderungen sind dokumentiert \\
+		\hline
+		\quad & es existieren Unittest \\
+		\hline
+	\end{tabularx}
+\caption{Nicht-funktionale Anforderungen im Projekt eCourse}
+\label{tab:nicht-funktionale_Anforderungen}
+\end{table}
