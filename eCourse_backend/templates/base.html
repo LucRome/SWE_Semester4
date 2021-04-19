@@ -11,6 +11,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {# Icons to show in Browser (e.g.) in Tabbar #}
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'site.webmanifest' %}  /">
+  <link rel="mask-icon" href="{% static 'safari-pinned-tab.svg' %}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#ffffff">
+
   {# Bootstrap stuff #}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
@@ -19,28 +28,40 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   {# own definitions #}
-  <link rel="stylesheet" href="{% static 'basic_definitions.css' %%}">
+  <link rel="stylesheet" href="{% static 'Css/basic_definitions.css' %%}">
   {% block additional-head %} {% endblock %}
-    <style>
-        
-    </style>
 </head>
 
 <body>
     <!-- user Leiste -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark d-flex">
-        <a class="navbar-brand" href="#">
-            <img class="logo" src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" /> 
+    <nav class="navbar navbar-dark bg-dark" >
+        <a class="navbar-brand p-0" href="#">
+            <img class="logo p-0" src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" /> 
         </a>
+        <a class="navbar-brand" href="#">
+            <img class="logo" src="{% static 'Logo_eCourse.png' %}" /> 
+        </a>
+        
         {% block userbar-content %} {% endblock %}
     </nav>
-    <!-- navigation bar -->
+
+
     <nav class="navbar navbar-expand-sm navbar-dark bg-danger d-flex" style="color: white;">
-        <h2>
+        {# site title #}
+        <h2 class="">
             {% block site-title %} {% endblock %}
         </h2>
-        {% block navbar-content %} {% endblock %}
+        {# toggler button #}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavBar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {# collapsible part #}
+        <div class="collapse navbar navbar-collapse p-0" id="collapsibleNavBar">    
+            {% block navbar-content %} {% endblock %}
+        </div>
     </nav>
+    
     <main>
         {% block content %} {% endblock %}
     </main>
