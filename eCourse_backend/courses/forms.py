@@ -1,9 +1,13 @@
 from django import forms
-from users.models import Lecturer
+from users.models import Student
 from .models import Course
 
 
 class CourseForm(forms.ModelForm):
+    student = forms.ModelMultipleChoiceField(
+        queryset=Student.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
+
     class Meta:
         model = Course
         fields = '__all__'
