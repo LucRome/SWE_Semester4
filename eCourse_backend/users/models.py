@@ -32,7 +32,8 @@ class Lecturer(User):
 
     class Meta:
         proxy = True
-        permissions = [('alter_courses', 'Can alter course')]
+        permissions = [('alter_courses', 'Can alter course'),
+                        ('create_exercise', 'Can create exercises')]
 
 
 class Student(User):
@@ -50,4 +51,6 @@ class Office(User):
         permissions = [('alter_courses', 'Can alter course'),
                        ('create_courses', 'Can create course'),
                        ('delete_courses', 'Can delete course'),
-                       ('manage_users', 'Can manage user'), ]
+                       ('manage_users', 'Can manage user'),
+                       ('create_exercise', 'Can create exercises') 
+                    ]

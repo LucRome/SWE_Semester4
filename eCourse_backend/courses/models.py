@@ -23,3 +23,4 @@ class Exercise(models.Model):
     submission_deadline = models.DateTimeField()
     is_visible = models.BooleanField(default=False)
     is_evaluated = models.BooleanField(default=False)
+    description = models.TextField(default=None)
