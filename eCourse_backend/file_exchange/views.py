@@ -12,11 +12,14 @@ import os
 
 # exercise
 
+
 @login_required
 def overview(request):
     if request.method == 'GET':
         exercises = Exercise.objects.all()
-        return render(request, 'file_exchange/overview.html', {'exersices': exercises})
+        return render(request,
+                      'file_exchange/overview.html',
+                      {'exersices': exercises})
 
 
 @login_required
@@ -29,7 +32,9 @@ def create_exercise(request):
     else:
         form = ExersiceForm()
 
-    return render(request, 'file_exchange/create_exersice.html', {'form': form})
+    return render(request,
+                  'file_exchange/create_exersice.html',
+                  {'form': form})
 
 
 @login_required
@@ -38,7 +43,10 @@ def delete_exercise(request, id):
     exercise_to_delete = get_object_or_404(Exercise, pk=id)
     name = exercise_to_delete.name
     exercise_to_delete.delete()
-    return render(request, 'file_exchange/deleted_exersice.html', {'name': name})
+    return render(request,
+                  'file_exchange/deleted_exersice.html',
+                  {'name': name})
+
 
 @login_required
 @permission_required('file_exchange.create_exercise', raise_exception=True)
@@ -67,12 +75,13 @@ def upload_file(request):
         form = FileForm()
     return render(request, 'file_exchange/upload_file.html', {'form': form})
 
+
 @login_required
 def download_file(request, id):
     file = get_object_or_404(Submission, pk=id)
     file_buffer = open(file.file.path, 'rb').read()
     content_type = magic.from_buffer(file_buffer, mime=True)
     response = HttpResponse(file_buffer, content_type=content_type)
-    response['Content-Disposition'] = 'attachment; filename="%s' %os.path.basename(file.file.path)
+    response['Content-Disposition'] = 'attachment; filename="%s' % os.path.basename(
+        file.file.path)
     return response
-

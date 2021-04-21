@@ -14,6 +14,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='submission',
             name='file',
-            field=models.FileField(upload_to=file_exchange.models.exercise_directory_path, validators=[file_exchange.models.validate_file_type]),
+            field=models.FileField(
+                upload_to=file_exchange.models.exercise_directory_path,
+                validators=[
+                    file_exchange.models.validate_file_type]),
         ),
     ]
