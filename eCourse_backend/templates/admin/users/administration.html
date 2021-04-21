@@ -33,18 +33,18 @@
     {# role and aria-labelledby is for schreenreaders #}
     <div class="tab-pane container no-gutters active" id="tab_studentlist" role="tabpanel" aria-labelledby="home-tab">
       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="{% url 'studentlist_admin_iframe' %}" height=1 frameborder="0" loading="lazy"  ></iframe>
+        <iframe class="embed-responsive-item" src="{% url 'studentlist_admin_iframe' page=0 %}" height=1 frameborder="0" loading="lazy"  ></iframe>
       </div>
     </div>
     {# lecturer list #}
     <div class="tab-pane container no-gutters" id="tab_lecturerlist" role="tabpanel" aria-labelledby="home-tab">
       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="{% url 'lecturerlist_admin_iframe' %}" style="width: 100%; height: 100%" frameborder="0" loading="lazy"  ></iframe>
+        <iframe class="embed-responsive-item" src="{% url 'lecturerlist_admin_iframe' page=0 %}" style="width: 100%; height: 100%" frameborder="0" loading="lazy"  ></iframe>
       </div>
     </div>
     <div class="tab-pane container no-gutters" id="tab_createuser" role="tabpanel" aria-labelledby="home-tab">
       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="{% url 'createuser_admin_iframe' %}" frameborder="0" loading="lazy"  ></iframe>
+        <iframe class="embed-responsive-item" src="{% url 'createofficeuser_admin_iframe' %}" frameborder="0" loading="lazy"  ></iframe>
       </div>
     </div>
   </div>

@@ -1,0 +1,9 @@
+{% extends 'admin/users/iframes/create_user/create_template.html' %}
+
+{% block dropdown_content %}
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" >Büro Mitarbeiter</button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'createlecturer_admin_iframe' %}">Dozent</a>
+    <a class="dropdown-item" href="{% url 'createstudent_admin_iframe' %}">Student</a>
+  </div>
+{% endblock %}
