@@ -21,3 +21,9 @@ class StudentFilterForm(Form):
     username = CharField(max_length=50, label="Username", required=False)
     first_name = CharField(max_length=50, label="Vorname", required=False)
     last_name = CharField(max_length=50, label="Nachname", required=False)
+
+
+class AdminStaffFilterForm(Form):
+    username = CharField(max_length=50, label="Username", required=False)
+    first_name = CharField(max_length=50, label="Vorname", required=False)
+    last_name = CharField(max_length=50, label="Nachname", required=False)

@@ -22,6 +22,9 @@
         <a class="nav-link" data-toggle="tab" href="#tab_lecturerlist">Dozentenliste</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab_adminlist">Admin- + Mitarbeiterliste</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#tab_createuser">User erstellen</a>
       </li>
     </ul>
@@ -42,6 +45,13 @@
         <iframe class="embed-responsive-item" src="{% url 'lecturerlist_admin_iframe' page=0 %}" style="width: 100%; height: 100%" frameborder="0" loading="lazy"  ></iframe>
       </div>
     </div>
+    {# admin and staff list#}
+    <div class="tab-pane container no-gutters" id="tab_adminlist" role="tabpanel" aria-labelledby="home-tab">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="{% url 'adminlist_admin_iframe' page=0 %}" style="width: 100%; height: 100%" frameborder="0" loading="lazy"  ></iframe>
+      </div>
+    </div>
+    {# create user #}
     <div class="tab-pane container no-gutters" id="tab_createuser" role="tabpanel" aria-labelledby="home-tab">
       <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="{% url 'createofficeuser_admin_iframe' %}" frameborder="0" loading="lazy"  ></iframe>
