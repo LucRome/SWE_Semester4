@@ -5,10 +5,11 @@ from .managers import *
 # Create your models here.
 
 USER_TYPES = [
-        (1, 'Office'),
-        (2, 'Lecturer'),
-        (3, 'Student'),
-        ]
+    (1, 'Office'),
+    (2, 'Lecturer'),
+    (3, 'Student'),
+]
+
 
 class User(AbstractUser):
     """
@@ -28,6 +29,7 @@ class User(AbstractUser):
 
 class Lecturer(User):
     objects = LecturerManager()
+
     class Meta:
         proxy = True
         permissions = [('alter_courses', 'Can alter course')]
@@ -35,12 +37,14 @@ class Lecturer(User):
 
 class Student(User):
     objects = StudentManager()
+
     class Meta:
         proxy = True
 
 
 class Office(User):
     objects = OfficeManager()
+
     class Meta:
         proxy = True
         permissions = [('alter_courses', 'Can alter course'),

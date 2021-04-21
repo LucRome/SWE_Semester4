@@ -4,8 +4,10 @@ from .models import Course
 
 
 class CourseForm(forms.ModelForm):
-    student = forms.ModelMultipleChoiceField(queryset= Student.objects.all(),
-            widget=forms.CheckboxSelectMultiple)
+    student = forms.ModelMultipleChoiceField(
+        queryset=Student.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
+
     class Meta:
         model = Course
         fields = '__all__'

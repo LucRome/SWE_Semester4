@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='type',
-            field=models.IntegerField(choices=[(1, 'Office'), (2, 'Lecturer'), (3, 'Student')], default=3),
-        ),
-    ]
+            model_name='user', name='type', field=models.IntegerField(
+                choices=[
+                    (1, 'Office'), (2, 'Lecturer'), (3, 'Student')], default=3), ), ]
