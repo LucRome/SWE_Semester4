@@ -21,7 +21,6 @@ def validate_file_type(file):
 class Submission(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
-    #description = models.TextField()
     upload_time = models.DateTimeField()
     file = models.FileField(upload_to=exercise_directory_path, validators=[validate_file_type])
 
