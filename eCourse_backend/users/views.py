@@ -5,6 +5,7 @@ from eCourse_backend.models import *
 from .forms import UserForm
 from .models import User, Lecturer, Student
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -179,8 +180,11 @@ def lecturer_list_iframe(request, page=1):
         filter_form = LecturerFilterForm()
         lecturers = Lecturer.objects.all()
 
+    paginator = Paginator(lecturers, 10)
+    page_obj = paginator.get_page(page)
+
     context = {
-        'lecturers': lecturers,
+        'page_obj': page_obj,
         'filter_form': filter_form,
     }
     return render(request, 'admin/users/iframes/lecturer_list.html', context)
