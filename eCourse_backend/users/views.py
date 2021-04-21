@@ -2,10 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from django.forms.models import model_to_dict
 from eCourse_backend.models import *
-from .forms import *
-from .models import User
+from .forms import UserForm
+from .models import User, Lecturer, Student
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 # Create your views here.
+
+# Views given from Backend, use as orientation
 
 
 @login_required
@@ -60,3 +63,57 @@ def alter_user(request, id):
         form = UserForm(model_to_dict(user_object))
 
     return render(request, 'users/alter_user.html', {'form': form})
+
+
+# Views for the admin
+# TODO: check whethter user is from the right group
+
+# User administration
+
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def user_administration_admin(request):
+    if request.method == 'GET':
+        return render(request, 'admin/users/administration.html', {})
+
+# IFrames
+# create user
+
+
+@xframe_options_exempt  # can be solved better
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def create_user_iframe(request):
+    save_success = False
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            save_success = True
+    else:
+        form = UserForm()
+
+    return render(request, 'admin/users/iframes/create_user.html',
+                  {'form': form, 'success': save_success})
+
+# Student list
+
+
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def student_list_iframe(request, page=1):
+    # TODO: filter + split into multiple pages
+    students = Student.objects.all()
+    return render(request, 'admin/users/iframes/student_list.html', {'students': students})
+
+
+# Lecturer list
+
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def lecturer_list_iframe(request, page=1):
+    # TODO: filter + split into multiple pages
+    lecturers = Lecturer.objects.all()
+    return render(request, 'admin/users/iframes/lecturer_list.html', {'lecturers': lecturers})
