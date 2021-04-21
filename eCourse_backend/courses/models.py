@@ -17,6 +17,7 @@ class Course(models.Model):
 
 class Exercise(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    description = models.TextField()
     start_time = models.DateTimeField()
     work_time_duration = models.DurationField()
     submission_deadline = models.DateTimeField()
