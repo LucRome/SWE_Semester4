@@ -14,8 +14,6 @@ class SD_DateTimeInput(forms.DateTimeInput):
         super().__init__(**kwargs) 
 
 #duration field
-
-
 class DurationInput(TextInput):
 
     def _format_value(self, value):
