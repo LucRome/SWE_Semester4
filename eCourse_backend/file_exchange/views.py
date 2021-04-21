@@ -60,9 +60,9 @@ def upload_file(request):
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
-            # file is saved
             form.save()
-            return render(request, 'file_exchange/sucess.html')
+            # back to exercises overview
+            return render(request, 'file_exchange/overview.html')
     else:
         form = FileForm()
     return render(request, 'file_exchange/upload_file.html', {'form': form})
