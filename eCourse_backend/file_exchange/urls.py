@@ -20,5 +20,10 @@ from .views import *
 
 urlpatterns = [
     path('upload/', upload_file, name='upload'),
-    path('download/<id>', download_file, name='download')
+    path('download/<id>', download_file, name='download'),
+    path('overview/', overview, name='overview'),
+    path('create_exersice/', create_exercise, name='create_exersice'),
+    path('alter_exersice/', alter_exersice, name='alter_exersice'),
+    path('deleted_exersice/', delete_exercise, name='deleted_exersice')
+    
 ]
