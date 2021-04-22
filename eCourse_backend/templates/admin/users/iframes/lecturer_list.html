@@ -1,0 +1,94 @@
+{% extends 'iframe_template.html' %}
+
+{% block title %}Admin Lecturer List{% endblock %}
+
+{% block content %}
+  {# filter form #}
+  <div class="card">
+    <div class="card-header">Filter</div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {% include 'forms/bs4_text_form.html' with form=filter_form %}
+        <button class="btn btn btn-danger" type="submit">Filtern</button>
+      </form>
+    </div>
+  </div>
+  
+  {# List (in form of a table #}
+  <div class="table-responsive">
+    <table class="table table-hover">
+      {# table header #}
+      <thead class="thead-light">
+        <tr>
+          <th>E-Mail</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Username</th>
+          <th>Aktiv</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      {# table body #}
+      <tbody>
+        {% for leturer in page_obj %}
+          <tr>
+            <td>{{leturer.email}}</td>
+            <td>{{leturer.first_name}}</td>
+            <td>{{leturer.last_name}}</td>
+            <td>{{leturer.username}}</td>
+            <td>
+              {# TODO: correct? #}
+              {% if lecturer.is_active %}
+                <i class="bi bi-check"></i>
+              {% else %}
+                <i class="bi bi-x"></i>
+              {% endif %}
+            </td>
+            {# edit button #}
+            <td>
+              <div class="container no-gutters">
+                <a href="#"> {# TODO: add correct link #}
+                  <button class="btn-sm btn-danger">
+                    bearbeiten
+                  </button>
+                </a>
+              </div>
+            </td>
+          </tr>        
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# pagination #}
+  <ul class="pagination justify-content-center">
+    {# previous #}
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="{% url 'lecturerlist_admin_iframe' page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">-</a>
+      </li> 
+    {% endif %}
+
+    {# current #}
+    <li class="page-item active">
+      <a class="page-link" href="#">{{page_obj.number}}</a>
+    </li>
+
+    {# next #}
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{% url 'lecturerlist_admin_iframe' page=page_obj.next_page_number %}">{{page_obj.previous_page_number}}</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">-</a>
+      </li>
+    {% endif %}
+  </ul>
+{% endblock  %}

@@ -1,11 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib.auth import get_user_model
 from django.forms.models import model_to_dict
 from eCourse_backend.models import *
-from .forms import *
-from .models import User
+from .forms import UserForm, StaffForm, LecturerFilterForm, StudentFilterForm, AdminStaffFilterForm
+from .models import User, Lecturer, Student, Office
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.core.paginator import Paginator
 
 # Create your views here.
+
+# Views given from Backend, use as orientation
 
 
 @login_required
@@ -60,3 +65,199 @@ def alter_user(request, id):
         form = UserForm(model_to_dict(user_object))
 
     return render(request, 'users/alter_user.html', {'form': form})
+
+
+# Views for the admin
+# TODO: check whethter user is from the right group
+
+# User administration
+
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def user_administration_admin(request):
+    if request.method == 'GET':
+        return render(request, 'admin/users/administration.html', {})
+
+# IFrames
+# create lecturer
+
+
+@xframe_options_exempt  # can be solved better
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def create_lecturer_iframe(request):
+    save_success = False
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        if user_form.is_valid():
+            Lecturer.objects.create_user(
+                username=user_form['username'].data,
+                email=user_form['email'].data,
+                first_name=user_form['first_name'].data,
+                last_name=user_form['last_name'].data,
+                matr_nr=user_form['matr_nr'].data
+            )
+            save_success = True
+    else:
+        user_form = UserForm()
+
+    context = {
+        'user_form': user_form,
+        'success': save_success,
+    }
+
+    return render(request, 'admin/users/iframes/create_user/create_lecturer.html', context)
+
+
+# create officeuser
+
+
+@xframe_options_exempt  # can be solved better
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def create_officeuser_iframe(request):
+    save_success = False
+    if request.method == 'POST':
+        user_form = StaffForm(request.POST)
+        if user_form.is_valid():
+            if user_form['is_superuser'].data == True:
+                Office.objects.create_superuser(
+                    username=user_form['username'].data,
+                    email=user_form['email'].data,
+                    first_name=user_form['first_name'].data,
+                    last_name=user_form['last_name'].data,
+                )
+            else:
+                Office.objects.create_user(
+                    username=user_form['username'].data,
+                    email=user_form['email'].data,
+                    first_name=user_form['first_name'].data,
+                    last_name=user_form['last_name'].data,
+                )
+            save_success = True
+    else:
+        user_form = StaffForm()
+
+    context = {
+        'user_form': user_form,
+        'success': save_success,
+    }
+
+    return render(request, 'admin/users/iframes/create_user/create_officeuser.html', context)
+
+
+# create student
+
+
+@ xframe_options_exempt  # can be solved better
+@ login_required
+@ permission_required('users.manage_users', raise_exception=True)
+def create_student_iframe(request):
+    save_success = False
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        if user_form.is_valid():
+            Student.objects.create_user(
+                username=user_form['username'].data,
+                email=user_form['email'].data,
+                first_name=user_form['first_name'].data,
+                last_name=user_form['last_name'].data,
+                matr_nr=user_form['matr_nr'].data
+            )
+            save_success = True
+    else:
+        user_form = UserForm()
+
+    context = {
+        'user_form': user_form,
+        'success': save_success,
+    }
+
+    return render(request, 'admin/users/iframes/create_user/create_student.html', context)
+
+# Student list
+
+
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def student_list_iframe(request, page=1):
+    if request.method == 'POST':
+        filter_form = StudentFilterForm(
+            request.POST, )
+        if filter_form.is_valid():
+            # Filter
+            students = Student.objects.filter(
+                matr_nr__contains=filter_form['matr_nr'].data,
+                first_name__contains=filter_form['first_name'].data,
+                last_name__contains=filter_form['last_name'].data,
+                username__contains=filter_form['username'].data)
+    else:
+        filter_form = StudentFilterForm()
+        students = Student.objects.all()
+
+    paginator = Paginator(students, 10)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+        'filter_form': filter_form,
+    }
+    return render(request, 'admin/users/iframes/student_list.html', context)
+
+
+# Lecturer list
+
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def lecturer_list_iframe(request, page=1):
+    if request.method == 'POST':
+        filter_form = LecturerFilterForm(
+            request.POST, )
+        if filter_form.is_valid():
+            # Filter
+            lecturers = Lecturer.objects.filter(
+                first_name__contains=filter_form['first_name'].data,
+                last_name__contains=filter_form['last_name'].data,
+                username__contains=filter_form['username'].data)
+    else:
+        filter_form = LecturerFilterForm()
+        lecturers = Lecturer.objects.all()
+
+    paginator = Paginator(lecturers, 10)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+        'filter_form': filter_form,
+    }
+    return render(request, 'admin/users/iframes/lecturer_list.html', context)
+
+
+# Staff and Admin List
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def staff_admin_list_iframe(request, page=1):
+    if request.method == 'POST':
+        filter_form = AdminStaffFilterForm(
+            request.POST, )
+        if filter_form.is_valid():
+            # Filter
+            users = Office.objects.filter(
+                first_name__contains=filter_form['first_name'].data,
+                last_name__contains=filter_form['last_name'].data,
+                username__contains=filter_form['username'].data)
+    else:
+        filter_form = AdminStaffFilterForm()
+        users = Office.objects.all()
+
+    paginator = Paginator(users, 10)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+        'filter_form': filter_form,
+    }
+    return render(request, 'admin/users/iframes/staff_admin_list.html', context)
