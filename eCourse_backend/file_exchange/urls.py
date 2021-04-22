@@ -22,8 +22,7 @@ urlpatterns = [
     path('upload/', upload_file, name='upload'),
     path('download/<id>', download_file, name='download'),
     path('overview/', overview, name='overview'),
-    path('create_exersice/', create_exercise, name='create_exersice'),
-    path('alter_exersice/<id>', alter_exersice, name='alter_exersice'),
-    path('deleted_exersice/<id>', delete_exercise, name='deleted_exersice')
-
+    path('exercises/create/', create_exercise, name='create_exersice'),
+    path('exercises/alter/<id>', alter_exersice, name='alter_exersice'),
+    path('exercises/deleted/<id>', delete_exercise, name='deleted_exersice')
 ]

@@ -45,5 +45,5 @@ urlpatterns = [
     path(
         'file_exchange/',
         include('file_exchange.urls'),
-        name='file_exchange')
+        name='file_exchange'),
 ]
