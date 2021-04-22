@@ -6,6 +6,8 @@ from users.models import User
 from courses.models import Exercise, Course
 
 # upload dir
+
+
 def exercise_directory_path(instance, filename):
     return 'upload/course_{0}/exercise_{1}/{2}'.format(
         instance.exercise.course.id, instance.exercise.id, filename)
