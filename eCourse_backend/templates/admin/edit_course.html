@@ -1,0 +1,19 @@
+{% extends 'home/home_auth.html' %}
+
+{% block navbar-content %}
+{% include "admin/navbar_content.html" %}
+
+
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {% comment %} Button: Zurück zur Übersicht {% endcomment %}
+  <a href="{% url 'home' %}">Zurück</a>
+  {% comment %} Textbox: Kurs Daten {% endcomment %}
+  {% include 'forms/bs4_text_form.html' with form=form %}
+  {% comment %} Button: Änderungen Speichern {% endcomment %}
+  <button class="btn btn-primary" type="submit">Speichern</button>
+</form>
+{% endblock %}
