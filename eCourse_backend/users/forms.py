@@ -8,7 +8,14 @@ class UserForm(ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email', 'matr_nr']
 
 
+class StaffForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name',
+                  'email', 'matr_nr', 'is_superuser']
+
 # useradministration: filter forms
+
 
 class LecturerFilterForm(Form):
     username = CharField(max_length=50, label="Username", required=False)
