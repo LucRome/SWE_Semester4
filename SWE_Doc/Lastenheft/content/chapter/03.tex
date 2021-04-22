@@ -4,38 +4,31 @@
 \section{MUST}
 Das Projektergebnis muss folgende Anforderungen umsetzen: \\ \\
 \textbf{Drei Benutzergruppen} \\
-Es gibt die Benutzergruppen: Dozent, Student und Administrator \\
-Die Gruppe Dozent kann folgende Aktionen ausführen: 
+Es gibt die Benutzergruppen: Dozierende, Studierende und Administratoren \\
+Die Gruppe der Dozierenden kann folgende Aktionen ausführen: 
 \begin{itemize}
 \item Kurse erstellen
-\item Studenten zu Kursen hinzufügen 
+\item Studierende zu Kursen hinzufügen 
 \item Aufgaben in den Kurs hochladen
 \item die Aufgaben mit einer Bearbeitungszeit versehen
 \item bearbeitete Abgaben von Studenten einsehen und herunterladen
 \item korrigierte Abgaben hochladen
-\item die Bewertung für Abgaben eintragen
 \end{itemize}
 Die Gruppe der Studenten kann folgende Aktionen ausführen:
 \begin{itemize}
 \item zur Verfügung stehende Aufgaben einsehen und herunterladen
-\item bearbeitete Aufgaben hochladen
+\item bearbeitete Abgaben hochladen
 \item korrigierte Abgaben einsehen
-\item Bewertung der Abgaben einsehen
 \end{itemize}
 Die Gruppe der Administratoren kann folgende Aktionen ausführen:
 \begin{itemize}
 \item Kurse erstellen
-\item Studenten zu Kursen hinzufügen
-\item Dozenten zu Kursen hinzufügen
-\item bearbeitete Abgaben von Studenten einsehen und herunterladen
-\item korrigierte Abgaben einsehen und herunterladen
-\item die eingetragene Bewertung der Abgaben einsehen und freigeben
-\item Studenten aus Kursen löschen
+\item Studierende zu Kursen hinzufügen
+\item Dozierende zu Kursen hinzufügen
+\item Studierende aus Kursen löschen
 \item Kurse löschen
-\item Studenten und Dozenten aus der Datenbank löschen
+\item Studierende und Dozierende aus der Datenbank löschen
 \end{itemize}
-
-Anmerkung: Studenten sollen Bewertungen von Aufgaben erst dann einsehen, wenn diese von einem Administrator freigeschaltet wurden
 
 \textbf{Benutzeraktionen} \\
 Jeder Benutzer soll in der Lage sein folgende Aktionen auszuführen:
@@ -46,22 +39,27 @@ Jeder Benutzer soll in der Lage sein folgende Aktionen auszuführen:
 \textbf{Login} \\
 Einem Nutzer werden bei Aufruf der Seite keine sensitiven Informationen angezeigt. \\
 Es soll eine Seite angezeigt werden, die nur generelle Informationen enthält, die in keiner Verbindung zu den Nutzern der Seite stehen. \\
-Erst nach einem Login mit Benutzername und Passwort soll eine Übersichtsseite angezeigt werden, die auf den Nutzer entsprechend seiner Nutzergruppe zugeschnitten sind. \\
+Erst nach einem Login mit Benutzername und Passwort soll eine Übersichtsseite angezeigt werden, die auf den Nutzer entsprechend seiner Nutzergruppe zugeschnitten ist. \\
 
 \section{SHOULD}
 Das Projektergebnis sollte folgende Anforderungen umsetzten:
 \begin{itemize}
 \item Der Administrator soll Studenten zu Gruppen zusammenfügen können
 \item Die Namen der Kurse werden automatisch generiert
+\item Dozierende sollen die Bewertung für bearbeitete Abgaben von Studierenden eintragen können
+\item Studierende sollen die Bewertung für ihre bearbeitete Abgaben einsehen können
+\item Administratoren sollen die eingetragene Bewertung der Abgaben von Studierenden einsehen und freigeben können
 \end{itemize}
+
+Anmerkung: Studierende sollen Bewertungen von Aufgaben erst dann einsehen, wenn diese von einem Administrator freigeschaltet wurden
 
 \section{COULD}
 Das Projektergebnis kann folgende Anforderungen umsetzen:
 \begin{itemize}
-\item Ein Dozent wird nach einer definierten Zeit automatisch an die Bewertung von Abgaben erinnert
+\item Ein*e Dozent*in wird nach einer definierten Zeit automatisch an die Bewertung von Abgaben erinnert
 \item ein Logo für die Software
-\item eine Chatfunktion zwischen Studenten und Dozenten
-\item Dozenten können neben Aufgaben auch Vorlesungsmaterialien hochladen
+\item eine Chatfunktion zwischen Studierenden und Dozierenden
+\item Dozierende können neben Aufgaben auch Vorlesungsmaterialien hochladen
 \end{itemize}
 
 
