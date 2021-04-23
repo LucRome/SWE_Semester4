@@ -261,3 +261,30 @@ def staff_admin_list_iframe(request, page=1):
         'filter_form': filter_form,
     }
     return render(request, 'admin/users/iframes/staff_admin_list.html', context)
+
+# Edit User IFrame
+
+# TODO: correctly edit user
+
+
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def edit_user_admin_modalcontent_iframe(request, username):
+    user_object = get_object_or_404(User, username=username)
+    update_success = False
+    if request.method == 'POST':
+        form = StaffForm(request.POST or None, instance=user_object)
+        if form.is_valid():
+            form.save()
+            update_success = True
+    else:
+        user_object = get_object_or_404(User, username=username)
+        form = UserForm(data=model_to_dict(user_object))
+
+    context = {
+        'user_form': form,
+        'update_success': update_success
+    }
+
+    return render(request, 'admin/users/iframes/edit_user_modalcontent.html', context)
