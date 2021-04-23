@@ -79,10 +79,9 @@ def download_file(request, id):
     file = get_object_or_404(Submission, pk=id)
     path = file.file.name
     f = open(path, 'rb').read()
-    #type is static to pdf would cause an error if i try to downlaod a non pdf file but we are only allowed to upload pdfs so its fine
+    # type is static to pdf would cause an error if i try to downlaod a non
+    # pdf file but we are only allowed to upload pdfs so its fine
     response = HttpResponse(f, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="%s' % path.split('_', 5)[-1]
+    response['Content-Disposition'] = 'attachment; filename="%s' % path.split(
+        '_', 5)[-1]
     return response
-
-
-
