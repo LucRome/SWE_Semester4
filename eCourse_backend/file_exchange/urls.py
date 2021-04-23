@@ -24,5 +24,5 @@ urlpatterns = [
     path('overview/', overview, name='overview'),
     path('exercises/create/', create_exercise, name='create_exersice'),
     path('exercises/alter/<id>', alter_exersice, name='alter_exersice'),
-    path('exercises/deleted/<id>', delete_exercise, name='deleted_exersice')
+    path('exercises/delete/<id>', delete_exercise, name='deleted_exersice')
 ]
