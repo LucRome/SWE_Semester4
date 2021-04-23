@@ -7,8 +7,6 @@ from courses.models import Exercise
 
 # DatetTime input fields
 # showing little calendar to choose date and time
-
-
 class SD_DateTimeInput(forms.DateTimeInput):
     input_type = 'datetime-local'
 
