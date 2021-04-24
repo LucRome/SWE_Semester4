@@ -1,22 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib.auth import get_user_model
 from django.forms.models import model_to_dict
 from eCourse_backend.models import *
 from .forms import *
-from .models import User, Lecturer, Student
+from .models import User, Lecturer, Student, Office
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.core.paginator import Paginator
 
 # Create your views here.
 
 # Views given from Backend, use as orientation
-
-
-# Views for the admin
-# TODO: check whethter user is from the right group
-
-
-
 
 
 @login_required
@@ -94,13 +88,18 @@ def user_administration_admin(request):
 def create_lecturer_iframe(request):
     save_success = False
     if request.method == 'POST':
-        user_form = LecturerForm(request.POST)
+        user_form = UserForm(request.POST)
         if user_form.is_valid():
-            user_form.save()
+            Lecturer.objects.create_user(
+                username=user_form['username'].data,
+                email=user_form['email'].data,
+                first_name=user_form['first_name'].data,
+                last_name=user_form['last_name'].data,
+                matr_nr=user_form['matr_nr'].data
+            )
             save_success = True
     else:
-        user_form = LecturerForm()
-
+        user_form = UserForm()
     context = {
         'user_form': user_form,
         'success': save_success,
@@ -118,13 +117,25 @@ def create_lecturer_iframe(request):
 def create_officeuser_iframe(request):
     save_success = False
     if request.method == 'POST':
-        user_form = OfficeUserForm(request.POST)
+        user_form = StaffForm(request.POST)
         if user_form.is_valid():
-            user_form.save()
+            if user_form['is_superuser'].data == True:
+                Office.objects.create_superuser(
+                    username=user_form['username'].data,
+                    email=user_form['email'].data,
+                    first_name=user_form['first_name'].data,
+                    last_name=user_form['last_name'].data,
+                )
+            else:
+                Office.objects.create_user(
+                    username=user_form['username'].data,
+                    email=user_form['email'].data,
+                    first_name=user_form['first_name'].data,
+                    last_name=user_form['last_name'].data,
+                )
             save_success = True
     else:
-        user_form = OfficeUserForm()
-
+        user_form = StaffForm()
     context = {
         'user_form': user_form,
         'success': save_success,
@@ -135,20 +146,24 @@ def create_officeuser_iframe(request):
 
 # create student
 
-
-@xframe_options_exempt  # can be solved better
-@login_required
-@permission_required('users.manage_users', raise_exception=True)
+@ xframe_options_exempt  # can be solved better
+@ login_required
+@ permission_required('users.manage_users', raise_exception=True)
 def create_student_iframe(request):
     save_success = False
     if request.method == 'POST':
-        user_form = StudentForm(request.POST)
+        user_form = UserForm(request.POST)
         if user_form.is_valid():
-            user_form.save()
+            Student.objects.create_user(
+                username=user_form['username'].data,
+                email=user_form['email'].data,
+                first_name=user_form['first_name'].data,
+                last_name=user_form['last_name'].data,
+                matr_nr=user_form['matr_nr'].data
+            )
             save_success = True
     else:
-        user_form = StudentForm()
-
+        user_form = UserForm()
     context = {
         'user_form': user_form,
         'success': save_success,
@@ -168,7 +183,7 @@ def student_list_iframe(request, page=1):
             request.POST, )
         if filter_form.is_valid():
             # Filter
-            students = Lecturer.objects.filter(
+            students = Student.objects.filter(
                 matr_nr__contains=filter_form['matr_nr'].data,
                 first_name__contains=filter_form['first_name'].data,
                 last_name__contains=filter_form['last_name'].data,
