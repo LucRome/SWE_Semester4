@@ -15,13 +15,7 @@ from django.core.paginator import Paginator
 # Views for the admin
 # TODO: check whethter user is from the right group
 
-# Course overview
 
-@login_required
-@permission_required('users.manage_users', raise_exception=True)
-def course_overview(request):
-    if request.method == 'GET':
-        return render(request, 'courses/overview.html', {})
 
 
 

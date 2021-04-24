@@ -14,25 +14,27 @@
     {# delete button to courses/delete/id #}
     
     <div id="accordion" role="tablist">
-
+      {% for course in courses %}
       <div class="card">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header" role="tab" id="heading_{{course.name}}">
           <h5 class="mb-0">
             <a>
-              Kurs1
+              {{course.name}}
             </a>
-            <button type="button" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger float-right">\/</button>
+            <button type="button" data-toggle="collapse" href="#collapse_{{course.name}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger float-right">\/</button>
           </h5>
         </div>
     
-        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-          <div class="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+        <div id="collapse_{{course.name}}" class="collapse show" role="tabpanel" aria-labelledby="heading_{{course.name}}">
+          <div class="card-body" data-src="{% url 'course_studentlist_iframe' name=course.name page=0 %}">
+            {# Student list #}
+            {# role and aria-labelledby is for schreenreaders #}
+            <iframe src="" width="100%" frameborder="0" loading="lazy"></iframe>
           </div>
         </div>
       </div>
+      {% endfor %}
 
-      --
     </div>
     
     {% endblock %}

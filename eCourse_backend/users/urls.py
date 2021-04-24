@@ -19,9 +19,7 @@ from django.views.generic.base import TemplateView
 from .views import *
 
 urlpatterns = [
-    # course 
-    path('course/overview/', course_overview, name='course_overview'),
-
+   
     path('overview/', overview, name='overview'),
     path('create/', create_user, name='create_user'),
     path('alter/<int:id>', alter_user, name='alter_user'),
@@ -29,13 +27,7 @@ urlpatterns = [
     # user administration
     path('admin_s/user_administration/',
          user_administration_admin, name='user_administration_admin'),
-    # create user iframes
-    path('admin_s/iframes/create_lecturer', create_lecturer_iframe,
-         name='createlecturer_admin_iframe'),
-    path('admin_s/iframes/create_officeuser', create_officeuser_iframe,
-         name='createofficeuser_admin_iframe'),
-    path('admin_s/iframes/create_student', create_student_iframe,
-         name='createstudent_admin_iframe'),
+ 
     # studentlist iframe
     path('admin_s/iframes/studentlist/page<int:page>',
          student_list_iframe, name='studentlist_admin_iframe'),
