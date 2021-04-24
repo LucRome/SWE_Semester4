@@ -1,0 +1,29 @@
+{% load class_tag %}
+
+{% load widget_tweaks%}
+
+<h1> Form: {{field.field.widget.input_type}} </h1>
+<h1> Form: {{field|get_class}} </h1>
+
+{% if field.field.widget.input_type == 'text' %}
+  {% render_field field class="form-control input {{error_class}}"%}
+{% elif field.field.widget.input_type == 'number' %}
+  {% render_field field class="form-control input {{error_class}}"%}
+{% elif field.field.widget.input_type == 'email' %}
+  {% render_field field class="form-control input {{error_class}}"%}
+{% elif field.field.widget.input_type == 'select' %}
+  <div class="form-check">
+    {% render_field field class="form-control input {{error_class}}"%}
+  </div>
+{% elif field.field.widget.input_type == 'checkbox' %}
+  <div class="form-check list-group">
+        {% for subfield in field %}
+          <div class="d-flex flex-wrap">
+            <label class="form-check-label" for="{{ subfield.id_for_label }}">
+              {{ subfield.tag }}
+              {{ subfield.choice_label }}
+            </label>
+          </div>
+        {% endfor %}
+  </div>
+{% endif %}
