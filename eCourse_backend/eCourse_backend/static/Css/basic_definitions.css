@@ -26,4 +26,6 @@
     width: auto;
     border-radius: 4px;
 }
-/*  */
+.success-icon {
+    color: green;
+}
