@@ -39,25 +39,13 @@ def overview(request):
 def create_user(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        type_form = UsertypeChooseForm(request.POST)
-        if type_form.is_valid() and user_form.is_valid():
-            u_type = type_form.cleaned_data['user_type']
-            if u_type == 'student':
-                form = StudentForm(request.POST)
-                form.save()
-            elif u_type == 'lecturer':
-                form = LecturerForm(request.POST)
-                form.save()
-            elif u_type == 'office':
-                form = OfficeUserForm(request.POST)
-                form.save()
+        if user_form.is_valid():
+            user_form.save()
     else:
         user_form = UserForm()
-        type_form = UsertypeChooseForm()
 
     context = {
         'form': user_form,
-        'usertype_form': type_form,
     }
     return render(request, 'users/create_user.html', context)
 
