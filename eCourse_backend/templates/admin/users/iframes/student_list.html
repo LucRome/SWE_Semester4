@@ -27,7 +27,7 @@
           <th>Nachname</th>
           <th>Username</th>
           <th>Aktiv</th>
-          <th></th>
+          <th> </th>
         </tr>
       </thead>
 
@@ -50,11 +50,8 @@
             {# edit button #}
             <td>
               <div class="container no-gutters">
-                <a href="#"> {# TODO: add correct link #}
-                  <button class="btn-sm btn-danger">
-                    edit
-                  </button>
-                </a>
+                {# Modal to Edit user #}
+                {% include 'admin/users/iframes/edit_user_modal.html' with user_edit=student %}
               </div>
             </td>
           </tr>        

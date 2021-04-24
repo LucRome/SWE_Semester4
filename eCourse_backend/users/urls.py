@@ -34,6 +34,9 @@ urlpatterns = [
          name='createofficeuser_admin_iframe'),
     path('admin_s/iframes/create_student', create_student_iframe,
          name='createstudent_admin_iframe'),
+    # edit user iframe
+    path('admin_s/iframes/edit_student/<username>', edit_user_admin_modalcontent_iframe,
+         name='edituser_admin_modalcontent_iframe'),
     # studentlist iframe
     path('admin_s/iframes/studentlist/page<int:page>',
          student_list_iframe, name='studentlist_admin_iframe'),

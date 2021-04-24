@@ -2,6 +2,8 @@
 
 {% block title %}Admin Lecturer List{% endblock %}
 
+{% load static %}
+
 {% block content %}
   {# filter form #}
   <div class="card">
@@ -26,18 +28,18 @@
           <th>Nachname</th>
           <th>Username</th>
           <th>Aktiv</th>
-          <th></th>
+          <th> </th>
         </tr>
       </thead>
 
       {# table body #}
       <tbody>
-        {% for leturer in page_obj %}
+        {% for lecturer in page_obj %}
           <tr>
-            <td>{{leturer.email}}</td>
-            <td>{{leturer.first_name}}</td>
-            <td>{{leturer.last_name}}</td>
-            <td>{{leturer.username}}</td>
+            <td>{{lecturer.email}}</td>
+            <td>{{lecturer.first_name}}</td>
+            <td>{{lecturer.last_name}}</td>
+            <td>{{lecturer.username}}</td>
             <td>
               {# TODO: correct? #}
               {% if lecturer.is_active %}
@@ -49,11 +51,8 @@
             {# edit button #}
             <td>
               <div class="container no-gutters">
-                <a href="#"> {# TODO: add correct link #}
-                  <button class="btn-sm btn-danger">
-                    bearbeiten
-                  </button>
-                </a>
+                {# Modal to Edit user #}
+                {% include 'admin/users/iframes/edit_user_modal.html' with user_edit=lecturer %}
               </div>
             </td>
           </tr>        
@@ -91,4 +90,5 @@
       </li>
     {% endif %}
   </ul>
+  <script src="{% static 'JS/iframe_size.js' %}"></script>
 {% endblock  %}

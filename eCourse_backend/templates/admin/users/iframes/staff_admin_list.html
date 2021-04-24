@@ -31,27 +31,27 @@
           <th>Username</th>
           <th>Admin</th>
           <th>Aktiv</th>
-          <th></th>
+          <th> </th>
         </tr>
       </thead>
 
       {# table body #}
       <tbody>
-        {% for student in page_obj %}
+        {% for office_user in page_obj %}
           <tr>
-            <td>{{student.email}}</td>
-            <td>{{student.first_name}}</td>
-            <td>{{student.last_name}}</td>
-            <td>{{student.username}}</td>
+            <td>{{office_user.email}}</td>
+            <td>{{office_user.first_name}}</td>
+            <td>{{office_user.last_name}}</td>
+            <td>{{office_user.username}}</td>
             <td>
-              {% if student.is_superuser %}
+              {% if office_user.is_superuser %}
                 <i class="bi bi-check"></i>
               {% else %}
                 <i class="bi bi-x"></i>
               {% endif %}
             </td>
             <td>
-              {% if student.is_active %}
+              {% if office_user.is_active %}
                 <i class="bi bi-check"></i>
               {% else %}
                 <i class="bi bi-x"></i>
@@ -60,11 +60,8 @@
             {# edit button #}
             <td>
               <div class="container no-gutters">
-                <a href="#"> {# TODO: add correct link #}
-                  <button class="btn-sm btn-danger">
-                    edit
-                  </button>
-                </a>
+                {# Modal to Edit user #}
+                {% include 'admin/users/iframes/edit_user_modal.html' with user_edit=office_user %}
               </div>
             </td>
           </tr>        
