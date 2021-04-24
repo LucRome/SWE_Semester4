@@ -9,10 +9,11 @@ from .models import Course
 
 # Create your views here.
 
+
 @xframe_options_exempt
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
-def course_student_list_iframe(request,name ,page=1):
+def course_student_list_iframe(request, name, page=1):
     # TO:DO Filter students by coursename
 
     if request.method == 'POST':

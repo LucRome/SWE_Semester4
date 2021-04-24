@@ -105,7 +105,10 @@ def create_lecturer_iframe(request):
         'success': save_success,
     }
 
-    return render(request, 'admin/users/iframes/create_user/create_lecturer.html', context)
+    return render(
+        request,
+        'admin/users/iframes/create_user/create_lecturer.html',
+        context)
 
 
 # create officeuser
@@ -119,7 +122,7 @@ def create_officeuser_iframe(request):
     if request.method == 'POST':
         user_form = StaffForm(request.POST)
         if user_form.is_valid():
-            if user_form['is_superuser'].data == True:
+            if user_form['is_superuser'].data:
                 Office.objects.create_superuser(
                     username=user_form['username'].data,
                     email=user_form['email'].data,
@@ -141,7 +144,10 @@ def create_officeuser_iframe(request):
         'success': save_success,
     }
 
-    return render(request, 'admin/users/iframes/create_user/create_officeuser.html', context)
+    return render(
+        request,
+        'admin/users/iframes/create_user/create_officeuser.html',
+        context)
 
 
 # create student
@@ -169,7 +175,10 @@ def create_student_iframe(request):
         'success': save_success,
     }
 
-    return render(request, 'admin/users/iframes/create_user/create_student.html', context)
+    return render(
+        request,
+        'admin/users/iframes/create_user/create_student.html',
+        context)
 
 # Student list
 
@@ -256,4 +265,7 @@ def staff_admin_list_iframe(request, page=1):
         'page_obj': page_obj,
         'filter_form': filter_form,
     }
-    return render(request, 'admin/users/iframes/staff_admin_list.html', context)
+    return render(
+        request,
+        'admin/users/iframes/staff_admin_list.html',
+        context)
