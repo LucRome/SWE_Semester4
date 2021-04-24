@@ -20,3 +20,13 @@ $('.modal-button').on('click', function (e) {
         $(iframe).attr("src", src);
     }
 })
+
+$('.card-button').on('click', function (e) {
+    card_body = $($(e.target).attr('href')).children('.card-body');
+    src = $(card_body).attr('data-src');
+    iframe = $(card_body).children('iframe');
+    // if the iframe hasn't already been loaded once
+    if ($(iframe).attr("src") == "") {
+        $(iframe).attr("src", src);
+    }
+})
