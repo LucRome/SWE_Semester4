@@ -6,6 +6,7 @@ from users.models import User, Lecturer, Student, Office
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.core.paginator import Paginator
 from .models import Course
+from django.db.models import Q
 
 # Create your views here.
 
@@ -41,11 +42,29 @@ def course_student_list_iframe(request, name, page=1):
 
 
 @login_required
-@permission_required('courses.create_course', raise_exception=True)
 def course_overview(request):
+    user_id = request.user.id
     if request.method == 'GET':
-        courses = Course.objects.all()
+        # officer has type 3 in db
+        if request.user.type == 3:
+            courses = Course.objects.all()
+        else:
+            # courses = Course.objects.filter(student = user_id)
+            courses = Course.objects.filter(Q(student = user_id) | Q(lecturer_id = user_id))
         return render(request, 'courses/overview.html', {'courses': courses})
+
+@login_required
+@permission_required('courses.create_course', raise_exception=True)
+def view_course(request, id):
+    if request.method == 'GET':
+        course = get_object_or_404(Course, pk = id)
+        lecturer = course.lecturer_id
+        # print('lecturer', lecturer)
+        students = list()
+        for student in course.student.all():
+            # print(student.id)
+            students.append(student.id)
+    return render(request, 'courses/detail.html', {'lecturer': lecturer, 'students': students})
 
 
 @login_required

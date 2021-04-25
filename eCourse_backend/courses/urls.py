@@ -32,4 +32,6 @@ urlpatterns = [
 
     path('edit/<id>', edit_course, name='edit_course'),
 
+    path('course/view/<id>', view_course, name='view_course')
+
 ]
