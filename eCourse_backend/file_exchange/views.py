@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from .forms import FileForm, ExersiceForm
 from .models import Submission
 from courses.models import Exercise
+import re
 
 # Create your views here.
 
@@ -81,7 +82,15 @@ def download_file(request, id):
     f = open(path, 'rb').read()
     # type is static to pdf would cause an error if i try to downlaod a non
     # pdf file but we are only allowed to upload pdfs so its fine
+    print(path)
     response = HttpResponse(f, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="%s' % path.split(
-        '_', 5)[-1]
+    response['Content-Disposition'] = 'attachment; filename="%s' % filename(path)
     return response
+
+
+#return filename w/o os.path.basename()
+def filename(path):
+    x = re.search("^upload/course_[0-9]+/exercise_[0-9]+/", path)
+    path_path = x.group()
+    filename = path.replace(path_path, '')
+    return filename
