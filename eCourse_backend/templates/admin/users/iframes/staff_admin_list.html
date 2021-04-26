@@ -6,6 +6,8 @@
 
 {% block title %}Admin Student List{% endblock %}
 
+{% load static %}
+
 {% block content %}
   {# filter form #}
   <div class="card">
@@ -99,4 +101,5 @@
       </li>
     {% endif %}
   </ul>
+  <script src="{% static 'JS/iframe_size.js' %}"></script>
 {% endblock  %}

@@ -1,5 +1,7 @@
 {% extends 'iframe_template.html' %}
 
+{% load static %}
+
 {% block title %}Admin Student List{% endblock %}
 
 {% block content %}
@@ -89,4 +91,5 @@
       </li>
     {% endif %}
   </ul>
+  <script src="{% static 'JS/iframe_size.js' %}"></script>
 {% endblock  %}
