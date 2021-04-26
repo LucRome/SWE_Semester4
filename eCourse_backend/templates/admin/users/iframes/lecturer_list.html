@@ -61,34 +61,6 @@
     </table>
   </div>
 
-  {# pagination #}
-  <ul class="pagination justify-content-center">
-    {# previous #}
-    {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="{% url 'lecturerlist_admin_iframe' page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">-</a>
-      </li> 
-    {% endif %}
-
-    {# current #}
-    <li class="page-item active">
-      <a class="page-link" href="#">{{page_obj.number}}</a>
-    </li>
-
-    {# next #}
-    {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="{% url 'lecturerlist_admin_iframe' page=page_obj.next_page_number %}">{{page_obj.previous_page_number}}</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">-</a>
-      </li>
-    {% endif %}
-  </ul>
+  {% include 'other/pagination.html' with page_obj=page_obj %}
   <script src="{% static 'JS/iframe_size.js' %}"></script>
 {% endblock  %}
