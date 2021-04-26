@@ -265,7 +265,10 @@ def staff_admin_list_iframe(request, page=1):
         'page_obj': page_obj,
         'filter_form': filter_form,
     }
-    return render(request, 'admin/users/iframes/staff_admin_list.html', context)
+    return render(
+        request,
+        'admin/users/iframes/staff_admin_list.html',
+        context)
 
 # Edit User IFrame
 
@@ -293,7 +296,10 @@ def edit_user_admin_modalcontent_iframe(request, username):
         'update_success': update_success
     }
 
-    return render(request, 'admin/users/iframes/edit_user_modalcontent.html', context)
+    return render(
+        request,
+        'admin/users/iframes/edit_user_modalcontent.html',
+        context)
 
 
 # Delete user Iframe
@@ -308,4 +314,7 @@ def delete_user_iframe(request, username):
     context = {
         'username': username,
     }
-    return render(request, 'admin/users/iframes/deleted_user_iframe.html', context)
+    return render(
+        request,
+        'admin/users/iframes/deleted_user_iframe.html',
+        context)
