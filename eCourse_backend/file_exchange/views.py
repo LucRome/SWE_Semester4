@@ -83,11 +83,12 @@ def download_file(request, id):
     # type is static to pdf would cause an error if i try to downlaod a non
     # pdf file but we are only allowed to upload pdfs so its fine
     response = HttpResponse(f, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="%s' % filename(path)
+    response['Content-Disposition'] = 'attachment; filename="%s' % filename(
+        path)
     return response
 
 
-#return filename w/o os.path.basename()
+# return filename w/o os.path.basename()
 def filename(path):
     x = re.search("^upload/course_[0-9]+/exercise_[0-9]+/", path)
     path_path = x.group()
