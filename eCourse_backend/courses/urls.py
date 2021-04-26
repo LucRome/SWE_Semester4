@@ -29,6 +29,8 @@ urlpatterns = [
     # create user iframes
     path('course/iframes/studentlist/<name>/page<int:page>', course_student_list_iframe,
          name='course_studentlist_iframe'),
+    # admin: create course
+    path('admin/create/', create_course_admin, name="create_course_admin"),
 
     path('edit/<id>', edit_course, name='edit_course'),
 
