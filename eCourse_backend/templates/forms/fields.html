@@ -1,21 +1,19 @@
 {% load class_tag %}
 
 {% load widget_tweaks%}
-
-<h1> Form: {{field.field.widget.input_type}} </h1>
-<h1> Form: {{field|get_class}} </h1>
-
-{% if field.field.widget.input_type == 'text' %}
+{% if field|field_type == 'charfield' or field|field_type == 'usernamefield' %}
   {% render_field field class="form-control input {{error_class}}"%}
-{% elif field.field.widget.input_type == 'number' %}
-  {% render_field field class="form-control input {{error_class}}"%}
-{% elif field.field.widget.input_type == 'email' %}
-  {% render_field field class="form-control input {{error_class}}"%}
-{% elif field.field.widget.input_type == 'select' %}
-  <div class="form-check">
-    {% render_field field class="form-control input {{error_class}}"%}
-  </div>
-{% elif field.field.widget.input_type == 'checkbox' %}
+{% elif field|field_type == 'integerfield' %}
+  {% render_field field class="form-control input {{error_class}}" type="number"%}
+{% elif field|field_type == 'emailfield' %}
+  {% render_field field class="form-control input {{error_class}}" type="email"%}
+{% elif field|field_type == 'datefield' %}
+  {% render_field field class="form-control input {{error_class}}" type="date"%}
+{% elif field|field_type == 'booleanfield' %}
+  {% render_field field class="form-control input {{error_class}}" type="checkbox"%}
+{% elif field|field_type == 'modelchoicefield' %}
+    {% render_field field class="form-check-input {{error_class}}"%}
+{% elif field|field_type == 'modelmultiplechoicefield' %}
   <div class="form-check list-group">
         {% for subfield in field %}
           <div class="d-flex flex-wrap">
