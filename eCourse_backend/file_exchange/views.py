@@ -82,7 +82,6 @@ def download_file(request, id):
     f = open(path, 'rb').read()
     # type is static to pdf would cause an error if i try to downlaod a non
     # pdf file but we are only allowed to upload pdfs so its fine
-    print(path)
     response = HttpResponse(f, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="%s' % filename(path)
     return response
