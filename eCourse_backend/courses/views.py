@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import permission_required, login_required
 from .forms import CourseForm
-from .models import Course
+from .models import Course, Exercise
 from users.models import User
 from django.db.models import Q
 
@@ -17,23 +17,27 @@ def course_overview(request):
         if request.user.type == 3:
             courses = Course.objects.all()
         else:
-            # courses = Course.objects.filter(student = user_id)
             courses = Course.objects.filter(Q(student = user_id) | Q(lecturer_id = user_id))
         return render(request, 'courses/overview.html', {'courses': courses})
 
 @login_required
-@permission_required('courses.create_course', raise_exception=True)
 def view_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk = id)
-        lecturer_id = course.lecturer_id
-        lecturer = User.objects.get(id = lecturer_id)
-        lecturer_name = lecturer.first_name + ' ' + lecturer.last_name
-        students = list()
-        for student in course.student.all():
-            student_name = student.first_name + ' ' + student.last_name
-            students.append(student_name)
-    return render(request, 'courses/detail.html', {'lecturer': lecturer_name, 'students': students})
+        print('user type ', request.user.type)
+        if (request.user.type == 3 or request.user.type == 2): 
+            #course members
+            lecturer_id = course.lecturer_id
+            lecturer = User.objects.get(id = lecturer_id)
+            lecturer_name = lecturer.first_name + ' ' + lecturer.last_name
+            students = list()
+            for student in course.student.all():
+                student_name = student.first_name + ' ' + student.last_name
+                students.append(student_name)
+        #files
+        exercise = Exercise.objects.get(id = id)
+
+    return render(request, 'courses/detail.html', {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise})
 
 
 @login_required
