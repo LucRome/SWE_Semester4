@@ -50,6 +50,7 @@ def view_course(request, id):
 
             data = {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise, 'files': files}
 
+        #student
         if (request.user.type == 3):
             #exercises
             exercise = Exercise.objects.filter(course_id = id)
