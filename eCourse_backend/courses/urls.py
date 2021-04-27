@@ -25,7 +25,10 @@ urlpatterns = [
     path('alter/<id>', alter_course, name='alter_course'),
     path('delete/<id>', delete_course, name='delte_course'),
     # course
-    path('course/overview/page<int:page>', course_overview, name='course_overview'),
+    path(
+        'course/overview/page<int:page>',
+        course_overview,
+        name='course_overview'),
     # create user iframes
     path('course/iframes/studentlist/<id>', course_student_list_iframe,
          name='course_studentlist_iframe'),

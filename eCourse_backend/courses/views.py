@@ -10,6 +10,7 @@ from django.db.models import Q
 
 # Create your views here.
 
+
 @xframe_options_exempt
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
@@ -27,8 +28,8 @@ def course_student_list_iframe(request, id, page=1):
                 last_name__contains=filter_form['last_name'].data,
                 username__contains=filter_form['username'].data)
     elif request.method == 'GET':
-        filter_form = CourseStudentFilterForm() 
-        course = get_object_or_404(Course, pk = id)
+        filter_form = CourseStudentFilterForm()
+        course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         # print('lecturer', lecturer)
         students = course.student.all()
@@ -50,27 +51,30 @@ def course_overview(request, page=1):
             courses = Course.objects.all()
         else:
             # courses = Course.objects.filter(student = user_id)
-            courses = Course.objects.filter(Q(student = user_id) | Q(lecturer_id = user_id))
-    
+            courses = Course.objects.filter(
+                Q(student=user_id) | Q(lecturer_id=user_id))
+
     paginator = Paginator(courses, 10)
     page_obj = paginator.get_page(page)
 
     context = {
         'page_obj': page_obj,
-    }   
+    }
     return render(request, 'courses/overview.html', context)
+
 
 @login_required
 def view_course(request, id):
     if request.method == 'GET':
-        course = get_object_or_404(Course, pk = id)
+        course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer_id
         # print('lecturer', lecturer)
         students = list()
         for student in course.student.all():
             # print(student.id)
             students.append(student.id)
-    return render(request, 'courses/detail.html', {'lecturer': lecturer, 'students': student})
+    return render(request, 'courses/detail.html',
+                  {'lecturer': lecturer, 'students': student})
 
 
 @login_required
