@@ -54,10 +54,10 @@ def view_course(request, id):
                 'exercise': exercise,
                 'files': files}
 
-        #student
+        # student
         if (request.user.type == 3):
-            #exercises
-            exercise = Exercise.objects.filter(course_id = id)
+            # exercises
+            exercise = Exercise.objects.filter(course_id=id)
             print(exercise)
 
             files = dir()
