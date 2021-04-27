@@ -61,7 +61,6 @@ def course_overview(request, page=1):
     return render(request, 'courses/overview.html', context)
 
 @login_required
-@permission_required('courses.create_course', raise_exception=True)
 def view_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk = id)
