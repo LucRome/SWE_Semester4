@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+    <h1> deleted course </h1>
+
+    <p>
+        Course with {{ name }} deleted 
+    </p>
+
+    <a href="{% url 'overview' %}">
+        <button> overview </button>
+    </a>
+
+{% endblock %} 
