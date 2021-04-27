@@ -1,4 +1,5 @@
 
+{% extends 'base.html' %}
 
 {% block content %} 
     <h1> Course view </h1>
@@ -9,10 +10,16 @@
     {# delete button to courses/delete/id #}
     
     <div id="accordion" role="tablist">
+        <a>students:</a><br>
       {% for student in students %}
               <a>{{student}}</a>
       {% endfor %}
     </div>
+    <a>lecturer:</a><br>
     <a> {{lecturer}}</a>
+
+    <a>exercise:</a><br>
+    <a> Deadline: {{exercise.submission_deadline}}</a><br>
+    <a> Description: {{exercise.description}}</a>
     
 {% endblock %}

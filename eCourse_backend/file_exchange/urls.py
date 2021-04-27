@@ -19,22 +19,10 @@ from django.views.generic.base import TemplateView
 from .views import *
 
 urlpatterns = [
-
-    path('create/', create_course, name='create_course'),
-    path('alter/<id>', alter_course, name='alter_course'),
-    path('delete/<id>', delete_course, name='delte_course'),
-    # course
-    path(
-        'course/overview/page<int:page>',
-        course_overview,
-        name='course_overview'),
-    # create user iframes
-    path('course/iframes/studentlist/<id>', course_student_list_iframe,
-         name='course_studentlist_iframe'),
-    # admin: create course
-    path('admin/create/', create_course_admin, name="create_course_admin"),
-
-    path('edit/<id>', edit_course, name='edit_course'),
-
-    path('course/view/<id>', view_course, name='view_course')
+    path('upload/', upload_file, name='upload'),
+    path('download/<id>', download_file, name='download'),
+    path('overview/', overview, name='overview'),
+    path('exercises/create/', create_exercise, name='create_exersice'),
+    path('exercises/alter/<id>', alter_exersice, name='alter_exersice'),
+    path('exercises/delete/<id>', delete_exercise, name='deleted_exersice')
 ]
