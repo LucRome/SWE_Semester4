@@ -3,7 +3,7 @@
 \chapter{Codierungsrichtlinien}\label{sec:Chap2}
 In diesem Abschnitt sind die wichtigsten Codierungsrichtlinien, die im Projekt gelten, zusammengefasst. Es handelt sich dabei um eine Auswahl der wichtigsten und am häufigsten vorkommenden Situationen.
 
-Das Projektteam hat sich für jede Programmiersprache bereits gültige Codierungsrichtlinien gesucht. Diese sollen im Projekt umgesetzt werden. 
+Das Projektteam befolgt die gängigen Codierungsrichtlinen für die jeweiligen Programmiersprachen. 
 
 Damit für die am häufigsten auftretenden Situationen nicht immer der geltende Standard gelesen werden muss, sind an dieser Stelle die wichtigsten Informationen zusammengefasst. 
 
@@ -14,11 +14,11 @@ Wirkt also eine Regel an einer bestimmten Stelle der Lesbarkeit des Codes entgeg
 Um ein Beispiel für eine solche Situation zu nennen:
 Dateinamen sollen nach Richtlinie immer im snake\_case geschrieben sein. Allerdings repräsentiert eine Datei einen bestimmten Eigennamen. Hier wird dann bevorzugt, den Eigennamen korrekt zu verwenden, als ihn an die Richtlinie anzupassen.
 \section{Allgemein}
-Vorab einige Allgemeine Richtlinien, auf die sich das Projektteam geeinigt hat.
+Vorab einige allgemeine Richtlinien, auf die sich das Projektteam geeinigt hat.
 \begin{itemize}
 \item Dateinamen werden im snake\_case geschrieben (Bsp.: das\_ist\_snake\_case)
 \item Jede Datei erhält einen Dateiheader, in dem die Inhalte der Datei kurz zusammengefasst werden
-\item Der Programmcode wird auf Englisch geschrieben. Von dieser Regel sind alle Inhalte die für den Nutzer der Software sichtbar sind ausgenommen.
+\item Der Programmcode wird auf Englisch geschrieben. Von dieser Regel sind alle Inhalte, die für den Nutzer der Software sichtbar sind, ausgenommen.
 \item Dateien werden mit UTF-8 codiert
 \end{itemize}
 
@@ -160,7 +160,7 @@ Kommentare werden in englischer Sprache verfasst.
 
 \textit{Inline Kommentare} stehen in der selben Zeile wie ein Code-Statement. Sie sollten sparsam eingesetzt werden und werden weggelassen, wenn sie das offensichtliche Erklären. Sie sind mindestens ein Leerzeichen vom Code den sie beschreiben entfernt und beginnen mit einem \# und einem darauf folgenden Leerzeichen. 
 
-\textit{Documentation Strings} werden für alle sichtbaren Module, Funktionen, Klassen und Methoden erstellt. Sie sind nicht nötig für nicht-sichtbare Methoden. Diese sollten mit Blockkommentaren versehen werden. Documentation Strings beginnen mit drei Anführungszeichen und enden mit drei Anführungszeichen. Die schließenden Anführungszeichen stehen dabei in einer eigenen Zeile. Diese Regel gilt nicht für einzeilige Kommentare, bei diesen stehen die schließenden Anführungszeichen in der gleichen Zeile.
+\textit{Documentation Strings} werden für alle sichtbaren Module, Funktionen, Klassen und Methoden erstellt. Sie sind nicht nötig für nicht-sichtbare Methoden. Diese sollten mit Blockkommentaren versehen werden. Documentation Strings beginnen mit drei Anführungszeichen und enden mit drei Anführungszeichen. Die schließenden Anführungszeichen stehen dabei in einer eigenen Zeile. Diese Regel gilt nicht für einzeilige Kommentare, bei diesen stehen die schließenden Anführungszeichen in der gleichen Zeile. \\
 \begin{tabbing}
 \textbf{Namenskonventionen}\\
 Neben \= der Beachtung der nachfolgenden Regeln sollte als erster Buchstabe in den \\
@@ -224,6 +224,15 @@ Kommentare \= sollten dann auftauchen, wenn sich der Leser folgende Fragen stell
 \> Welchen Zweck hat der Code\\
 \> Warum wurde diese Lösung verwendet
 \end{tabbing}
+Kommentare werden nach folgenden Richtlinien in den Code integriert:
+\begin{lstlisting}[language = HTML, caption = Kommentare, label = comments]
+{# Einzeiliger Kommentar #}
+
+{% comment %}
+  Mehrzeiliger
+  Kommentar
+{% endcomment %}
+\end{lstlisting}
 
 \textbf{Handlungspunkte}\\
 Kann an einer Stelle der Code noch nicht vollständig geschrieben werden bzw. ist man an einer gewissen Stelle auf einen anderen Entwickler angewiesen, sollte die Stelle mit einem Todo markiert werden.\\

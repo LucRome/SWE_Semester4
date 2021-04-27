@@ -89,6 +89,26 @@ def create_course(request):
 
 
 @login_required
+@permission_required('courses.create_course', raise_exception=True)
+def create_course_admin(request):
+    success = False
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            # We need the students to add to this
+            form.save()
+            success = True
+    else:
+        form = CourseForm()
+
+    context = {
+        'form': form,
+        'success': success
+    }
+    return render(request, 'courses/create_course_admin.html', context)
+
+
+@login_required
 @permission_required('courses.alter_course', raise_exception=True)
 def alter_course(request, id):
     if request.method == 'POST':

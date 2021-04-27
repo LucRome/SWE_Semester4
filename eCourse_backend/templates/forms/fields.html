@@ -1,0 +1,31 @@
+{% load class_tag %}
+
+{% load widget_tweaks%}
+
+
+{% if field|field_type == 'charfield' or field|field_type == 'usernamefield' %}
+  {% render_field field class="form-control input {{error_class}}"%}
+{% elif field|field_type == 'integerfield' %}
+  {% render_field field class="form-control input {{error_class}}" type="number"%}
+{% elif field|field_type == 'emailfield' %}
+  {% render_field field class="form-control input {{error_class}}" type="email"%}
+{% elif field|field_type == 'datefield' %}
+  {% render_field field class="form-control input {{error_class}}" type="date"%}
+{% elif field|field_type == 'booleanfield' %}
+  {% render_field field class="form-control input {{error_class}}" type="checkbox"%}
+{% elif field|field_type == 'modelchoicefield' %}
+  <div class="form-check">
+    {% render_field field class="form-control input {{error_class}}"%}
+  </div>
+{% elif field|field_type == 'modelmultiplechoicefield' %}
+  <div class="form-check list-group">
+        {% for subfield in field %}
+          <div class="d-flex flex-wrap">
+            <label class="form-check-label" for="{{ subfield.id_for_label }}">
+              {{ subfield.tag }}
+              {{ subfield.choice_label }}
+            </label>
+          </div>
+        {% endfor %}
+  </div>
+{% endif %}
