@@ -291,6 +291,7 @@ def edit_user_admin_modalcontent_iframe(request, username):
         form = UserForm(data=model_to_dict(user_object))
 
     context = {
+        'username': username,
         'user_form': form,
         'update_success': update_success
     }
@@ -298,4 +299,21 @@ def edit_user_admin_modalcontent_iframe(request, username):
     return render(
         request,
         'admin/users/iframes/edit_user_modalcontent.html',
+        context)
+
+# Delete user Iframe
+
+@xframe_options_exempt
+@login_required
+@permission_required('users.manage_users', raise_exception=True)
+def delete_user_iframe(request, username):
+    user_to_delete = get_object_or_404(User, username=username)
+    # TODO: catch if delete operation fails (?)
+    user_to_delete.delete()
+    context = {
+        'username': username,
+    }
+    return render(
+        request,
+        'admin/users/iframes/deleted_user_iframe.html',
         context)
