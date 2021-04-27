@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import permission_required, login_required
 from .forms import CourseForm
 from .models import Course, Exercise
 from users.models import User
+from file_exchange.models import Submission
 from django.db.models import Q
 
 # Create your views here.
@@ -34,10 +35,19 @@ def view_course(request, id):
             for student in course.student.all():
                 student_name = student.first_name + ' ' + student.last_name
                 students.append(student_name)
-        #files
-        exercise = Exercise.objects.get(id = id)
+        
+        #exercises
+        exercise = Exercise.objects.filter(course_id = id)
+        # print(type(exercise))
 
-    return render(request, 'courses/detail.html', {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise})
+        #files
+        files = dir()
+        for e in exercise:
+            print(e.id)
+            files[e.id] = Submission.objects.filter(exercise = e.id)
+
+        print(files)
+    return render(request, 'courses/detail.html', {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise, 'files': files})
 
 
 @login_required
