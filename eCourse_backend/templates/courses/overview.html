@@ -7,7 +7,7 @@
 {% load static %}
 
 {% block content %} 
-    <h1> Courses overview </h1>
+    <h1> Kursübersicht</h1>
     
     {# We get the users object from the backend which is an array of all courses #}
     {# It should be printed as a table with an 'edit' link pointing to /courses/alter/id #}
@@ -23,7 +23,7 @@
               {{course.name}}
             </a>
             <div class="btn-group float-right">
-              <button type="button" href="" class="btn btn-danger float-right ">edit</button>
+              <button type="button" href="{% url 'edit_course' id=course.id %}" class="btn btn-danger float-right">bearbeiten</button>
               <button type="button" data-toggle="collapse" href="#collapse_{{course.id}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger card-button">\/</button>
             </div>
           </h5>
@@ -41,33 +41,5 @@
 
     </div>
     <script src="{% static 'JS/iframe_size.js' %}"></script>
-    {# pagination #}
-  <ul class="pagination justify-content-center">
-    {# previous #}
-    {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="{% url 'course_overview' page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">-</a>
-      </li> 
-    {% endif %}
-
-    {# current #}
-    <li class="page-item active">
-      <a class="page-link" href="#">{{page_obj.number}}</a>
-    </li>
-
-    {# next #}
-    {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="{% url 'course_overview' page=page_obj.next_page_number %}">{{page_obj.previous_page_number}}</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">-</a>
-      </li>
-    {% endif %}
-  </ul>
+    {% include 'other/pagination.html' with page_obj=page_obj url_name='course_overview' %}
 {% endblock %}

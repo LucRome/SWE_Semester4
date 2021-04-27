@@ -29,18 +29,14 @@ def course_student_list_iframe(request, id, page=1):
     elif request.method == 'GET':
         filter_form = CourseStudentFilterForm() 
         course = get_object_or_404(Course, pk = id)
-        lecturer = course.lecturer_id
+        lecturer = course.lecturer
         # print('lecturer', lecturer)
-        students = list()
-        studentsa = course.student.all()
-        for student in course.student.all():
-            # print(student.id)
-            students.append(student.username)
+        students = course.student.all()
 
     context = {
         'filter_form': filter_form,
         'lecturer': lecturer,
-        'students': studentsa,
+        'students': students,
     }
     return render(request, 'courses/iframes/course_student_list.html', context)
 
