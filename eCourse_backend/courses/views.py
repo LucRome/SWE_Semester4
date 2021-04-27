@@ -18,36 +18,51 @@ def course_overview(request):
         if request.user.type == 3:
             courses = Course.objects.all()
         else:
-            courses = Course.objects.filter(Q(student = user_id) | Q(lecturer_id = user_id))
+            courses = Course.objects.filter(
+                Q(student=user_id) | Q(lecturer_id=user_id))
         return render(request, 'courses/overview.html', {'courses': courses})
+
 
 @login_required
 def view_course(request, id):
     if request.method == 'GET':
-        course = get_object_or_404(Course, pk = id)
+        course = get_object_or_404(Course, pk=id)
         print('user type ', request.user.type)
-        if (request.user.type == 3 or request.user.type == 2): 
-            #course members
+        if (request.user.type == 1 or request.user.type == 2):
+            # course members
             lecturer_id = course.lecturer_id
-            lecturer = User.objects.get(id = lecturer_id)
+            lecturer = User.objects.get(id=lecturer_id)
             lecturer_name = lecturer.first_name + ' ' + lecturer.last_name
             students = list()
             for student in course.student.all():
                 student_name = student.first_name + ' ' + student.last_name
                 students.append(student_name)
         
-        #exercises
-        exercise = Exercise.objects.filter(course_id = id)
-        # print(type(exercise))
+            #exercises
+            exercise = Exercise.objects.filter(course_id = id)
+            # print(type(exercise))
 
-        #files
-        files = dir()
-        for e in exercise:
-            print(e.id)
-            files[e.id] = Submission.objects.filter(exercise = e.id)
+            #files
+            files = dir()
+            for e in exercise:
+                print(e.id)
+                files[e.id] = Submission.objects.filter(exercise = e.id)
 
-        print(files)
-    return render(request, 'courses/detail.html', {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise, 'files': files})
+            data = {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise, 'files': files}
+
+        if (request.user.type == 3):
+            #exercises
+            exercise = Exercise.objects.filter(course_id = id)
+            print(exercise)
+
+            files = dir()
+            for e in exercise:
+                files[e.id] = Submission.objects.filter(exercise = e.id, user = request.user.id)
+
+
+            data = {'exercise' : exercise, 'files': files}
+
+    return render(request, 'courses/detail.html', data)
 
 
 @login_required
