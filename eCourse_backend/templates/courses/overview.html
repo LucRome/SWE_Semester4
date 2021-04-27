@@ -23,7 +23,7 @@
               {{course.name}}
             </a>
             <div class="btn-group float-right">
-              <button type="button" href="{% url 'edit_course' id=course.id %}" class="btn btn-danger float-right">bearbeiten</button>
+              <a href="{% url 'edit_course' id=course.id %}"><button type="button"  class="btn btn-danger float-right">bearbeiten</button></a>
               <button type="button" data-toggle="collapse" href="#collapse_{{course.id}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger card-button">\/</button>
             </div>
           </h5>
