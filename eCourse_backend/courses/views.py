@@ -40,7 +40,6 @@ def view_course(request, id):
         
             #exercises
             exercise = Exercise.objects.filter(course_id = id)
-            # print(type(exercise))
 
             #files
             files = dir()
@@ -58,9 +57,8 @@ def view_course(request, id):
 
             files = dir()
             for e in exercise:
-                files[e.id] = Submission.objects.filter(exercise = e.id, user = request.user.id)
-
-
+                files[e.id] = Submission.objects.filter((Q(user = request.user.id) | Q(from_lecturer = 1)), exercise = e.id)
+            
             data = {'exercise' : exercise, 'files': files}
 
     return render(request, 'courses/detail.html', data)
