@@ -28,7 +28,7 @@ def view_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk=id)
         print('user type ', request.user.type)
-        if (request.user.type == 1 or request.user.type == 2):
+        if (request.user.type == 3 or request.user.type == 2):
             # course members
             lecturer_id = course.lecturer_id
             lecturer = User.objects.get(id=lecturer_id)
@@ -50,7 +50,7 @@ def view_course(request, id):
             data = {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise, 'files': files}
 
         #student
-        if (request.user.type == 3):
+        if (request.user.type == 1):
             #exercises
             exercise = Exercise.objects.filter(course_id = id)
             print(exercise)
