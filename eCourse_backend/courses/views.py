@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import permission_required, login_required
 from .forms import CourseForm
 from .models import Course, Exercise
 from users.models import User
+from file_exchange.models import Submission
 from django.db.models import Q
 
 # Create your views here.
@@ -13,8 +14,8 @@ from django.db.models import Q
 def course_overview(request):
     user_id = request.user.id
     if request.method == 'GET':
-        # officer has type 3 in db
-        if request.user.type == 3:
+        # office user has type 1 in db
+        if request.user.type == 1:
             courses = Course.objects.all()
         else:
             courses = Course.objects.filter(
@@ -27,7 +28,8 @@ def view_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk=id)
         print('user type ', request.user.type)
-        if (request.user.type == 3 or request.user.type == 2):
+        # office user and lecturer
+        if (request.user.type == 1 or request.user.type == 2):
             # course members
             lecturer_id = course.lecturer_id
             lecturer = User.objects.get(id=lecturer_id)
@@ -36,14 +38,36 @@ def view_course(request, id):
             for student in course.student.all():
                 student_name = student.first_name + ' ' + student.last_name
                 students.append(student_name)
-        # files
-        exercise = Exercise.objects.get(id=id)
 
-    return render(request,
-                  'courses/detail.html',
-                  {'lecturer': lecturer_name,
-                   'students': students,
-                   'exercise': exercise})
+            # exercises
+            exercise = Exercise.objects.filter(course_id=id)
+
+            # files
+            files = dir()
+            for e in exercise:
+                print(e.id)
+                files[e.id] = Submission.objects.filter(exercise=e.id)
+
+            data = {
+                'lecturer': lecturer_name,
+                'students': students,
+                'exercise': exercise,
+                'files': files}
+
+        # student
+        if (request.user.type == 3):
+            # exercises
+            exercise = Exercise.objects.filter(course_id=id)
+            print(exercise)
+
+            files = dir()
+            for e in exercise:
+                files[e.id] = Submission.objects.filter(
+                    (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
+
+            data = {'exercise': exercise, 'files': files}
+
+    return render(request, 'courses/detail.html', data)
 
 
 @login_required

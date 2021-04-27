@@ -5,11 +5,6 @@
 {% block content %} 
     <h1> Course view </h1>
     
-    {# We get the users object from the backend which is an array of all courses #}
-    {# It should be printed as a table with an 'edit' link pointing to /courses/alter/id #}
-    {# with id being the primary key of the course #}
-    {# delete button to courses/delete/id #}
-    
     <div id="accordion" role="tablist">
         <a>students:</a><br>
       {% for student in students %}
@@ -19,8 +14,11 @@
     <a>lecturer:</a><br>
     <a> {{lecturer}}</a>
 
+    {% for e in exercise %} 
     <a>exercise:</a><br>
-    <a> Deadline: {{exercise.submission_deadline}}</a><br>
-    <a> Description: {{exercise.description}}</a>
+    <a> Deadline: {{e.submission_deadline}}</a><br>
+    <a> Description: {{e.description}}</a>
+    {# we need to find a way to disply the nested list of files something like file.1.1.id will give the id of the first file connected to exercise 1 #}
+    {% endfor %}
     
 {% endblock %}
