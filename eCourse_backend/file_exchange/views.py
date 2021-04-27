@@ -69,7 +69,7 @@ def upload_file(request):
         if form.is_valid():
             submission = form.save(commit=False)
             submission.user_id = request.user.id
-            if (request.user.type == 3 or request.user.type == 2):
+            if (request.user.type == 1 or request.user.type == 2):
                 submission.from_lecturer = True
             submission.save()
             # back to exercises overview

@@ -14,8 +14,8 @@ from django.db.models import Q
 def course_overview(request):
     user_id = request.user.id
     if request.method == 'GET':
-        # officer has type 3 in db
-        if request.user.type == 3:
+        # officer has type 1 in db
+        if request.user.type == 1:
             courses = Course.objects.all()
         else:
             courses = Course.objects.filter(
@@ -28,7 +28,8 @@ def view_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk=id)
         print('user type ', request.user.type)
-        if (request.user.type == 3 or request.user.type == 2):
+        #officer and lecturer
+        if (request.user.type == 1 or request.user.type == 2):
             # course members
             lecturer_id = course.lecturer_id
             lecturer = User.objects.get(id=lecturer_id)
@@ -50,7 +51,7 @@ def view_course(request, id):
             data = {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise, 'files': files}
 
         #student
-        if (request.user.type == 1):
+        if (request.user.type == 3):
             #exercises
             exercise = Exercise.objects.filter(course_id = id)
             print(exercise)
