@@ -18,75 +18,24 @@
       {# table header #}
       <thead class="thead-light">
         <tr>
-          <th>Matrikel Nr.</th>
-          <th>E-Mail</th>
           <th>Vorname</th>
           <th>Nachname</th>
-          <th>Username</th>
-          <th>Aktiv</th>
-          <th></th>
+          <th>Benutzername</th>
+          <th>Matrikel Nr.</th>
         </tr>
       </thead>
 
       {# table body #}
       <tbody>
-        {% for student in page_obj %}
+        {% for student in students %}
           <tr>
-            <td>{{student.matr_nr}}</td>
-            <td>{{student.email}}</td>
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
             <td>{{student.username}}</td>
-            <td>
-              {% if student.is_active %}
-                <i class="bi bi-check"></i>
-              {% else %}
-                <i class="bi bi-x"></i>
-              {% endif %}
-            </td>
-            {# edit button #}
-            <td>
-              <div class="container no-gutters">
-                <a href="#"> {# TODO: add correct link #}
-                  <button class="btn-sm btn-danger">
-                    edit
-                  </button>
-                </a>
-              </div>
-            </td>
-          </tr>        
+            <td>{{student.matr_nr}}</td>
+          </tr>            
         {% endfor %}
       </tbody>
     </table>
   </div>
-
-  {# pagination #}
-  <ul class="pagination justify-content-center">
-    {# previous #}
-    {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="{% url 'course_studentlist_iframe' page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">-</a>
-      </li> 
-    {% endif %}
-
-    {# current #}
-    <li class="page-item active">
-      <a class="page-link" href="#">{{page_obj.number}}</a>
-    </li>
-
-    {# next #}
-    {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="{% url 'course_studentlist_iframe' page=page_obj.next_page_number %}">{{page_obj.previous_page_number}}</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">-</a>
-      </li>
-    {% endif %}
-  </ul>
 {% endblock  %}

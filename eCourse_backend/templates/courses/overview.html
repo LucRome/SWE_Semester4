@@ -15,19 +15,22 @@
     {# delete button to courses/delete/id #}
     
     <div id="accordion" role="tablist">
-      {% for course in courses %}
+      {% for course in page_obj %}
       <div class="card">
-        <div class="card-header" role="tab" id="heading_{{course.name}}">
+        <div class="card-header" role="tab" id="heading_{{course.id}}">
           <h5 class="mb-0">
             <a>
               {{course.name}}
             </a>
-            <button type="button" data-toggle="collapse" href="#collapse_{{course.name}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger float-right card-button">\/</button>
+            <div class="btn-group float-right">
+              <button type="button" href="" class="btn btn-danger float-right ">edit</button>
+              <button type="button" data-toggle="collapse" href="#collapse_{{course.id}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger card-button">\/</button>
+            </div>
           </h5>
         </div>
     
-        <div id="collapse_{{course.name}}" class="collapse" role="tabpanel" aria-labelledby="heading_{{course.name}}">
-          <div class="card-body" data-src="{% url 'course_studentlist_iframe' name=course.name page=0 %}">
+        <div id="collapse_{{course.id}}" class="collapse" role="tabpanel" aria-labelledby="heading_{{course.id}}">
+          <div class="card-body" data-src="{% url 'course_studentlist_iframe' id=course.id %}">
             {# Student list #}
             {# role and aria-labelledby is for schreenreaders #}
             <iframe src="" width="100%" frameborder="0" loading="lazy"></iframe>
@@ -38,4 +41,33 @@
 
     </div>
     <script src="{% static 'JS/iframe_size.js' %}"></script>
-    {% endblock %}
+    {# pagination #}
+  <ul class="pagination justify-content-center">
+    {# previous #}
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="{% url 'course_overview' page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">-</a>
+      </li> 
+    {% endif %}
+
+    {# current #}
+    <li class="page-item active">
+      <a class="page-link" href="#">{{page_obj.number}}</a>
+    </li>
+
+    {# next #}
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{% url 'course_overview' page=page_obj.next_page_number %}">{{page_obj.previous_page_number}}</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">-</a>
+      </li>
+    {% endif %}
+  </ul>
+{% endblock %}
