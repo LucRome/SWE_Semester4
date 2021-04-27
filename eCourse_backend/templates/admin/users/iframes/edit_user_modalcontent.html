@@ -19,6 +19,13 @@
   <form method="post">
     {% csrf_token %}
     {% include 'forms/bs4_text_form.html' with form=user_form %}
-    <button class="btn btn btn-danger" type="submit">Speichern</button>
+    <div class="container-fluid d-flex flex-wrap">
+      <button class="btn btn-danger" type="submit">Speichern</button>
+      <a href="{% url 'deleteuser_admin_iframe' username=username%}" class="ml-auto">
+        <button class="btn-sm btn-danger" type="button">
+          Löschen
+        </button>
+      </a>
+    </div>
   </form>
 {% endblock %}
