@@ -37,16 +37,16 @@ Userverwaltung
   {# Student list #}
   {# role and aria-labelledby is for schreenreaders #}
   <div class="tab-pane container-fluid no-gutters active" id="tab_studentlist" role="tabpanel" aria-labelledby="home-tab">
-    <iframe src="{% url 'studentlist_admin_iframe' page=0 %}" width="100%" frameborder="0" loading="lazy"></iframe>
+    <iframe src="{% url 'studentlist_admin_iframe' page=1 %}" width="100%" frameborder="0" loading="lazy"></iframe>
   </div>
   {# lecturer list #}
   <div class="tab-pane container-fluid no-gutters" id="tab_lecturerlist" role="tabpanel" aria-labelledby="home-tab"
-    data-src="{% url 'lecturerlist_admin_iframe' page=0 %}">
+    data-src="{% url 'lecturerlist_admin_iframe' page=1 %}">
     <iframe src="" width="100%" frameborder="0" loading="lazy"></iframe>
   </div>
   {# admin and staff list#}
   <div class="tab-pane container-fluid no-gutters" id="tab_adminlist" role="tabpanel" aria-labelledby="home-tab"
-    data-src="{% url 'adminlist_admin_iframe' page=0 %}">
+    data-src="{% url 'adminlist_admin_iframe' page=1 %}">
     <iframe src="" width="100%" frameborder="0" loading="lazy"></iframe>
   </div>
   {# create user #}

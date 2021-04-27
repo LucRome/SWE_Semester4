@@ -61,6 +61,6 @@
     </table>
   </div>
 
-  {% include 'other/pagination.html' with page_obj=page_obj %}
+  {% include 'other/pagination.html' with page_obj=page_obj url_name='lecturerlist_admin_iframe' %}
   <script src="{% static 'JS/iframe_size.js' %}"></script>
 {% endblock  %}
