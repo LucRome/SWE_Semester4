@@ -10,7 +10,7 @@
   {# previous #}
   {% if page_obj.has_previous %}
     <li class="page-item">
-      <a class="page-link" href="{% url 'lecturerlist_admin_iframe' page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
+      <a class="page-link" href="{% url url_name page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
     </li>
   {% else %}
     <li class="page-item disabled">
@@ -26,7 +26,7 @@
   {# next #}
   {% if page_obj.has_next %}
     <li class="page-item">
-      <a class="page-link" href="{% url 'lecturerlist_admin_iframe' page=page_obj.next_page_number %}">{{page_obj.previous_page_number}}</a>
+      <a class="page-link" href="{% url url_name page=page_obj.next_page_number %}">{{page_obj.next_page_number}}</a>
     </li>
   {% else %}
     <li class="page-item disabled">

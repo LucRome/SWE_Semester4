@@ -6,6 +6,7 @@ from users.models import User, Lecturer, Student, Office
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.core.paginator import Paginator
 from .models import Course
+from django.db.models import Q
 
 # Create your views here.
 
@@ -13,7 +14,7 @@ from .models import Course
 @xframe_options_exempt
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
-def course_student_list_iframe(request, name, page=1):
+def course_student_list_iframe(request, id, page=1):
     # TO:DO Filter students by coursename
 
     if request.method == 'POST':
@@ -26,26 +27,54 @@ def course_student_list_iframe(request, name, page=1):
                 first_name__contains=filter_form['first_name'].data,
                 last_name__contains=filter_form['last_name'].data,
                 username__contains=filter_form['username'].data)
-    else:
+    elif request.method == 'GET':
         filter_form = CourseStudentFilterForm()
-        students = Student.objects.all()
-
-    paginator = Paginator(students, 10)
-    page_obj = paginator.get_page(page)
+        course = get_object_or_404(Course, pk=id)
+        lecturer = course.lecturer
+        # print('lecturer', lecturer)
+        students = course.student.all()
 
     context = {
-        'page_obj': page_obj,
         'filter_form': filter_form,
+        'lecturer': lecturer,
+        'students': students,
     }
     return render(request, 'courses/iframes/course_student_list.html', context)
 
 
 @login_required
-@permission_required('courses.create_course', raise_exception=True)
-def course_overview(request):
+def course_overview(request, page=1):
+    user_id = request.user.id
     if request.method == 'GET':
-        courses = Course.objects.all()
-        return render(request, 'courses/overview.html', {'courses': courses})
+        # officer has type 3 in db
+        if request.user.type == 3:
+            courses = Course.objects.all()
+        else:
+            # courses = Course.objects.filter(student = user_id)
+            courses = Course.objects.filter(
+                Q(student=user_id) | Q(lecturer_id=user_id))
+
+    paginator = Paginator(courses, 10)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+    }
+    return render(request, 'courses/overview.html', context)
+
+
+@login_required
+def view_course(request, id):
+    if request.method == 'GET':
+        course = get_object_or_404(Course, pk=id)
+        lecturer = course.lecturer_id
+        # print('lecturer', lecturer)
+        students = list()
+        for student in course.student.all():
+            # print(student.id)
+            students.append(student.id)
+    return render(request, 'courses/detail.html',
+                  {'lecturer': lecturer, 'students': student})
 
 
 @login_required

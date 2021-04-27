@@ -51,7 +51,7 @@
           {% endfor %}
         {% else %}
           {# field without errors in prv. input #}
-          {% include 'forms/fields.html' with field=field error_class="" %}
+          {% render_field field class="form-control input"%}
         {% endif %}
         {# Help-text to the field #}
         {% if field.help_text %}

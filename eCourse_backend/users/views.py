@@ -301,7 +301,6 @@ def edit_user_admin_modalcontent_iframe(request, username):
         'admin/users/iframes/edit_user_modalcontent.html',
         context)
 
-
 # Delete user Iframe
 
 @xframe_options_exempt
