@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+    <h1> Courses overview </h1>
+    
+    {# We get the users object from the backend which is an array of all courses #}
+    {# It should be printed as a table with an 'edit' link pointing to /courses/alter/id #}
+    {# with id being the primary key of the course #}
+    {# delete button to courses/delete/id #}
+    <a href="{% url 'create_course' %}"> 
+        <button>Create course</button>
+    </a>
+    
+    {% endblock %}

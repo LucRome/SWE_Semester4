@@ -165,13 +165,17 @@
 \graphicspath{{images/}}
 
 % frequently used programing languages
-\lstloadlanguages{PHP,Python,Java,C,C++,bash}
+\lstloadlanguages{PHP,Python,Java,C,C++,bash, HTML}
 
 \listingsettings{}
 % Rename Listings
+\renewcommand{\listingPhrase}{Quellcode}
+\renewcommand{\listListingPhrase}{Programmauszugsverzeichnis}
+\renewcommand{\authorListingPhrase}{Quellcode}
 \renewcommand\lstlistingname{\listingPhrase}
 \renewcommand\lstlistlistingname{\listListingPhrase}
 \def\lstlistingautorefname{\authorListingPhrase}
+
 
 % Spaces in tables
 \setlength{\tabcolsep}{\tableColumnMargin}
