@@ -28,7 +28,7 @@ def view_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk=id)
         print('user type ', request.user.type)
-        #office user and lecturer
+        # office user and lecturer
         if (request.user.type == 1 or request.user.type == 2):
             # course members
             lecturer_id = course.lecturer_id
@@ -54,10 +54,10 @@ def view_course(request, id):
                 'exercise': exercise,
                 'files': files}
 
-        #student
+        # student
         if (request.user.type == 3):
-            #exercises
-            exercise = Exercise.objects.filter(course_id = id)
+            # exercises
+            exercise = Exercise.objects.filter(course_id=id)
             print(exercise)
 
             files = dir()
