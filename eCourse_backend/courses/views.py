@@ -37,29 +37,34 @@ def view_course(request, id):
             for student in course.student.all():
                 student_name = student.first_name + ' ' + student.last_name
                 students.append(student_name)
-        
-            #exercises
-            exercise = Exercise.objects.filter(course_id = id)
 
-            #files
+            # exercises
+            exercise = Exercise.objects.filter(course_id=id)
+
+            # files
             files = dir()
             for e in exercise:
                 print(e.id)
-                files[e.id] = Submission.objects.filter(exercise = e.id)
+                files[e.id] = Submission.objects.filter(exercise=e.id)
 
-            data = {'lecturer': lecturer_name, 'students': students, 'exercise' : exercise, 'files': files}
+            data = {
+                'lecturer': lecturer_name,
+                'students': students,
+                'exercise': exercise,
+                'files': files}
 
-        #student
+        # student
         if (request.user.type == 1):
-            #exercises
-            exercise = Exercise.objects.filter(course_id = id)
+            # exercises
+            exercise = Exercise.objects.filter(course_id=id)
             print(exercise)
 
             files = dir()
             for e in exercise:
-                files[e.id] = Submission.objects.filter((Q(user = request.user.id) | Q(from_lecturer = 1)), exercise = e.id)
-            
-            data = {'exercise' : exercise, 'files': files}
+                files[e.id] = Submission.objects.filter(
+                    (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
+
+            data = {'exercise': exercise, 'files': files}
 
     return render(request, 'courses/detail.html', data)
 
