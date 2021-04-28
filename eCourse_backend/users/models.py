@@ -61,7 +61,7 @@ class Office(User):
                        ('delete_courses', 'Can delete course'),
                        ('manage_users', 'Can manage user'),
                        ('create_exercise', 'Can create exercises'),
-                      ]
+                       ]
 
     def save(self, *args, **kwargs):
         self.type = 1
