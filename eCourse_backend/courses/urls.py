@@ -19,9 +19,6 @@ from django.views.generic.base import TemplateView
 from .views import *
 
 urlpatterns = [
-
-    path('create/', create_course, name='create_course'),
-    path('alter/<id>', alter_course, name='alter_course'),
     path('delete/<id>', delete_course, name='delte_course'),
     # course
     path(
@@ -35,6 +32,4 @@ urlpatterns = [
     path('admin/create/', create_course_admin, name="create_course_admin"),
 
     path('edit/<id>', edit_course, name='edit_course'),
-
-    path('course/view/<id>', view_course, name='view_course')
 ]

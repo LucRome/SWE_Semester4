@@ -19,11 +19,6 @@ from django.views.generic.base import TemplateView
 from .views import *
 
 urlpatterns = [
-
-    path('overview/', overview, name='overview'),
-    path('create/', create_user, name='create_user'),
-    path('alter/<int:id>', alter_user, name='alter_user'),
-    path('delete/<int:id>', delete_user, name='delete_user'),
     # user administration
     path('admin_s/user_administration/',
          user_administration_admin, name='user_administration_admin'),

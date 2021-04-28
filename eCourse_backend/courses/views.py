@@ -52,7 +52,6 @@ def course_overview(request, page=1):
         if request.user.type == 3:
             courses = Course.objects.all()
         else:
-            # courses = Course.objects.filter(student = user_id)
             courses = Course.objects.filter(
                 Q(student=user_id) | Q(lecturer_id=user_id))
 
@@ -63,58 +62,6 @@ def course_overview(request, page=1):
         'page_obj': page_obj,
     }
     return render(request, 'courses/overview.html', context)
-
-
-@login_required
-def view_course(request, id):
-    if request.method == 'GET':
-        course = get_object_or_404(Course, pk=id)
-        lecturer = course.lecturer_id
-        # print('lecturer', lecturer)
-        students = list()
-        for student in course.student.all():
-            # print(student.id)
-            students.append(student.id)
-    return render(request, 'courses/detail.html',
-                  {'lecturer': lecturer, 'students': student})
-
-
-@login_required
-def view_course(request, id):
-    if request.method == 'GET':
-        course = get_object_or_404(Course, pk=id)
-        print('user type ', request.user.type)
-        if (request.user.type == 3 or request.user.type == 2):
-            # course members
-            lecturer_id = course.lecturer_id
-            lecturer = User.objects.get(id=lecturer_id)
-            lecturer_name = lecturer.first_name + ' ' + lecturer.last_name
-            students = list()
-            for student in course.student.all():
-                student_name = student.first_name + ' ' + student.last_name
-                students.append(student_name)
-        # files
-        exercise = Exercise.objects.get(id=id)
-
-    return render(request,
-                  'courses/detail.html',
-                  {'lecturer': lecturer_name,
-                   'students': students,
-                   'exercise': exercise})
-
-
-@login_required
-@permission_required('courses.create_course', raise_exception=True)
-def create_course(request):
-    if request.method == 'POST':
-        form = CourseForm(request.POST)
-        if form.is_valid():
-            # We need the students to add to this
-            form.save()
-    else:
-        form = CourseForm()
-
-    return render(request, 'courses/create_course.html', {'form': form})
 
 
 @login_required
@@ -138,22 +85,9 @@ def create_course_admin(request):
 
 
 @login_required
-@permission_required('courses.alter_course', raise_exception=True)
-def alter_course(request, id):
-    if request.method == 'POST':
-        form = CourseForm(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-        course_object = get_object_or_404(Course, pk=id)
-        form = CourseForm(model_to_dict(course_object))
-
-    return render(request, 'courses/alter_course.html', {'form': form})
-
-
-@login_required
 @permission_required('courses.delete_course', raise_exception=True)
 def delete_course(request, id):
+    # TODO: use for delete course
     course_to_delete = get_object_or_404(Course, pk=id)
     name = course_to_delete.name
     course_to_delete.delete()
@@ -172,4 +106,4 @@ def edit_course(request, id):
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
 
-    return render(request, 'admin/edit_course.html', {'form': form})
+    return render(request, 'courses/edit_course.html', {'form': form})
