@@ -68,20 +68,12 @@ def create_officeuser_iframe(request):
     if request.method == 'POST':
         user_form = StaffForm(request.POST)
         if user_form.is_valid():
-            if user_form['is_superuser'].data:
-                Office.objects.create_superuser(
-                    username=user_form['username'].data,
-                    email=user_form['email'].data,
-                    first_name=user_form['first_name'].data,
-                    last_name=user_form['last_name'].data,
-                )
-            else:
-                Office.objects.create_user(
-                    username=user_form['username'].data,
-                    email=user_form['email'].data,
-                    first_name=user_form['first_name'].data,
-                    last_name=user_form['last_name'].data,
-                )
+            Office.objects.create_user(
+                username=user_form['username'].data,
+                email=user_form['email'].data,
+                first_name=user_form['first_name'].data,
+                last_name=user_form['last_name'].data,
+            )
             save_success = True
     else:
         user_form = StaffForm()
@@ -164,7 +156,7 @@ def student_list_iframe(request, page=1):
 @permission_required('users.manage_users', raise_exception=True)
 def lecturer_list_iframe(request, page=1):
     if request.method == 'POST':
-        filter_form = LecturerFilterForm(
+        filter_form = LecturerAndOfficeFilterForm(
             request.POST, )
         if filter_form.is_valid():
             # Filter
@@ -173,7 +165,7 @@ def lecturer_list_iframe(request, page=1):
                 last_name__contains=filter_form['last_name'].data,
                 username__contains=filter_form['username'].data)
     else:
-        filter_form = LecturerFilterForm()
+        filter_form = LecturerAndOfficeFilterForm()
         lecturers = Lecturer.objects.all()
 
     paginator = Paginator(lecturers, 10)
@@ -192,7 +184,7 @@ def lecturer_list_iframe(request, page=1):
 @permission_required('users.manage_users', raise_exception=True)
 def staff_admin_list_iframe(request, page=1):
     if request.method == 'POST':
-        filter_form = AdminStaffFilterForm(
+        filter_form = LecturerAndOfficeFilterForm(
             request.POST, )
         if filter_form.is_valid():
             # Filter
@@ -201,7 +193,7 @@ def staff_admin_list_iframe(request, page=1):
                 last_name__contains=filter_form['last_name'].data,
                 username__contains=filter_form['username'].data)
     else:
-        filter_form = AdminStaffFilterForm()
+        filter_form = LecturerAndOfficeFilterForm()
         users = Office.objects.all()
 
     paginator = Paginator(users, 10)

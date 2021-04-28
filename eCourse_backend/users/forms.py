@@ -12,25 +12,16 @@ class StaffForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name',
-                  'email', 'matr_nr', 'is_superuser']
+                  'email', 'matr_nr']
 
 # useradministration: filter forms
 
 
-class LecturerFilterForm(Form):
+class LecturerAndOfficeFilterForm(Form):
     username = CharField(max_length=50, label="Username", required=False)
     first_name = CharField(max_length=50, label="Vorname", required=False)
     last_name = CharField(max_length=50, label="Nachname", required=False)
 
 
-class StudentFilterForm(Form):
+class StudentFilterForm(LecturerAndOfficeFilterForm):
     matr_nr = IntegerField(label="Matrikel Nummer", required=False)
-    username = CharField(max_length=50, label="Username", required=False)
-    first_name = CharField(max_length=50, label="Vorname", required=False)
-    last_name = CharField(max_length=50, label="Nachname", required=False)
-
-
-class AdminStaffFilterForm(Form):
-    username = CharField(max_length=50, label="Username", required=False)
-    first_name = CharField(max_length=50, label="Vorname", required=False)
-    last_name = CharField(max_length=50, label="Nachname", required=False)
