@@ -40,7 +40,6 @@ def create_lecturer_iframe(request):
                 email=user_form['email'].data,
                 first_name=user_form['first_name'].data,
                 last_name=user_form['last_name'].data,
-                matr_nr=user_form['matr_nr'].data
             )
             save_success = True
     else:
@@ -215,20 +214,20 @@ def staff_admin_list_iframe(request, page=1):
 @xframe_options_exempt
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
-def edit_user_admin_modalcontent_iframe(request, username):
-    user_object = get_object_or_404(User, username=username)
+def edit_user_admin_modalcontent_iframe(request, id):
+    user_object = get_object_or_404(User, pk=id)
     update_success = False
     if request.method == 'POST':
-        form = StaffForm(request.POST or None, instance=user_object)
+        form = UserForm(request.POST or None, instance=user_object)
         if form.is_valid():
             form.save()
             update_success = True
     else:
-        user_object = get_object_or_404(User, username=username)
+        user_object = get_object_or_404(User, pk=id)
         form = UserForm(data=model_to_dict(user_object))
 
     context = {
-        'username': username,
+        'id': id,
         'user_form': form,
         'update_success': update_success
     }
@@ -244,9 +243,10 @@ def edit_user_admin_modalcontent_iframe(request, username):
 @xframe_options_exempt
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
-def delete_user_iframe(request, username):
-    user_to_delete = get_object_or_404(User, username=username)
+def delete_user_iframe(request, id):
+    user_to_delete = get_object_or_404(User, pk=id)
     # TODO: catch if delete operation fails (?)
+    username = user_to_delete.username
     user_to_delete.delete()
     context = {
         'username': username,

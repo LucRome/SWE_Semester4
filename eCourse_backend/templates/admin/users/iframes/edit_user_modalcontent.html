@@ -21,7 +21,7 @@
     {% include 'forms/bs4_text_form.html' with form=user_form %}
     <div class="container-fluid d-flex flex-wrap">
       <button class="btn btn-danger" type="submit">Speichern</button>
-      <a href="{% url 'deleteuser_admin_iframe' username=username%}" class="ml-auto">
+      <a href="{% url 'deleteuser_admin_iframe' id=id%}" class="ml-auto">
         <button class="btn-sm btn-danger" type="button">
           Löschen
         </button>

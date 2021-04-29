@@ -3,7 +3,7 @@
 {% endcomment %}
 
 <button type="button" class="btn-sm btn-danger modal-button"  data-toggle="modal" data-target="#edit_{{user_edit.username}}"
-  data-src="{% url 'edituser_admin_modalcontent_iframe' username=user_edit.username %}">
+  data-src="{% url 'edituser_admin_modalcontent_iframe' id=user_edit.id %}">
   bearbeiten
 </button>
 <div class="modal" id="edit_{{user_edit.username}}">
