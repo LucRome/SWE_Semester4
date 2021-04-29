@@ -5,10 +5,10 @@ from users.models import User, Student, Lecturer, Office
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'matr_nr']
+        fields = ['username', 'first_name', 'last_name', 'email']
 
 
-class StaffForm(ModelForm):
+class StudentForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name',

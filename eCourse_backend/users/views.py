@@ -14,13 +14,12 @@ from django.core.paginator import Paginator
 
 
 # Views for the admin
-# TODO: check whethter user is from the right group
 
 # User administration
 
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
-def user_administration_admin(request):
+def user_administration(request):
     if request.method == 'GET':
         return render(request, 'admin/users/administration.html', {})
 
@@ -66,7 +65,7 @@ def create_lecturer_iframe(request):
 def create_officeuser_iframe(request):
     save_success = False
     if request.method == 'POST':
-        user_form = StaffForm(request.POST)
+        user_form = UserForm(request.POST)
         if user_form.is_valid():
             Office.objects.create_user(
                 username=user_form['username'].data,
@@ -76,7 +75,7 @@ def create_officeuser_iframe(request):
             )
             save_success = True
     else:
-        user_form = StaffForm()
+        user_form = UserForm()
     context = {
         'user_form': user_form,
         'success': save_success,
@@ -96,7 +95,7 @@ def create_officeuser_iframe(request):
 def create_student_iframe(request):
     save_success = False
     if request.method == 'POST':
-        user_form = UserForm(request.POST)
+        user_form = StudentForm(request.POST)
         if user_form.is_valid():
             Student.objects.create_user(
                 username=user_form['username'].data,
@@ -107,7 +106,7 @@ def create_student_iframe(request):
             )
             save_success = True
     else:
-        user_form = UserForm()
+        user_form = StudentForm()
     context = {
         'user_form': user_form,
         'success': save_success,

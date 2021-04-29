@@ -20,28 +20,28 @@ from .views import *
 
 urlpatterns = [
     # user administration
-    path('admin_s/user_administration/',
-         user_administration_admin, name='user_administration_admin'),
+    path('admin/user_administration/',
+         user_administration, name='user_administration'),
     # create user iframes
-    path('admin_s/iframes/create_lecturer', create_lecturer_iframe,
+    path('admin/iframes/create_lecturer', create_lecturer_iframe,
          name='createlecturer_admin_iframe'),
-    path('admin_s/iframes/create_officeuser', create_officeuser_iframe,
+    path('admin/iframes/create_officeuser', create_officeuser_iframe,
          name='createofficeuser_admin_iframe'),
-    path('admin_s/iframes/create_student', create_student_iframe,
+    path('admin/iframes/create_student', create_student_iframe,
          name='createstudent_admin_iframe'),
     # deleted user iframe
-    path('admin_s/iframes/deleted_user/<username>', delete_user_iframe,
+    path('admin/iframes/deleted_user/<username>', delete_user_iframe,
          name='deleteuser_admin_iframe'),
     # edit user iframe
-    path('admin_s/iframes/edit_student/<username>', edit_user_admin_modalcontent_iframe,
+    path('admin/iframes/edit_student/<username>', edit_user_admin_modalcontent_iframe,
          name='edituser_admin_modalcontent_iframe'),
     # studentlist iframe
-    path('admin_s/iframes/studentlist/page<int:page>',
+    path('admin/iframes/studentlist/page<int:page>',
          student_list_iframe, name='studentlist_admin_iframe'),
     # lecturerlist iframe
-    path('admin_s/iframes/lecturerlist/page<int:page>',
+    path('admin/iframes/lecturerlist/page<int:page>',
          lecturer_list_iframe, name='lecturerlist_admin_iframe'),
     # admin + staff list (iframe)
-    path('admin_s/iframes/adminstafflist/page<int:page>',
+    path('admin/iframes/adminstafflist/page<int:page>',
          staff_admin_list_iframe, name='adminlist_admin_iframe'),
 ]

@@ -21,12 +21,12 @@ from .views import *
 urlpatterns = [
     path('delete/<id>', delete_course, name='delte_course'),
     # course
-    path('overview/page<int:page>',course_overview,name='course_overview'),
+    path('overview/page<int:page>', course_overview, name='course_overview'),
     # create user iframes
     path('iframes/studentlist/<id>', course_student_list_iframe,
          name='course_studentlist_iframe'),
     # admin: create course
-    path('admin/create/', create_course_admin, name="create_course_admin"),
+    path('create/', create_course, name="create_course"),
 
     path('edit/<id>', edit_course, name='edit_course'),
 ]
