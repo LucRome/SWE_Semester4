@@ -18,10 +18,13 @@ class StudentForm(ModelForm):
 
 
 class LecturerAndOfficeFilterForm(Form):
-    username = CharField(max_length=50, label="Username", required=False)
-    first_name = CharField(max_length=50, label="Vorname", required=False)
-    last_name = CharField(max_length=50, label="Nachname", required=False)
+    username = CharField(max_length=50, label='Username',
+                         initial='', required=False)
+    first_name = CharField(max_length=50, label='Vorname',
+                           initial='', required=False)
+    last_name = CharField(max_length=50, label='Nachname',
+                          initial='', required=False)
 
 
 class StudentFilterForm(LecturerAndOfficeFilterForm):
-    matr_nr = IntegerField(label="Matrikel Nummer", required=False)
+    matr_nr = IntegerField(label='Matrikel Nummer', initial='', required=False)

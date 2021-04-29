@@ -7,6 +7,7 @@ from .forms import *
 from .models import User, Lecturer, Student, Office
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.core.paginator import Paginator
+from eCourse_backend.utils import *
 
 # Create your views here.
 
@@ -36,10 +37,10 @@ def create_lecturer_iframe(request):
         user_form = UserForm(request.POST)
         if user_form.is_valid():
             Lecturer.objects.create_user(
-                username=user_form['username'].data,
-                email=user_form['email'].data,
-                first_name=user_form['first_name'].data,
-                last_name=user_form['last_name'].data,
+                username=get_value(user_form, 'username'),
+                email=get_value(user_form, 'email'),
+                first_name=get_value(user_form, 'first_name'),
+                last_name=get_value(user_form, 'last_name'),
             )
             save_success = True
     else:
@@ -67,10 +68,10 @@ def create_officeuser_iframe(request):
         user_form = UserForm(request.POST)
         if user_form.is_valid():
             Office.objects.create_user(
-                username=user_form['username'].data,
-                email=user_form['email'].data,
-                first_name=user_form['first_name'].data,
-                last_name=user_form['last_name'].data,
+                username=get_value(user_form, 'username'),
+                email=get_value(user_form, 'email'),
+                first_name=get_value(user_form, 'first_name'),
+                last_name=get_value(user_form, 'last_name'),
             )
             save_success = True
     else:
@@ -97,11 +98,11 @@ def create_student_iframe(request):
         user_form = StudentForm(request.POST)
         if user_form.is_valid():
             Student.objects.create_user(
-                username=user_form['username'].data,
-                email=user_form['email'].data,
-                first_name=user_form['first_name'].data,
-                last_name=user_form['last_name'].data,
-                matr_nr=user_form['matr_nr'].data
+                username=get_value(user_form, 'username'),
+                email=get_value(user_form, 'email'),
+                first_name=get_value(user_form, 'first_name'),
+                last_name=get_value(user_form, 'last_name'),
+                matr_nr=get_value(user_form, 'matr_nr'),
             )
             save_success = True
     else:
@@ -129,10 +130,10 @@ def student_list_iframe(request, page=1):
         if filter_form.is_valid():
             # Filter
             students = Student.objects.filter(
-                matr_nr__contains=filter_form['matr_nr'].data,
-                first_name__contains=filter_form['first_name'].data,
-                last_name__contains=filter_form['last_name'].data,
-                username__contains=filter_form['username'].data)
+                matr_nr__contains=get_value(filter_form, 'matr_nr'),
+                first_name__contains=get_value(filter_form, 'first_name'),
+                last_name__contains=get_value(filter_form, 'last_name'),
+                username__contains=get_value(filter_form, 'username'),)
     else:
         filter_form = StudentFilterForm()
         students = Student.objects.all()
@@ -159,9 +160,9 @@ def lecturer_list_iframe(request, page=1):
         if filter_form.is_valid():
             # Filter
             lecturers = Lecturer.objects.filter(
-                first_name__contains=filter_form['first_name'].data,
-                last_name__contains=filter_form['last_name'].data,
-                username__contains=filter_form['username'].data)
+                first_name__contains=get_value(filter_form, 'first_name'),
+                last_name__contains=get_value(filter_form, 'last_name'),
+                username__contains=get_value(filter_form, 'username'),)
     else:
         filter_form = LecturerAndOfficeFilterForm()
         lecturers = Lecturer.objects.all()
@@ -187,9 +188,9 @@ def staff_admin_list_iframe(request, page=1):
         if filter_form.is_valid():
             # Filter
             users = Office.objects.filter(
-                first_name__contains=filter_form['first_name'].data,
-                last_name__contains=filter_form['last_name'].data,
-                username__contains=filter_form['username'].data)
+                first_name__contains=get_value(filter_form, 'first_name'),
+                last_name__contains=get_value(filter_form, 'last_name'),
+                username__contains=get_value(filter_form, 'username'),)
     else:
         filter_form = LecturerAndOfficeFilterForm()
         users = Office.objects.all()

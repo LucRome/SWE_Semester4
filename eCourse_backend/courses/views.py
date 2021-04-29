@@ -24,15 +24,14 @@ def course_student_list_iframe(request, id, page=1):
         if filter_form.is_valid():
             # Filter
             students = Student.objects.filter(
-                matr_nr__contains=filter_form['matr_nr'].data,
-                first_name__contains=filter_form['first_name'].data,
-                last_name__contains=filter_form['last_name'].data,
-                username__contains=filter_form['username'].data)
+                matr_nr__contains=get_value(filter_form, 'matr_nr'),
+                first_name__contains=get_value(filter_form, 'first_name'),
+                last_name__contains=get_value(filter_form, 'last_name'),
+                username__contains=get_value(filter_form, 'username'))
     elif request.method == 'GET':
         filter_form = CourseStudentFilterForm()
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
-        # print('lecturer', lecturer)
         students = course.student.all()
 
     context = {
