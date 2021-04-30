@@ -11,24 +11,14 @@
       Kurse
     </a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Kursübersicht</a>
-      <a class="dropdown-item" href="#">Kurs anlegen</a>
+      <a class="dropdown-item" href="{% url 'course_overview' page=0 %}">Kursübersicht</a>
+      <a class="dropdown-item" href="{% url 'create_course' %}">Kurs anlegen</a>
     </div>
   </li>
-  {% comment %} Dropdown: Gruppen {% endcomment %}
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" 
-      data-toggle="dropdown">
-      Gruppen
-    </a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Gruppe anlegen</a>
-      <a class="dropdown-item" href="#">Kursgruppe anlegen</a>
-    </div>
   </li>
   {% comment %} Link: Userverwaltung {% endcomment %}
   <li class="nav-item">
-    <a class="nav-link" href="#">Userverwaltung</a>
+    <a class="nav-link" href="{% url 'user_administration' %}">Userverwaltung</a>
   </li>
 </ul>
 

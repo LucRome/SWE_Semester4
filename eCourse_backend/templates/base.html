@@ -28,43 +28,43 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   {# own definitions #}
-  <link rel="stylesheet" href="{% static 'Css/basic_definitions.css' %%}">
+  <link rel="stylesheet" href="{% static 'css/basic_definitions.css' %%}">
+
   {% block additional-head %} {% endblock %}
 </head>
 
 <body>
-    <!-- user Leiste -->
-    <nav class="navbar navbar-dark bg-dark" >
-        <a class="navbar-brand p-0" href="#">
-            <img class="logo p-0" src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" /> 
-        </a>
-        <a class="navbar-brand" href="#">
-            <img class="logo" src="{% static 'Logo_eCourse.png' %}" /> 
-        </a>
-        
-        {% block userbar-content %} {% endblock %}
-    </nav>
+  <!-- user Leiste -->
+  <nav class="navbar navbar-dark bg-dark" >
+    <a class="navbar-brand p-0" href="#">
+      <img class="logo p-0" src="https://upload.wikimedia.org/wikipedia/de/1/1d/DHBW-Logo.svg" /> 
+    </a>
+    <a class="navbar-brand" href="#">
+      <img class="logo" src="{% static 'Logo_eCourse.png' %}" /> 
+    </a>
+    {% block userbar-content %} {% endblock %}
+  </nav>
 
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-danger d-flex" style="color: white;">
-        {# site title #}
-        <h2 class="">
-            {% block site-title %} {% endblock %}
-        </h2>
-        {# toggler button #}
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavBar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-danger d-flex" style="color: white;">
+    {# site title #}
+    <h2 class="">
+      {% block site-title %} {% endblock %}
+    </h2>
+    {# toggler button #}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavBar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        {# collapsible part #}
-        <div class="collapse navbar navbar-collapse p-0" id="collapsibleNavBar">    
-            {% block navbar-content %} {% endblock %}
-        </div>
-    </nav>
-    
-    <main>
-        {% block content %} {% endblock %}
-    </main>
+    {# collapsible part #}
+    <div class="collapse navbar navbar-collapse p-0" id="collapsibleNavBar">    
+      {% block navbar-content %} {% endblock %}
+    </div>
+  </nav>
+  
+  <main class="container-fluid mt-2 mb-2">
+    {% block content %} {% endblock %}
+  </main>
 </body>
 
 </html>

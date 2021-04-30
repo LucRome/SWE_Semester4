@@ -25,9 +25,10 @@ class Command(BaseCommand):
                 type=t,
             )
             try:
+                u.set_password('test123')
                 u.save()
             except Exception:
                 raise CommandError('Could not create user')
 
             self.stdout.write(self.style.SUCCESS(
-                'Successfully created testusers'))
+                'Successfully created testuser of type {} with username: {}'.format(t, u.username)))

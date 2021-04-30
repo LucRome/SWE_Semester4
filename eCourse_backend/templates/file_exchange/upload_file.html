@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1>Alter Course</h1>
 
-  <form method="post">
+{% block content %}
+    <h1>Upload file</h1>
+
+  <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>
