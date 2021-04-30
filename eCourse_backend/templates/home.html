@@ -7,6 +7,9 @@
 {% if user.is_authenticated %}
   {% if user.is_superuser %}
     {% include "admin/home_admin.html" %}
+  {% elif user.type == 2 %}
+    {# Lecturer #}
+    {% include "lecturer/lecturer_home.html" %}
   {% else %}
     {% include "home/home_auth.html" %}
   {% endif %}
