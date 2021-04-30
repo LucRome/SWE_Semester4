@@ -105,4 +105,5 @@ def edit_course(request, id):
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
 
-    return render(request, 'courses/edit_course.html', {'form': form, 'courseid': id})
+    return render(request, 'courses/edit_course.html',
+                  {'form': form, 'courseid': id})
