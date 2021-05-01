@@ -64,7 +64,6 @@ def course_overview(request, page=1):
     return render(request, 'courses/overview.html', context)
 
 
-    
 @login_required
 def view_course(request, id):
     if request.method == 'GET':
