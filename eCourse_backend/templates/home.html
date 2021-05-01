@@ -5,7 +5,7 @@
 
 
 {% if user.is_authenticated %}
-  {% if user.type == 1 %}
+  {% if user.is_superuser or user.type == 1 %}
     {% include "admin/home_admin.html" %}
   {% else %}
     {% include "home/home_auth.html" %}
