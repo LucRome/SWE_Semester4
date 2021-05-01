@@ -1,5 +1,7 @@
 from django import forms
 from django.forms.widgets import TextInput
+from django.forms import MultiWidget
+from django.contrib.admin import widgets
 from django.utils.dateparse import parse_duration
 from users.models import Lecturer
 from .models import Submission
@@ -9,12 +11,48 @@ from courses.models import Exercise
 # showing little calendar to choose date and time
 
 
-class SD_DateTimeInput(forms.DateTimeInput):
-    input_type = 'datetime-local'
+# class DateTimeInput(forms.MultiWidget()):
+#     # input_type = 'datetime-local'
+
+#     # def __init__(self, **kwargs):
+#     #     kwargs["format"] = "%Y-%m-%dT%H:%M"
+#     #     super().__init__(**kwargs)
+
+#     # def decompress(self, value):
+#     #     if value:
+#     #         return [value.date(), value.time().replace(microsecond=0)]
+#     #     return [None, None]
+#     def __init__(self, attr = None):
+#         widgets = [forms.DateField, forms.TimeField]
+
+class _Date(forms.DateInput):
+    input_type = 'date'
 
     def __init__(self, **kwargs):
-        kwargs["format"] = "%Y-%m-%dT%H:%M"
+        kwargs['format'] = '%Y-%m-%d'
         super().__init__(**kwargs)
+
+class _Time(forms.DateInput):
+    input_type = 'time'
+
+    def __init__(self, **kwargs):
+        kwargs['format'] = '%H:%M'
+        super().__init__(**kwargs)
+
+class DateTime(forms.MultiWidget):
+    def __init__(self, attrs = None):
+        widgets = [
+            _Date(format = ['%Y-%m-%d']),
+            _Time(format = ['%H:%M'])
+        ]
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return [value.date(), value.time().replace(microsecond = 0).replace(milisecond = 0).replace(second = 0)]
+        return [None, None]
+
+    
 
 
 # duration field
@@ -42,7 +80,7 @@ class ExersiceForm(forms.ModelForm):
         model = Exercise
         fields = '__all__'
         widgets = {
-            'start_time': SD_DateTimeInput(format=['%Y-%m-%d']),
-            'submission_deadline': SD_DateTimeInput(format=['%Y-%m-%d']),
+            'start_time': DateTime(),
+            'submission_deadline': DateTime(),
             'work_time_duration': DurationInput()
         }
