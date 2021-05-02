@@ -4,20 +4,13 @@
 {# TODO: determine active site and set the corresponding link to active #}
 
 <ul class="navbar-nav">
-  {# Dropdown: Kurse #}
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" 
-      data-toggle="dropdown">
-      Kurse
-    </a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Kursübersicht</a>
-      <a class="dropdown-item" href="{% url 'create_course' %}">Kurs anlegen</a>
-    </div>
-  </li>
   {# Link: Klausurübersicht #}
   <li class="nav-item">
     <a class="nav-link" href="#">Klausurübersicht</a>
+  </li>
+  {# Link: Kursübersicht #}
+  <li class="nav-item">
+    <a class="nav-link" href="#">Kursübersicht</a>
   </li>
 </ul>
 
