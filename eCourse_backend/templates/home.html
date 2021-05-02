@@ -5,11 +5,8 @@
 
 
 {% if user.is_authenticated %}
-  {% if user.is_superuser %}
+  {% if user.is_superuser or user.type == 1 %}
     {% include "admin/home_admin.html" %}
-  {% elif user.type == 2 %}
-    {# Lecturer #}
-    {% include "lecturer/lecturer_home.html" %}
   {% else %}
     {% include "home/home_auth.html" %}
   {% endif %}
