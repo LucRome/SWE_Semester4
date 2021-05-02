@@ -1,10 +1,8 @@
 {% comment %} Contains the links in the navbar {% endcomment %}
 
-{# TODO: provide urls behind the buttons#}
-{# TODO: determine active site and set the corresponding link to active #}
 
 <ul class="navbar-nav">
-  {% comment %} Dropdown: Kurse {% endcomment %}
+  {# Dropdown: Kurse #}
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" 
       data-toggle="dropdown">
@@ -16,7 +14,7 @@
     </div>
   </li>
   </li>
-  {% comment %} Link: Userverwaltung {% endcomment %}
+  {# Link: Userverwaltung #}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'user_administration' %}">Userverwaltung</a>
   </li>
