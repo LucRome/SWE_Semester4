@@ -1,4 +1,4 @@
-![](Logo_eCourse.png)
+![](logo_eCourse.png)
 # eCourse
 
 A replacement for moodle and dualis.
