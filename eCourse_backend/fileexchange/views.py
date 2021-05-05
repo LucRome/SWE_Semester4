@@ -22,7 +22,7 @@ def overview(request):
 
 
 @login_required
-@permission_required('file_exchange.create_exercise', raise_exception=True)
+@permission_required('exercise.create_exercise', raise_exception=True)
 def create_exercise(request):
     if request.method == 'POST':
         form = ExersiceForm(request.POST)
@@ -37,7 +37,7 @@ def create_exercise(request):
 
 
 @login_required
-@permission_required('file_exchange.create_exercise', raise_exception=True)
+@permission_required('exercise.delete_exercise', raise_exception=True)
 def delete_exercise(request, id):
     exercise_to_delete = get_object_or_404(Exercise, pk=id)
     name = exercise_to_delete.name
@@ -48,7 +48,7 @@ def delete_exercise(request, id):
 
 
 @login_required
-@permission_required('file_exchange.create_exercise', raise_exception=True)
+@permission_required('exercise.change_exercise', raise_exception=True)
 def alter_exersice(request, id):
     if request.method == 'POST':
         form = ExersiceForm(request.POST)

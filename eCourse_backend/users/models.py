@@ -26,14 +26,15 @@ class User(AbstractUser):
     type = models.IntegerField(choices=USER_TYPES, default=3)
     matr_nr = models.IntegerField(default=0)
 
+    class Meta:
+        permissions = [('manage_users', 'Manages Users')]
+
 
 class Lecturer(User):
     objects = LecturerManager()
 
     class Meta:
         proxy = True
-        permissions = [('alter_courses', 'Can alter course'),
-                       ('create_exercise', 'Can create exercises')]
 
     def save(self, *args, **kwargs):
         self.type = 2
@@ -56,12 +57,6 @@ class Office(User):
 
     class Meta:
         proxy = True
-        permissions = [('alter_courses', 'Can alter course'),
-                       ('create_courses', 'Can create course'),
-                       ('delete_courses', 'Can delete course'),
-                       ('manage_users', 'Can manage user'),
-                       ('create_exercise', 'Can create exercises'),
-                       ]
 
     def save(self, *args, **kwargs):
         self.type = 1
