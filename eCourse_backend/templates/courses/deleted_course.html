@@ -1,14 +1,22 @@
 {% extends 'base.html' %} 
 
+{% block navbar-content %}
+{% include "admin/navbar_content.html" %}
+{% endblock %}
+
+
+{% block title %}Kurs gelöscht{% endblock %}
+{% block site-title %}Kurs gelöscht{% endblock %}
+
 {% block content %} 
-    <h1> deleted course </h1>
+    <h1> Kurs gelöscht</h1>
 
     <p>
-        Course with {{ name }} deleted 
+        Kurs: {{ name }} wurde gelöscht
     </p>
 
-    <a href="{% url 'overview' %}">
-        <button> overview </button>
+    <a href="{% url 'course_overview'  page=0%}">
+        <button type="button"  class="btn btn-danger float-left"> Zurück </button>
     </a>
 
 {% endblock %} 
