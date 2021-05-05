@@ -12,6 +12,17 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='office',
-            options={'permissions': [('courses.alter_courses', 'Can alter course'), ('create_courses', 'Can create course'), ('delete_courses', 'Can delete course'), ('manage_users', 'Can manage user'), ('create_exercise', 'Can create exercises')]},
+            options={
+                'permissions': [
+                    ('courses.alter_courses',
+                     'Can alter course'),
+                    ('create_courses',
+                     'Can create course'),
+                    ('delete_courses',
+                     'Can delete course'),
+                    ('manage_users',
+                     'Can manage user'),
+                    ('create_exercise',
+                     'Can create exercises')]},
         ),
     ]

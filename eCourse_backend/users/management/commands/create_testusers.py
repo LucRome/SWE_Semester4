@@ -7,10 +7,10 @@ from users.models import User
 USER_NUM = range(20)
 
 USER_GROUPS = [
-        'office_users',
-        'lecturer_users',
-        'student_users',
-        ]
+    'office_users',
+    'lecturer_users',
+    'student_users',
+]
 
 
 def rand_word(l):
