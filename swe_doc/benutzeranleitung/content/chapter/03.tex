@@ -2,10 +2,16 @@
 
 \chapter{Anleitung für Verwaltungsangestellte}
 \label{sec:chap1}
-\textbf{Kursübersicht}
+\textbf{Kursübersicht}\\
 Der Benutzer kann zu jedem Zeitpunkt zur Kursübersicht gelangen. Diese ist in der Menüleiste im Sandwichmenü zu den Kursen zu finden.\\
 In der Kursübersicht findet der Benutzer alle Kurse. Diese sind je nach Anzahl auf verschiedene Seiten aufgeteilt. Ein Wechsel zwischen den Seiten kann durch klicken auf die jeweilige Seitenzahl erfolgen. 
-\textcolor{magenta}{hier bild kursübersicht einfügen}
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=.5\textwidth]{kursübersicht.png}
+\caption{Kursübersicht für Verwaltungsangestellte}
+\label{fib:kü}
+\end{figure}
 
 \textbf{Kurs anlegen}
 Ebenfalls im Untermenü Kurse ist die Möglichkeit zum Kurse anlegen gegeben.\\
@@ -16,7 +22,19 @@ Außerdem sollte dem Kurs sinnvoller Name vergeben werden. Von den Entwicklern w
 Abschließend kann über einen Kalender ein Start- und Enddatum des Kurses festgelegt werden. 
 Die Erstellung des Kurses kann durch klicken der Schaltfläche \glqq Kurs erstellen\grqq\: beendet werden.
 
-\textcolor{magenta}{bild mit der form}
+\begin{figure}[h]
+\centering
+\includegraphics[height=.5\textwidth]{kurs_erstellen_1.png}
+\caption{Kurs anlegen}
+\label{fib:kü}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=.5\textwidth]{kurs_erstellen_2.png}
+\caption{Kurs anlegen - Auswahl des Dozierenden aus dem Drop-Down-Menü}
+\label{fib:kü}
+\end{figure}
 
 \textbf{Kurs bearbeiten}
 Kurse können nur bearbeitet werden, wenn sich der Benutzer in der Kursübersicht befindet. Dort findet sich neben jedem Kursnamen eine Schaltfläche \glqq bearbeiten\grqq . Wird diese betätigt öffnet sich das gleiche Formular wie auch bei der Kurserstellung. Im Gegensatz zum Anlegen des Kurses its das Formular aber hier mit den Informationen über den Kurs gefüllt und kann bei Bedarf abgeändert werden.\\
@@ -30,13 +48,23 @@ Die Benutzerübersicht kann ebenfalls zu jeder Zeit erreicht werden, indem der B
 Die Benutzerübersicht ist aufgeteilt in 4 Bereiche: die Studentenliste, die Dozentenliste, die Admin- und Mitarbeiterliste und den Punkt Benutzer erstellen. \\
 In den jeweiligen Listen werden alle Benutzer aufgeführt, die den jeweils angegebenen Benutzertyp haben. Die Liste der Benutzer ist analog zu der Liste der Kurse auf mehrere Seiten aufgeteilt, wobei die jeweiligen Seiten über klicken auf die verschiedenen Seitennummern erreicht werden können.\\
 Die Listen können durch verschiedene Filterfunktionen nach bestimmten Nutzern durchsucht werden. 
-\textcolor{Bild von einer Seite}
+\begin{figure}[h]
+\centering
+\includegraphics[height=.5\textwidth]{user_übersicht.png}
+\caption{Benutzerübersicht am Beispiel der Studentenliste}
+\label{fib:kü}
+\end{figure}
 
 \textbf{Benutzer anlegen}
-Im Unterpunkt \glqq User erstellen\grqq\: der Benutzerverwaltung können Benutzer erstellt werden. Bei der Erstellung wird unabhängig vom Benutzertyp ein Benutzername, ein Voname, ein Nachname und eine E-Mail-Adresse verlangt. Nur der Gruppe der Studierenden erhält zusätzlich noch eine Matrikelnummer. \\
+Im Unterpunkt \glqq User erstellen\grqq\: der Benutzerverwaltung können Benutzer erstellt werden. Bei der Erstellung wird unabhängig vom Benutzertyp ein Benutzername, ein Vorname, ein Nachname und eine E-Mail-Adresse verlangt. Nur der Gruppe der Studierenden erhält zusätzlich noch eine Matrikelnummer. Der Benutzertyp selbst wird aus einem Drop-Down-Menü ausgewählt. Es stehen Verwaltungsangestellter, Studierender und Dozierender zur Verfügung als möglicher Benutzertyp. \\
 Wichtig zu beachten ist, wurde ein Benutzer erstellt, taucht er in der entsprechenden Liste erst dann auf, wenn die Seite manuell aktualisiert wurde. Diese Maßnahme wurde eingebaut um die Performanz der Seite zu verbessern.
 
-\textcolor{bitte bild von User erstellen am besten Dozent und Student wegen Matrikelnummer}
+\begin{figure}[h]
+\centering
+\includegraphics[height=.5\textwidth]{student_erstellen.png}
+\caption{Benutzer erstellen am Beispiel eines Studenten}
+\label{fib:kü}
+\end{figure}
 
 \textbf{Benutzer bearbeiten}
 In den jeweiligen Listen können die Benutzer nun auch bearbeitet werden. Dies kann nötig sein, wenn zum Beispiel ein Benutzer seine E-Mail-Adresse ändert.\\
@@ -44,5 +72,9 @@ Die Bearbeitung eines Benutzers geschieht analog zur Bearbeitung der Kurse, alle
 Auch hier kann der Benutzer analog zu den Kursen den Benutzer löschen. Auch hier ist zu beachten, dass der Benutzer direkt nach Betätigung der Schaltfläche \glqq Löschen\grqq\: gelöscht wird. Die Schaltfläche sollte also nur betätigt werden, wenn der Benutzer auch wirklich gelöscht werden soll.\\
 Nach der Bearbeitung eines Benutzers muss wie auch bei der Erstellung die Seite neu geladen werden, um die Veränderungen auch in der Liste sehen zu können.\\
 
-\textcolor{Bild Benutzer bearbeiten}
-
+\begin{figure}[h]
+\centering
+\includegraphics[height=.5\textwidth]{user_bearbeiten.png}
+\caption{Bearbeiten eines Benutzers am Beispiel eines Studenten}
+\label{fib:kü}
+\end{figure}
