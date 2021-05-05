@@ -1,5 +1,3 @@
-# Ignore upload folder
-upload/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -152,5 +150,3 @@ dmypy.json
 *.synctex.gz
 *.fdb_latexmk
 *.fls 
-*.pdf
-

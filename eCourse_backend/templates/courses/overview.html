@@ -1,55 +1,14 @@
-{% extends 'home/home_auth.html' %}
+{% extends 'base.html' %} 
 
-{% block navbar-content %}
-  {% include "admin/navbar_content.html" %}
-{% endblock %}
-
-{% load static %}
-
-{% block title %}Kursübersicht{% endblock %}
-{% block site-title %}Kursübersicht{% endblock %}
-
-{% block content %}
-  
-  {# We get the users object from the backend which is an array of all courses #}
-  {# It should be printed as a table with an 'edit' link pointing to /courses/alter/id #}
-  {# with id being the primary key of the course #}
-  {# delete button to courses/delete/id #}
-  
-  <div id="accordion" role="tablist">
-    {% for course in page_obj %}
-    <div class="card">
-      <div class="card-header" role="tab" id="heading_{{course.id}}">
-        <h5 class="mb-0">
-          <a>
-            {{course.name}}
-          </a>
-          <div class="btn-group float-right">
-            <a href="{% url 'edit_course' id=course.id %}">
-              <button type="button"  class="btn btn-danger float-right">
-                bearbeiten
-              </button>
-            </a>
-            <button type="button" data-toggle="collapse" href="#collapse_{{course.id}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger card-button">
-              <i class="bi bi-caret-down-square-fill"></i>
-            </button>
-          </div>
-        </h5>
-      </div>
-  
-      <div id="collapse_{{course.id}}" class="collapse" role="tabpanel" aria-labelledby="heading_{{course.id}}">
-        <div class="card-body" data-src="{% url 'course_studentlist_iframe' id=course.id %}">
-          {# Student list #}
-          {# role and aria-labelledby is for schreenreaders #}
-          <iframe src="" width="100%" frameborder="0" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-
-  </div>
-  <script src="{% static 'JS/iframe_size.js' %}"></script>
-  <div class="mt-3">
-    {% include 'other/pagination.html' with page_obj=page_obj url_name='course_overview' %}
-  </div>
-{% endblock %}
+{% block content %} 
+    <h1> Courses overview </h1>
+    
+    {# We get the users object from the backend which is an array of all courses #}
+    {# It should be printed as a table with an 'edit' link pointing to /courses/alter/id #}
+    {# with id being the primary key of the course #}
+    {# delete button to courses/delete/id #}
+    <a href="{% url 'create_course' %}"> 
+        <button>Create course</button>
+    </a>
+    
+    {% endblock %}
