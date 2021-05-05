@@ -34,8 +34,6 @@ class Command(BaseCommand):
             try:
                 u.set_password('test123')
                 u.save()
-                g = Group.objects.get(name=USER_GROUPS[i % 3])
-                g.user_set.add(u)
             except Exception:
                 raise CommandError('Could not create user')
 

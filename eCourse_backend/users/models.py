@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
+from django.db.models.signals import post_save
+from django.dispatch import receiver 
 from .managers import *
 
 # Create your models here.
@@ -61,3 +63,13 @@ class Office(User):
     def save(self, *args, **kwargs):
         self.type = 1
         return super(Office, self).save(*args, **kwargs)
+
+@receiver(post_save, sender=Office)
+@receiver(post_save, sender=Student)
+@receiver(post_save, sender=Lecturer)
+@receiver(post_save, sender=User)
+def add_user_to_public_group(sender, instance, created, **kwargs):
+    """Post-create user signal that adds the user to everyone group."""
+    if created:
+        t = instance.type
+        instance.groups.add(Group.objects.get(pk=t))
