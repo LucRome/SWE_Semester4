@@ -124,9 +124,15 @@ def create_course(request):
     else:
         form = CourseForm()
 
+    if request.user.is_superuser or request.user.type == 1:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+
     context = {
         'form': form,
-        'success': success
+        'success': success,
+        'base_template': base_template
     }
     return render(request, 'courses/create_course.html', context)
 
