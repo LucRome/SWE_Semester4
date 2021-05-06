@@ -22,6 +22,11 @@ def validate_file_type(file):
 
 
 class Submission(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_exercise')
+    from_lecturer = models.BooleanField(default=False)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     upload_time = models.DateTimeField()

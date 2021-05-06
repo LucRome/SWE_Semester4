@@ -35,12 +35,20 @@ class Lecturer(User):
         permissions = [('alter_courses', 'Can alter course'),
                        ('create_exercise', 'Can create exercises')]
 
+    def save(self, *args, **kwargs):
+        self.type = 2
+        return super(Lecturer, self).save(*args, **kwargs)
+
 
 class Student(User):
     objects = StudentManager()
 
     class Meta:
         proxy = True
+
+    def save(self, *args, **kwargs):
+        self.type = 3
+        return super(Student, self).save(*args, **kwargs)
 
 
 class Office(User):
@@ -52,5 +60,9 @@ class Office(User):
                        ('create_courses', 'Can create course'),
                        ('delete_courses', 'Can delete course'),
                        ('manage_users', 'Can manage user'),
-                       ('create_exercise', 'Can create exercises')
+                       ('create_exercise', 'Can create exercises'),
                        ]
+
+    def save(self, *args, **kwargs):
+        self.type = 1
+        return super(Office, self).save(*args, **kwargs)

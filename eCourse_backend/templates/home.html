@@ -1,14 +1,15 @@
-{# templates/home.html #}
-{% extends 'base.html' %}
+  {% comment %} 
+    Determine which page to show 
+    Depending on user
+  {% endcomment %}
 
-{% block title %}Home{% endblock %}
 
-{% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  {% if user.is_superuser or user.type == 1 %}
+    {% include "admin/home_admin.html" %}
+  {% else %}
+    {% include "home/home_auth.html" %}
+  {% endif %}
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %}
+  {% include "home/home_not_auth.html" %}
+{%endif%}

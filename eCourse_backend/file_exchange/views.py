@@ -67,7 +67,11 @@ def upload_file(request):
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            submission = form.save(commit=False)
+            submission.user_id = request.user.id
+            if (request.user.type == 1 or request.user.type == 2):
+                submission.from_lecturer = True
+            submission.save()
             # back to exercises overview
             return render(request, 'file_exchange/overview.html')
     else:
