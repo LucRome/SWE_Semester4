@@ -19,8 +19,29 @@ from django.views.generic.base import TemplateView
 from .views import *
 
 urlpatterns = [
-    path('overview/', overview, name='overview'),
-    path('create/', create_user, name='create_user'),
-    path('alter/<int:id>', alter_user, name='alter_user'),
-    path('delete/<int:id>', delete_user, name='delete_user'),
+    # user administration
+    path('admin/user_administration/',
+         user_administration, name='user_administration'),
+    # create user iframes
+    path('admin/iframes/create_lecturer', create_lecturer_iframe,
+         name='createlecturer_admin_iframe'),
+    path('admin/iframes/create_officeuser', create_officeuser_iframe,
+         name='createofficeuser_admin_iframe'),
+    path('admin/iframes/create_student', create_student_iframe,
+         name='createstudent_admin_iframe'),
+    # deleted user iframe
+    path('admin/iframes/deleted_user/<id>', delete_user_iframe,
+         name='deleteuser_admin_iframe'),
+    # edit user iframe
+    path('admin/iframes/edit_student/<id>', edit_user_admin_modalcontent_iframe,
+         name='edituser_admin_modalcontent_iframe'),
+    # studentlist iframe
+    path('admin/iframes/studentlist/page<int:page>',
+         student_list_iframe, name='studentlist_admin_iframe'),
+    # lecturerlist iframe
+    path('admin/iframes/lecturerlist/page<int:page>',
+         lecturer_list_iframe, name='lecturerlist_admin_iframe'),
+    # admin + staff list (iframe)
+    path('admin/iframes/adminstafflist/page<int:page>',
+         staff_admin_list_iframe, name='adminlist_admin_iframe'),
 ]
