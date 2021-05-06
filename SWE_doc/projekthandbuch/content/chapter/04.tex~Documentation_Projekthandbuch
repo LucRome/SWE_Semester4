@@ -1,0 +1,27 @@
+\chapter{Projektkommunikationsplan}
+
+Zur internen Kommunikation innerhalb des Projektes wird die Plattform Discord verwendet. Dort wurde ein eigens für dieses Projekt bestimmter Server erstellt, auf welchem die Kommunikation stattfindet. \\
+Alle Besprechungen, die das gesamte \gls{Development Team} betreffen werden im Kanal \glqq General\grqq\: abgehalten. Dazu zählt auch schriftliche Kommunikation via Chat. \\
+Sind einzelne Inhalte nur für eine bestimmte Gruppe interessant, kann auf die anderen, entsprechend gekennzeichneten Kanäle ausgewichen werden. \\
+In Tabelle \ref{tab:Kommunikation} sind alle regelmäßigen Projektmeetings aufgeführt. Zu diesen Meetings wird eine vollzählige Anwesenheit des \gls{Development Team}s erwartet.
+
+\begin{table}[h]
+\centering
+\tiny
+\begin{tabular} [h] {|c|c|c|c|}
+\hline
+Bezeichnung des Meetings & Inhalte & Häufigkeit und Dauer \\
+\hline
+\gls{Daily Scrum} & Besprechung was getan wurde & jeden Montag von 9.30 bis 10.00\\
+\quad & und was noch getan wird & und jeden Mittwoch von 15.00 bis 15.30 \\
+\hline
+\gls{Sprint Review} & Besprechung der im Sprint geleisteten Arbeit & jeden Donnerstag direkt nach der SoftwareEngineering-Vorlesung\\
+\hline
+\gls{Sprint Retrospektive} & Besprechung des Ablaufs des letzten Sprints & jeden Donnerstag direkt nach dem \gls{Sprint Review}\\
+\hline
+\gls{Sprint Planning} & Planung des nächsten Sprints & jeden Donnerstag direkt nach der \gls{Sprint Retrospektive}\\
+\hline
+\end{tabular}
+\caption{Projektkommunikationsplan}
+\label{tab:Kommunikation}
+\end{table}

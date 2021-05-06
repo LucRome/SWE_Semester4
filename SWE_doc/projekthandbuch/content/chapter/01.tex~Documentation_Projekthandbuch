@@ -1,0 +1,12 @@
+%!TEX root = ../../main.tex
+
+\chapter{Ansprechpartner und Organisationsstruktur}
+Die Zuständigkeiten und die allgemeine personelle Organisationsstruktur sind dem Organigramm in Abbildung \ref{fib:Organigramm} zu entnehmen.
+\begin{figure}[h]
+\centering
+\includegraphics[height=.8\textwidth]{Organigramm.png}
+\caption{Organigramm für das Projekt eCourse}
+\label{fib:Organigramm}
+\end{figure}\\
+
+Alle externe Anfragen an das Projektteam gehen über den Projektansprechpartner. Diese Rolle übernimmt Miriam Haas. Als Kontaktart wird eine E-Mail an \href{mailto:inf19109@lehre.dhbw-stuttgart.de}{diese Adresse} bevorzugt. 
