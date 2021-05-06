@@ -1,26 +1,12 @@
-{% extends 'admin/home_admin.html' %}
-
-{% block title %}create course{% endblock %}
+{% extends 'base.html' %}
 
 
 {% block content %}
-  {# success message #}
-  {% if success %}
-    <div class="alert alert-success alert-dismissible d-flex flex-wrap align-content-center">
-      <i class="bi bi-check-circle-fill success-icon mr-2"></i>
-      <p class="mt-0 mb-0">Kurs erfolgreich angelegt</p>
-      <button type="button" class="close" data-dismiss="alert">
-        <i class="bi bi-x"></i>
-      </button>
-    </div>
-  {% endif %}
+    <h1>Create Course</h1>
 
-
-  <div class="container-fluid">
-    <form method="post">
-      {% csrf_token %}
-      {% include 'forms/bs4_text_form.html' with form=form %}
-      <button class="btn btn btn-danger" type="submit">Kurs Erstellen</button>
-    </form>
-  </div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
 {% endblock %}

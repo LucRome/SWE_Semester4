@@ -1,30 +1,36 @@
-from django.forms import ModelForm, Form, ChoiceField, CharField, IntegerField
+from django.forms import ModelForm, Form, ChoiceField
 from users.models import User, Student, Lecturer, Office
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email', 'matr_nr']
 
 
 class StudentForm(ModelForm):
     class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name',
-                  'email', 'matr_nr']
-
-# useradministration: filter forms
+        model = Student
+        fields = ['username', 'first_name', 'last_name', 'email', 'matr_nr']
 
 
-class LecturerAndOfficeFilterForm(Form):
-    username = CharField(max_length=50, label='Username',
-                         initial='', required=False)
-    first_name = CharField(max_length=50, label='Vorname',
-                           initial='', required=False)
-    last_name = CharField(max_length=50, label='Nachname',
-                          initial='', required=False)
+class LecturerForm(ModelForm):
+    class Meta:
+        model = Lecturer
+        fields = ['username', 'first_name', 'last_name', 'email', 'matr_nr']
 
 
-class StudentFilterForm(LecturerAndOfficeFilterForm):
-    matr_nr = IntegerField(label='Matrikel Nummer', initial='', required=False)
+class OfficeUserForm(ModelForm):
+    class Meta:
+        model = Office
+        fields = ['username', 'first_name', 'last_name', 'email', 'matr_nr']
+
+
+class UsertypeChooseForm(Form):
+    CHOICES = [
+        ('student', 'Student'),
+        ('lecturer', 'Lecturer'),
+        ('office', 'Office User'),
+    ]
+
+    user_type = ChoiceField(choices=CHOICES)
