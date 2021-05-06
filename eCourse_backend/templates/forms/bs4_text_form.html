@@ -43,7 +43,7 @@
         {# Input field #}
         {% if form.is_bound and field.errors %}
           {# field with errors in prev. input #}
-          {% include 'forms/fields.html' with field=field error_class="is-invalid" %}
+          {% render_field field class="form-control is-invalid input"%}
           {% for error in field.errors %}
             <div class="invalid-feedback">
               {{ error }}
@@ -51,7 +51,7 @@
           {% endfor %}
         {% else %}
           {# field without errors in prv. input #}
-          {% include 'forms/fields.html' with field=field error_class="" %}
+          {% render_field field class="form-control input"%}
         {% endif %}
         {# Help-text to the field #}
         {% if field.help_text %}

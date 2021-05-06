@@ -1,0 +1,10 @@
+input {
+    max-width: 400px;
+}
+
+.input-group-text {
+    width: 40px;
+}
+.error-icon {
+    font-size: 2em;
+}
