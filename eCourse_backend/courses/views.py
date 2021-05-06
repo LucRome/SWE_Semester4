@@ -159,5 +159,10 @@ def edit_course(request, id):
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
 
+    if request.user.is_superuser or request.user.type == 1:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+
     return render(request, 'courses/edit_course.html',
-                  {'form': form, 'courseid': id})
+                  {'form': form, 'courseid': id, 'base_template': base_template})
