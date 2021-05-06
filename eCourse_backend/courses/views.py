@@ -49,7 +49,7 @@ def course_overview(request, page=1):
     user_id = request.user.id
     if request.method == 'GET':
         # office user has type 1 in db
-        if request.user.type == 1:
+        if request.user.type == 1 or request.user.is_superuser:
             courses = Course.objects.all()
         else:
             courses = Course.objects.filter(
