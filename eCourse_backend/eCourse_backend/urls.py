@@ -41,4 +41,9 @@ urlpatterns = [
     path(
         'users/',
         include('users.urls'),
-        name='users')]
+        name='users'),
+    path(
+        'file_exchange/',
+        include('file_exchange.urls'),
+        name='file_exchange'),
+]

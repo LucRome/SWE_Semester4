@@ -1,0 +1,68 @@
+%!TEX root = ../../main.tex
+
+\chapter{Soll-Konzept}
+\section{MUST}
+Das Projektergebnis muss folgende Anforderungen umsetzen: \\ \\
+\textbf{Drei Benutzergruppen} \\
+Es gibt die Benutzergruppen: Dozierende, Studierende und Administratoren \\
+Die Gruppe der Dozierenden kann folgende Aktionen ausführen: 
+\begin{itemize}
+\item Kurse erstellen
+\item Studierende zu Kursen hinzufügen 
+\item Aufgaben in den Kurs hochladen
+\item die Aufgaben mit einer Bearbeitungszeit versehen
+\item bearbeitete Abgaben von Studenten herunterladen
+\item korrigierte Abgaben hochladen
+\end{itemize}
+Die Gruppe der Studenten kann folgende Aktionen ausführen:
+\begin{itemize}
+\item zur Verfügung stehende Aufgaben herunterladen
+\item bearbeitete Abgaben hochladen
+\item korrigierte Abgaben herunterladen
+\end{itemize}
+Die Gruppe der Administratoren kann folgende Aktionen ausführen:
+\begin{itemize}
+\item Kurse erstellen
+\item Studierende zu Kursen hinzufügen
+\item Dozierende zu Kursen hinzufügen
+\item Studierende aus Kursen löschen
+\item Kurse löschen
+\item Studierende und Dozierende aus der Datenbank löschen
+\end{itemize}
+
+\textbf{Benutzeraktionen} \\
+Jeder Benutzer soll in der Lage sein folgende Aktionen auszuführen:
+\begin{itemize}
+\item eigenes Password ändern
+\end{itemize}
+
+\textbf{Login} \\
+Einem Nutzer werden bei Aufruf der Seite keine sensitiven Informationen angezeigt. \\
+Es soll eine Seite angezeigt werden, die nur generelle Informationen enthält, die in keiner Verbindung zu den Nutzern der Seite stehen. \\
+Erst nach einem Login mit Benutzername und Passwort soll eine Übersichtsseite angezeigt werden, die auf den Nutzer entsprechend seiner Nutzergruppe zugeschnitten ist. \\
+
+\section{SHOULD}
+Das Projektergebnis sollte folgende Anforderungen umsetzten:
+\begin{itemize}
+\item Der Administrator soll Studenten zu Gruppen zusammenfügen können
+\item Die Namen der Kurse werden automatisch generiert
+\item Dozierende sollen die Bewertung für bearbeitete Abgaben von Studierenden eintragen können
+\item Studierende sollen die Bewertung für ihre bearbeitete Abgaben einsehen können
+\item Administratoren sollen die eingetragene Bewertung der Abgaben von Studierenden einsehen und freigeben können
+\item Studierende sollen Bewertungen von Aufgaben erst dann einsehen, wenn diese von einem Administrator freigeschaltet wurden
+\end{itemize}
+
+
+\section{COULD}
+Das Projektergebnis kann folgende Anforderungen umsetzen:
+\begin{itemize}
+\item Ein*e Dozent*in wird nach einer definierten Zeit automatisch an die Bewertung von Abgaben erinnert
+\item ein Logo für die Software
+\item eine Chatfunktion zwischen Studierenden und Dozierenden
+\item Dozierende können neben Aufgaben auch Vorlesungsmaterialien hochladen
+\end{itemize}
+
+
+
+
+
