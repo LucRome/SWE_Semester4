@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'widget_tweaks',
+    'django_perms_provisioner',
     'eCourse_backend',
     'users',
-    'file_exchange',
+    'fileexchange',
     'courses',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,27 @@
+{% comment %} Contains the links in the navbar {% endcomment %}
+
+
+<ul class="navbar-nav">
+  {# Dropdown: Kurse #}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" 
+      data-toggle="dropdown">
+      Kurse
+    </a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'course_overview' page=0 %}">Kursübersicht</a>
+      <a class="dropdown-item" href="{% url 'create_course' %}">Kurs anlegen</a>
+    </div>
+  </li>
+  </li>
+  {# Link: Userverwaltung #}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'user_administration' %}">Userverwaltung</a>
+  </li>
+</ul>
+
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">sign-out</a>
+  </li>
+</ul>

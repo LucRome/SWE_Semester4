@@ -1,0 +1,28 @@
+{% comment %} Contains the links in the navbar {% endcomment %}
+
+{# TODO: provide urls behind the buttons#}
+{# TODO: determine active site and set the corresponding link to active #}
+
+<ul class="navbar-nav">
+  {% comment %} Dropdown: Kurse {% endcomment %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" 
+      data-toggle="dropdown">
+      Kurse
+    </a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Kursübersicht</a>
+      <a class="dropdown-item" href="#">Kurs anlegen</a>
+    </div>
+  </li>
+  {% comment %} Link: Userverwaltung {% endcomment %}
+  <li class="nav-item">
+    <a class="nav-link" href="#">Klausurübersicht</a>
+  </li>
+</ul>
+
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">sign-out</a>
+  </li>
+</ul>

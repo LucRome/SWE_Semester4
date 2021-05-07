@@ -1,0 +1,31 @@
+{% extends 'iframe_template.html' %}
+
+{% comment %} 
+  contains only the form to edit the user
+  and the success message
+{% endcomment %}
+
+{% block content %}
+  {% if update_success %}
+    <div class="alert alert-success alert-dismissible d-flex flex-wrap align-content-center">
+      <i class="bi bi-check-circle-fill success-icon mr-2"></i>
+      <p class="mt-0 mb-0">Änderungen erfolgreich gespeichert</p>
+      <button type="button" class="close" data-dismiss="alert">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {% include 'forms/bs4_text_form.html' with form=user_form %}
+    <div class="container-fluid d-flex flex-wrap">
+      <button class="btn btn-danger" type="submit">Speichern</button>
+      <a href="{% url 'deleteuser_admin_iframe' id=id%}" class="ml-auto">
+        <button class="btn-sm btn-danger" type="button">
+          Löschen
+        </button>
+      </a>
+    </div>
+  </form>
+{% endblock %}
