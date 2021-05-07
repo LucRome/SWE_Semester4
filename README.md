@@ -17,7 +17,7 @@ Unix: `source venv/bin/activate`
 
 Before running the project, you need to install the needed dependencies:
 ```
-python install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 Then you need to setup the database
