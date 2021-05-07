@@ -8,13 +8,17 @@ from .models import Submission
 from courses.models import Exercise
 
 # DatetTime input fields
-# spliting datetimefiled into a date and a time filed (idk maybe frontend needs to fit into their style)
+# spliting datetimefiled into a date and a time filed (idk maybe frontend
+# needs to fit into their style)
+
+
 class _Date(forms.DateInput):
     input_type = 'date'
 
     def __init__(self, **kwargs):
         kwargs['format'] = '%Y-%m-%d'
         super().__init__(**kwargs)
+
 
 class _Time(forms.DateInput):
     input_type = 'time'
@@ -23,20 +27,24 @@ class _Time(forms.DateInput):
         kwargs['format'] = '%H:%M'
         super().__init__(**kwargs)
 
+
 class DateTime(forms.MultiWidget):
-    def __init__(self, attrs = None):
+    def __init__(self, attrs=None):
         widgets = [
-            _Date(format = ['%Y-%m-%d']),
-            _Time(format = ['%H:%M'])
+            _Date(format=['%Y-%m-%d']),
+            _Time(format=['%H:%M'])
         ]
         super().__init__(widgets, attrs)
 
     def decompress(self, value):
         if value:
-            return [value.date(), value.time().replace(microsecond = 0).replace(milisecond = 0).replace(second = 0)]
+            return [
+                value.date(),
+                value.time().replace(
+                    microsecond=0).replace(
+                    milisecond=0).replace(
+                    second=0)]
         return [None, None]
-
-    
 
 
 # duration field
