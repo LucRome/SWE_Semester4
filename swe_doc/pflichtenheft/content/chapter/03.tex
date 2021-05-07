@@ -1,3 +1,35 @@
 %!TEX root = ../../main.tex
 
-\chapter{Konfiguartionsmanagement}
+\chapter{Funktionale Anforderungen}
+\label{sec:funktionale_Anforderungen}
+Unter den funktionalen Anforderungen sind alle Anforderungen zu verstehen, die klar definiert sind. Der Stand ihrer Umsetzung kann eindeutig bestimmt werden. \\
+Für das Projekt eCourse sind die funktionalen Anforderungen die vom Projektteam umgesetzt werden im folgenden zusammengefasst.\\
+\begin{enumerate}
+	\item Benutzer- und Rechtesteuerung mit 3 Benutzergruppen
+	\begin{enumerate}
+		\item \gls{Verwaltungsangestellte} 
+		\item \gls{Dozierende}
+		\item \gls{Studierende}
+	\end{enumerate}
+	\item a-priori \gls{Landing-Page}, die für alle Besucher einheitlich ist und keine sensiblen Daten enthält
+	\item Login und Logout
+	\begin{enumerate}
+		\item erfolgreicher Login leitet auf die a-posteriori \gls{Landing-Page} weiter
+		\item erfolgloser Login führt zu einer Fehlermeldung
+		\item erfolgreicher Logout führt zurück auf die a-priori \gls{Landing-Page}
+	\end{enumerate}
+	\item a-posteriori \gls{Landing-Page}, enthält für alle Benutzergruppen eine Kursübersicht
+	\item \gls{Studierende} haben von der Kursübersicht Zugriff auf eine Klausurübersicht oder auf eine \gls{kursspezifische}
+	\item \gls{Studierende} haben sowohl in der Kursübersicht, als auch in der Klausurübersicht und den \gls{kursspezifische}n die Möglichkeit eine \gls{bearbeitete} zu einer bestimmten \gls{Aufgabe} hochzuladen
+	\item \gls{Studierende} haben sowohl in der Kursübersicht, als auch in der Klausurübersicht und den \gls{kursspezifische}n Seiten die Möglichkeit eine bestimmte \gls{Aufgabe} herunterzuladen
+	\item \gls{Dozierende} können von der Kursübersicht aus einen \gls{Kurs}anlegen
+	\item \gls{Dozierende} können von der Kursübersicht aus einen \gls{Kurs} bearbeiten, dies impliziert auch, \gls{Aufgabe}n für diesen \gls{Kurs} hochzuladen
+	\item \gls{Dozierende} können von der Kursübersicht auf eine Klausurübersicht gelangen
+	\item \gls{Dozierende} können in der Klausurübersicht die bearbeiteten Abgaben der \gls{Studierende}n herunterladen
+	\item \gls{Verwaltungsangestellte} können verschiedene Unterseiten aufrufen
+	\begin{enumerate}
+		\item \gls{Kurs}e verwalten (anlegen, bearbeiten, löschen)
+		\item Benutzer verwalten (anlegen, bearbeiten, löschen)
+	\end{enumerate}	 
+	\item die Datenbank, die an das Backend anschließt soll gegen verschiedene \gls{relationale Datenbank}en austauschbar sein
+\end{enumerate}
