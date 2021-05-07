@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import file_exchange.models
+import fileexchange.models
 
 
 class Migration(migrations.Migration):
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=128)),
                 ('description', models.TextField()),
                 ('upload_time', models.DateTimeField()),
-                ('file', models.FileField(upload_to=file_exchange.models.exercise_directory_path)),
+                ('file', models.FileField(upload_to=fileexchange.models.exercise_directory_path)),
                 ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.exercise')),
             ],
         ),

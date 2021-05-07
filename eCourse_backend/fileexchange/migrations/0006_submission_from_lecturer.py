@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('file_exchange', '0005_auto_20210427_0643'),
+        ('fileexchange', '0005_auto_20210427_0643'),
     ]
 
     operations = [

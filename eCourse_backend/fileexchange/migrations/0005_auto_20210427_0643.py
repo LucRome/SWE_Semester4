@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('file_exchange', '0004_submission_user_id'),
+        ('fileexchange', '0004_submission_user_id'),
     ]
 
     operations = [
