@@ -8,23 +8,7 @@ from .models import Submission
 from courses.models import Exercise
 
 # DatetTime input fields
-# showing little calendar to choose date and time
-
-
-# class DateTimeInput(forms.MultiWidget()):
-#     # input_type = 'datetime-local'
-
-#     # def __init__(self, **kwargs):
-#     #     kwargs["format"] = "%Y-%m-%dT%H:%M"
-#     #     super().__init__(**kwargs)
-
-#     # def decompress(self, value):
-#     #     if value:
-#     #         return [value.date(), value.time().replace(microsecond=0)]
-#     #     return [None, None]
-#     def __init__(self, attr = None):
-#         widgets = [forms.DateField, forms.TimeField]
-
+# spliting datetimefiled into a date and a time filed (idk maybe frontend needs to fit into their style)
 class _Date(forms.DateInput):
     input_type = 'date'
 
