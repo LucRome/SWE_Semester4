@@ -134,7 +134,10 @@ def create_course_admin(request):
             form.save()
             success = True
     else:
-        form = CourseForm()
+        if request.user.type == 2:
+            form = CourseForm(initial={'lecturer': request.user.id})
+        else:
+            form = CourseForm()
 
     if request.user.is_superuser or request.user.type == 1:
         base_template = 'admin/home_admin.html'
