@@ -10,8 +10,6 @@ import re
 # Create your views here.
 
 # exercise
-
-
 @login_required
 def overview(request):
     if request.method == 'GET':
@@ -19,7 +17,6 @@ def overview(request):
         return render(request,
                       'file_exchange/overview.html',
                       {'exersices': exercises})
-
 
 @login_required
 @permission_required('file_exchange.create_exercise', raise_exception=True)
@@ -35,7 +32,6 @@ def create_exercise(request):
                   'file_exchange/create_exersice.html',
                   {'form': form})
 
-
 @login_required
 @permission_required('file_exchange.create_exercise', raise_exception=True)
 def delete_exercise(request, id):
@@ -45,7 +41,6 @@ def delete_exercise(request, id):
     return render(request,
                   'file_exchange/deleted_exersice.html',
                   {'name': name})
-
 
 @login_required
 @permission_required('file_exchange.create_exercise', raise_exception=True)
@@ -59,7 +54,6 @@ def alter_exersice(request, id):
         form = Exercise(model_to_dict(course_object))
 
     return render(request, 'file_exchange/alter_exercise.html', {'form': form})
-
 
 # fileupload
 @login_required
@@ -78,7 +72,6 @@ def upload_file(request):
         form = FileForm()
     return render(request, 'file_exchange/upload_file.html', {'form': form})
 
-
 @login_required
 def download_file(request, id):
     file = get_object_or_404(Submission, pk=id)
@@ -90,7 +83,6 @@ def download_file(request, id):
     response['Content-Disposition'] = 'attachment; filename="%s' % filename(
         path)
     return response
-
 
 # return filename w/o os.path.basename()
 def filename(path):

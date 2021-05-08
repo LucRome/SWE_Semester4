@@ -1,0 +1,13 @@
+{% extends 'iframe_template.html' %}
+
+{% block title %}Course Student List{% endblock %}
+
+{% block content %}
+  <h1>Hallo 123</h1>
+  {% for e in exercise %} 
+    <a>exercise:</a><br>
+    <a> Deadline: {{e.submission_deadline}}</a><br>
+    <a> Description: {{e.description}}</a>
+    {# we need to find a way to disply the nested list of files something like file.1.1.id will give the id of the first file connected to exercise 1 #}
+  {% endfor %}
+{% endblock  %}

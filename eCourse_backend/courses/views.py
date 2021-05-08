@@ -6,49 +6,55 @@ from users.models import User, Lecturer, Student, Office
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.core.paginator import Paginator
 from .models import Course, Exercise
-from users.models import User
-from file_exchange.models import Submission
+
 from django.db.models import Q
 
 # Create your views here.
-
-
 @xframe_options_exempt
 @login_required
-@permission_required('users.manage_users', raise_exception=True)
-def course_student_list_iframe(request, id, page=1):
+def course_student_list_iframe(request, id):
     # TO:DO Filter students by coursename
-
-    if request.method == 'POST':
-        filter_form = CourseStudentFilterForm(
-            request.POST, )
-        if filter_form.is_valid():
-            # Filter
-            students = Student.objects.filter(
-                matr_nr__contains=get_value(filter_form, 'matr_nr'),
-                first_name__contains=get_value(filter_form, 'first_name'),
-                last_name__contains=get_value(filter_form, 'last_name'),
-                username__contains=get_value(filter_form, 'username'))
-    elif request.method == 'GET':
-        filter_form = CourseStudentFilterForm()
+    if (request.user.type == 1 or request.user.type == 2):
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         students = course.student.all()
+        # exercises
+        exercise = Exercise.objects.filter(course_id=id)
 
-    context = {
-        'filter_form': filter_form,
-        'lecturer': lecturer,
-        'students': students,
-    }
-    return render(request, 'courses/iframes/course_student_list.html', context)
+        # files
+        files = dir()
+        for e in exercise:
+            print(e.id)
+            files[e.id] = Submission.objects.filter(exercise=e.id)
+
+
+        context = {
+            'lecturer': lecturer,
+            'students': students,
+            'exercise': exercise,
+            'files': files}
+
+        return render(request, 'courses/iframes/course_student_list.html', context)
+
+    # student
+    if (request.user.type == 3):
+        # exercises
+        exercise = Exercise.objects.filter(course_id=id)
+        print(exercise)
+
+        files = dir()
+        for e in exercise:
+            files[e.id] = Submission.objects.filter((Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
+        
+        context = {'exercise': exercise, 'files': files}
+        return render(request, 'courses/iframes/course_student.html', context)
 
 
 @login_required
 def course_overview(request, page=1):
-
     user_id = request.user.id
     if request.method == 'GET':
-        # office user has type 1 in db
+        # officer has type 3 in db
         if request.user.type == 1:
             courses = Course.objects.all()
         else:
@@ -61,11 +67,11 @@ def course_overview(request, page=1):
     context = {
         'page_obj': page_obj,
     }
+
     return render(request, 'courses/overview.html', context)
 
-
 @login_required
-def view_course(request, id):
+def detailed_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk=id)
         print('user type ', request.user.type)
@@ -79,7 +85,6 @@ def view_course(request, id):
             for student in course.student.all():
                 student_name = student.first_name + ' ' + student.last_name
                 students.append(student_name)
-
             # exercises
             exercise = Exercise.objects.filter(course_id=id)
 
@@ -110,10 +115,9 @@ def view_course(request, id):
 
     return render(request, 'courses/detail.html', data)
 
-
 @login_required
 @permission_required('courses.create_course', raise_exception=True)
-def create_course(request):
+def create_course_admin(request):
     success = False
     if request.method == 'POST':
         form = CourseForm(request.POST)
@@ -153,5 +157,4 @@ def edit_course(request, id):
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
 
-    return render(request, 'courses/edit_course.html',
-                  {'form': form, 'courseid': id})
+    return render(request, 'courses/edit_course.html', {'form': form, 'courseid': id})
