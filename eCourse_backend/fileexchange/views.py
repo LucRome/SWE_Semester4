@@ -10,6 +10,8 @@ import re
 # Create your views here.
 
 # exercise
+
+
 @login_required
 def overview(request):
     if request.method == 'GET':
@@ -17,6 +19,7 @@ def overview(request):
         return render(request,
                       'file_exchange/overview.html',
                       {'exersices': exercises})
+
 
 @login_required
 @permission_required('exercise.create_exercise', raise_exception=True)
@@ -32,6 +35,7 @@ def create_exercise(request):
                   'file_exchange/create_exersice.html',
                   {'form': form})
 
+
 @login_required
 @permission_required('exercise.delete_exercise', raise_exception=True)
 def delete_exercise(request, id):
@@ -41,6 +45,7 @@ def delete_exercise(request, id):
     return render(request,
                   'file_exchange/deleted_exersice.html',
                   {'name': name})
+
 
 @login_required
 @permission_required('exercise.change_exercise', raise_exception=True)
@@ -56,6 +61,8 @@ def alter_exersice(request, id):
     return render(request, 'file_exchange/alter_exercise.html', {'form': form})
 
 # fileupload
+
+
 @login_required
 def upload_file(request):
     if request.method == 'POST':
@@ -72,6 +79,7 @@ def upload_file(request):
         form = FileForm()
     return render(request, 'file_exchange/upload_file.html', {'form': form})
 
+
 @login_required
 def download_file(request, id):
     file = get_object_or_404(Submission, pk=id)
@@ -85,6 +93,8 @@ def download_file(request, id):
     return response
 
 # return filename w/o os.path.basename()
+
+
 def filename(path):
     x = re.search("^upload/course_[0-9]+/exercise_[0-9]+/", path)
     path_path = x.group()

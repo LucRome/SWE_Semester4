@@ -11,6 +11,8 @@ from fileexchange.models import Submission
 from django.db.models import Q
 
 # Create your views here.
+
+
 @xframe_options_exempt
 @login_required
 def course_student_list_iframe(request, id):
@@ -28,14 +30,16 @@ def course_student_list_iframe(request, id):
             print(e.id)
             files[e.id] = Submission.objects.filter(exercise=e.id)
 
-
         context = {
             'lecturer': lecturer,
             'students': students,
             'exercise': exercise,
             'files': files}
 
-        return render(request, 'courses/iframes/course_student_list.html', context)
+        return render(
+            request,
+            'courses/iframes/course_student_list.html',
+            context)
 
     # student
     if (request.user.type == 3):
@@ -45,8 +49,9 @@ def course_student_list_iframe(request, id):
 
         files = dir()
         for e in exercise:
-            files[e.id] = Submission.objects.filter((Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
-        
+            files[e.id] = Submission.objects.filter(
+                (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
+
         context = {'exercise': exercise, 'files': files}
         return render(request, 'courses/iframes/course_student.html', context)
 
@@ -70,6 +75,7 @@ def course_overview(request, page=1):
     }
 
     return render(request, 'courses/overview.html', context)
+
 
 @login_required
 def detailed_course(request, id):
@@ -115,6 +121,7 @@ def detailed_course(request, id):
             data = {'exercise': exercise, 'files': files}
 
     return render(request, 'courses/detail.html', data)
+
 
 @login_required
 @permission_required('courses.create_course', raise_exception=True)

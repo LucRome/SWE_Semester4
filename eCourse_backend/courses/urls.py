@@ -30,5 +30,5 @@ urlpatterns = [
 
     path('edit/<id>', edit_course, name='edit_course'),
     path('detailed', detailed_course, name='detailed_course'),
-    
+
 ]
