@@ -6,7 +6,8 @@ from users.models import User, Lecturer, Student, Office
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.core.paginator import Paginator
 from .models import Course, Exercise
-
+from users.models import User
+from fileexchange.models import Submission
 from django.db.models import Q
 
 # Create your views here.
@@ -54,8 +55,8 @@ def course_student_list_iframe(request, id):
 def course_overview(request, page=1):
     user_id = request.user.id
     if request.method == 'GET':
-        # officer has type 3 in db
-        if request.user.type == 1:
+        # office user has type 1 in db
+        if request.user.type == 1 or request.user.is_superuser:
             courses = Course.objects.all()
         else:
             courses = Course.objects.filter(
@@ -128,15 +129,21 @@ def create_course_admin(request):
     else:
         form = CourseForm()
 
+    if request.user.is_superuser or request.user.type == 1:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+
     context = {
         'form': form,
-        'success': success
+        'success': success,
+        'base_template': base_template
     }
     return render(request, 'courses/create_course.html', context)
 
 
 @login_required
-@permission_required('courses.delete_course', raise_exception=True)
+@permission_required('course.delete_course', raise_exception=True)
 def delete_course(request, id):
     # TODO: use for delete course
     course_to_delete = get_object_or_404(Course, pk=id)
@@ -147,7 +154,7 @@ def delete_course(request, id):
 
 
 @login_required
-@permission_required('courses.alter_course', raise_exception=True)
+@permission_required('course.change_course', raise_exception=True)
 def edit_course(request, id):
     if request.method == 'POST':
         form = CourseForm(request.POST)
@@ -157,4 +164,10 @@ def edit_course(request, id):
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
 
-    return render(request, 'courses/edit_course.html', {'form': form, 'courseid': id})
+    if request.user.is_superuser or request.user.type == 1:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+
+    return render(request, 'courses/edit_course.html',
+                  {'form': form, 'courseid': id, 'base_template': base_template})
