@@ -60,8 +60,9 @@ def alter_exersice(request, id):
 
     return render(request, 'file_exchange/alter_exercise.html', {'form': form})
 
-
 # fileupload
+
+
 @login_required
 def upload_file(request):
     if request.method == 'POST':
@@ -91,8 +92,9 @@ def download_file(request, id):
         path)
     return response
 
-
 # return filename w/o os.path.basename()
+
+
 def filename(path):
     x = re.search("^upload/course_[0-9]+/exercise_[0-9]+/", path)
     path_path = x.group()
