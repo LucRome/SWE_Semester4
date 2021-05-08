@@ -26,4 +26,8 @@
           </div>
         {% endfor %}
   </div>
+{% elif field|field_type == 'datetimefield' %}
+  {{field.as_p}}
+{% else %}
+  <h2>{{field|field_type}}</h2>
 {% endif %}

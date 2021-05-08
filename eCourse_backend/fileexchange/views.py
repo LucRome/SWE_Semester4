@@ -22,18 +22,25 @@ def overview(request):
 
 
 @login_required
-@permission_required('exercise.create_exercise', raise_exception=True)
+# @permission_required('courses.add_exercise', raise_exception=True)
 def create_exercise(request):
+    save_success = False
     if request.method == 'POST':
         form = ExersiceForm(request.POST)
         if form.is_valid():
             form.save()
+            save_success = True
     else:
         form = ExersiceForm()
+    
+    context = {
+        'form': form,
+        'save_success': save_success
+    }
 
     return render(request,
                   'file_exchange/create_exersice.html',
-                  {'form': form})
+                  context)
 
 
 @login_required
