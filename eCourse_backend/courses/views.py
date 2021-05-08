@@ -7,7 +7,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.core.paginator import Paginator
 from .models import Course, Exercise
 from users.models import User
-from file_exchange.models import Submission
+from fileexchange.models import Submission
 from django.db.models import Q
 
 # Create your views here.
@@ -112,7 +112,7 @@ def view_course(request, id):
 
 
 @login_required
-@permission_required('courses.create_course', raise_exception=True)
+@permission_required('courses.add_course', raise_exception=True)
 def create_course(request):
     success = False
     if request.method == 'POST':
@@ -138,7 +138,7 @@ def create_course(request):
 
 
 @login_required
-@permission_required('courses.delete_course', raise_exception=True)
+@permission_required('course.delete_course', raise_exception=True)
 def delete_course(request, id):
     # TODO: use for delete course
     course_to_delete = get_object_or_404(Course, pk=id)
@@ -149,7 +149,7 @@ def delete_course(request, id):
 
 
 @login_required
-@permission_required('courses.alter_course', raise_exception=True)
+@permission_required('course.change_course', raise_exception=True)
 def edit_course(request, id):
     if request.method == 'POST':
         form = CourseForm(request.POST)
