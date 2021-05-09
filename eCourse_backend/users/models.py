@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from .managers import *
 
 # Create your models here.
@@ -26,14 +28,15 @@ class User(AbstractUser):
     type = models.IntegerField(choices=USER_TYPES, default=3)
     matr_nr = models.IntegerField(default=0)
 
+    class Meta:
+        permissions = [('manage_users', 'Manages Users')]
+
 
 class Lecturer(User):
     objects = LecturerManager()
 
     class Meta:
         proxy = True
-        permissions = [('alter_courses', 'Can alter course'),
-                       ('create_exercise', 'Can create exercises')]
 
     def save(self, *args, **kwargs):
         self.type = 2
@@ -56,13 +59,18 @@ class Office(User):
 
     class Meta:
         proxy = True
-        permissions = [('alter_courses', 'Can alter course'),
-                       ('create_courses', 'Can create course'),
-                       ('delete_courses', 'Can delete course'),
-                       ('manage_users', 'Can manage user'),
-                       ('create_exercise', 'Can create exercises'),
-                       ]
 
     def save(self, *args, **kwargs):
         self.type = 1
         return super(Office, self).save(*args, **kwargs)
+
+
+@receiver(post_save, sender=Office)
+@receiver(post_save, sender=Student)
+@receiver(post_save, sender=Lecturer)
+@receiver(post_save, sender=User)
+def add_user_to_public_group(sender, instance, created, **kwargs):
+    """Post-create user signal that adds the user to everyone group."""
+    if created:
+        t = instance.type
+        instance.groups.add(Group.objects.get(pk=t))

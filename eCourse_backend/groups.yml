@@ -1,0 +1,40 @@
+groups:
+  - name: office_users
+    permissions:
+      courses:
+         - course.add_course
+         - exercise.add_exercise
+         - course.change_course
+         - exercise.change_exercise
+         - course.delete_course
+         - exercise.delete_exercise
+         - course.view_course
+         - exercise.view_exercise
+      fileexchange:
+         - submission.add_submission
+         - submission.change_submission
+         - submission.delete_submission
+         - submission.view_submission
+      users:
+          - user.manage_users
+  - name: lecturer_users
+    permissions:
+      courses:
+         - course.change_course
+         - exercise.change_exercise
+         - course.view_course
+         - exercise.view_exercise
+      fileexchange:
+         - submission.add_submission
+         - submission.change_submission
+         - submission.delete_submission
+         - submission.view_submission
+  - name: student_users
+    permissions:
+      courses:
+         - course.view_course
+         - exercise.view_exercise
+      fileexchange:
+         - submission.add_submission
+         - submission.change_submission
+         - submission.view_submission
