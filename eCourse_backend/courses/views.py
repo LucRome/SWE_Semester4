@@ -183,8 +183,8 @@ def edit_course(request, id):
         base_template = 'lecturer/home_lecturer.html'
 
     context = {
-        'form': form, 
-        'courseid': id, 
+        'form': form,
+        'courseid': id,
         'base_template': base_template,
         'update_success': updata_success}
 
