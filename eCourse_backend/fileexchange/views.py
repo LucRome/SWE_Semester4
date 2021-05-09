@@ -32,7 +32,7 @@ def create_exercise(request):
             save_success = True
     else:
         form = ExersiceForm()
-    
+
     context = {
         'form': form,
         'save_success': save_success
