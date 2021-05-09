@@ -124,7 +124,7 @@ def detailed_course(request, id):
 
 
 @login_required
-@permission_required('courses.create_course', raise_exception=True)
+@permission_required('courses.add_course', raise_exception=True)
 def create_course_admin(request):
     success = False
     if request.method == 'POST':
@@ -134,7 +134,10 @@ def create_course_admin(request):
             form.save()
             success = True
     else:
-        form = CourseForm()
+        if request.user.type == 2:
+            form = CourseForm(initial={'lecturer': request.user.id})
+        else:
+            form = CourseForm()
 
     if request.user.is_superuser or request.user.type == 1:
         base_template = 'admin/home_admin.html'
@@ -163,10 +166,13 @@ def delete_course(request, id):
 @login_required
 @permission_required('course.change_course', raise_exception=True)
 def edit_course(request, id):
+    updata_success = False
     if request.method == 'POST':
-        form = CourseForm(request.POST)
+        course_object = get_object_or_404(Course, pk=id)
+        form = CourseForm(request.POST or None, instance=course_object)
         if form.is_valid():
             form.save()
+            updata_success = True
     else:
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
@@ -176,5 +182,10 @@ def edit_course(request, id):
     elif request.user.type == 2:
         base_template = 'lecturer/home_lecturer.html'
 
-    return render(request, 'courses/edit_course.html',
-                  {'form': form, 'courseid': id, 'base_template': base_template})
+    context = {
+        'form': form, 
+        'courseid': id, 
+        'base_template': base_template,
+        'update_success': updata_success}
+
+    return render(request, 'courses/edit_course.html', context)
