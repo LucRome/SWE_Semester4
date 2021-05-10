@@ -58,15 +58,23 @@ def delete_exercise(request, id):
 @login_required
 @permission_required('courses.change_exercise', raise_exception=True)
 def alter_exersice(request, id):
+    update_success = False
     if request.method == 'POST':
-        form = ExersiceForm(request.POST)
+        exercise = get_object_or_404(Exercise, pk=id)
+        form = ExersiceForm(request.POST or None, instance=exercise)
         if form.is_valid():
             form.save()
+            update_success = True
     else:
         course_object = get_object_or_404(Exercise, pk=id)
-        form = Exercise(model_to_dict(course_object))
+        form = ExersiceForm(instance=course_object)
+    
+    context = {
+        'form': form,
+        'update_success': update_success
+    }
 
-    return render(request, 'file_exchange/alter_exercise.html', {'form': form})
+    return render(request, 'file_exchange/alter_exercise.html', context)
 
 # fileupload
 
