@@ -17,7 +17,7 @@ from django.db.models import Q
 @login_required
 def course_student_list_iframe(request, id):
     # TO:DO Filter students by coursename
-    if (request.user.type == 1 or request.user.type == 2):
+    if (request.user.type == 1 or request.user.type == 2) or  request.user.is_superuser:
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         students = course.student.all()
@@ -54,6 +54,8 @@ def course_student_list_iframe(request, id):
 
         context = {'exercise': exercise, 'files': files}
         return render(request, 'courses/iframes/course_student.html', context)
+    
+
 
 
 @login_required
@@ -64,8 +66,7 @@ def course_overview(request, page=1):
         if request.user.type == 1 or request.user.is_superuser:
             courses = Course.objects.all()
         else:
-            courses = Course.objects.filter(
-                Q(student=user_id) | Q(lecturer_id=user_id))
+            courses = Course.objects.filter(Q(student=user_id) | Q(lecturer_id=user_id))
 
     paginator = Paginator(courses, 10)
     page_obj = paginator.get_page(page)

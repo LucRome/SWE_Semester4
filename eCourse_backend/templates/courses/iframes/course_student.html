@@ -4,10 +4,15 @@
 
 {% block content %}
   <h1>Hallo 123</h1>
-  {% for e in exercise %} 
-    <a>exercise:</a><br>
-    <a> Deadline: {{e.submission_deadline}}</a><br>
-    <a> Description: {{e.description}}</a>
+  <ul class="list-group">
+  
+  {% for e in exercise %}
+    <li class="list-group-item d-flex"> <p class="p-0 m-0 flex-grow-1"> Aufgabe {{e.id} </p>
+      <a href="{% url '#' %}">
+        <button class="btn-success">Anzeigen</button>  
+      </a>
+    </li>
     {# we need to find a way to disply the nested list of files something like file.1.1.id will give the id of the first file connected to exercise 1 #}
   {% endfor %}
+  </ul>
 {% endblock  %}
