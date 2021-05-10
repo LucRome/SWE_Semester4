@@ -33,5 +33,5 @@
     {% endfor %}
   </div>
 {% elif field|field_type == 'durationfield'%}
-    {% render_field field class="form-control input {{error_class}}" type="time"%}
+  {% render_field field class="form-control input {{error_class}}" type="time"%}
 {% endif %}
