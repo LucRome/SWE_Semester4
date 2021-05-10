@@ -1,4 +1,54 @@
 %!TEX root = ../../main.tex
 
-\chapter{Projekthandbuch}
+\chapter{Einführung und Ziele}
+Die Anwendung eCourse dient dem Austausch von \gls{Aufgabe}n und \gls{Klausur}en sowie deren \gls{bearbeitete Abgabe}n zwischen \gls{Dozierende}n und \gls{Studierende}n. Außerdem können \gls{Verwaltungsangestellte der Hochschule} \gls{Kurs}e und Benutzer verwalten und haben auch Einsicht in die ausgetauschten Dateien. \\
+Dadurch soll der Studienalltag an einer Hochschule erleichtert werden. Der Austausch von Dateien muss nicht mehr per E-Mail erfolgen. \\
+Besonders in der aktuell anhaltenden Corona-Pandemie, erleichtert dies den Hochschulalltag, da \gls{Klausur}en dann über die Anwendung eCourse verwaltet werden können.  
+
+\section{Aufgabenstellung}
+\label{sec:Aufgabe}
+Vom Kunden wurde die Aufgabe gestellt, eine webbasierte Anwendung mit Datenbankanbindung und verschiedenen Nutzerrollen zu entwerfen. \\
+Darauf aufbauend wurde das Ziel gefasst, eine Anwendung zu entwerfen, über die Dokumente zwischen \gls{Studierende}n und \gls{Dozierende}n einer Hochschule ausgetauscht werden können. Die dafür zu Grunde liegenden Anforderungen sind im Lastenheft zusammengefasst.
+
+\section{Qualitätsziele}
+\label{sec:Quali}
+Um die Software für alle beteiligten Anwender so gut wie möglich zu gestalten wurden verschiedene Qualitätsziele definiert. Diese sind in \ref{tab:Qualitätsziele} zusammengefasst. Diese Qualitätsziele sind auch für die grundlegenden Architekturentscheidungen von besonderer Wichtigkeit.
+
+\begin{table}
+\centering
+\begin{tabularx}{\textwidth}[H]{|c|c|X|}
+\hline
+Priorität &	Ziel & Szenario\\
+\hline
+1 & Korrektheit & Software folgt Benutzereingabe, es sei denn dieser verletzt die Zugriffsrechte \\
+\hline
+2 & Konsistenz & Gespeicherte Daten sind eindeutig und nicht redundant \\
+\hline
+3 & Benutzerfreundlichkeit & Ansprechendes und intuitives User-Interface \\
+\hline
+4 & Zuverlässigkeit & eCourse läuft sicher und ist frei von Abstürzen \\
+\hline
+5 & Portabilität & Hardware lässt sich (mit akzeptablem Aufwand) an einen anderen Standort bringen\\
+\hline
+\end{tabularx}
+\caption{Qualitätsziele im Projekt eCourse}
+\label{tab:Qualitätsziele}
+\end{table}
+
+\section{Stakeholder}
+
+\begin{table}
+\centering
+\begin{tabularx}{\textwidth}[H]{|c|X|X|}
+\hline
+Rolle &	Kontakt & Erwartungshaltung\\
+\hline
+Kunde & Stephan.Brunnet@softwareinmotion.de & funktionsfähige Anwendung und gute Dokumentation des Projekts \\
+\hline
+Entwickler & Ansprechpartner: inf19109@lehre.dhbw-stuttgart.de & gute und effiziente Umsetzung der Aufgabenstellung\\
+\hline
+\end{tabularx}
+\caption{Stakegholder im Projekt eCourse}
+\label{tab:Stakeholder}
+\end{table}
 
