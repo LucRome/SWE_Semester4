@@ -107,3 +107,22 @@ def filename(path):
     path_path = x.group()
     filename = path.replace(path_path, '')
     return filename
+
+
+@login_required
+def exercise_site(request, id):
+    if request.user.type == 2:  # dozent
+        iframe_link = 'exams_dozent'
+        base_template = 'lecturer/home_lecturer.html'
+        lecturer_id = request.user.id
+        courses = Course.objects.filter(Q(lecturer_id=lecturer_id))
+        page_obj = Paginator(courses, 10)
+    elif request.user.type == 3:  # student
+        iframe_link = 'exams_student'
+        base_template = 'student/home_student.html'
+
+    context = {
+        'iframe_link': iframe_link,
+        'base_template': base_template,
+    }
+    return render(request, 'student/exercise_site.html', context)
