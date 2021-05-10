@@ -30,7 +30,3 @@ class Exercise(models.Model):
     is_evaluated = models.BooleanField(default=False)
     description = models.TextField(default=None)
 
-    def __str__(self):
-            return "%s" % (self.name)
-    def __unicode__(self):
-        return u'%s' % (self.name)
