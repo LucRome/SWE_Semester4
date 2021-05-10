@@ -34,7 +34,7 @@ class DurationInput(TextInput):
 class FileForm(forms.ModelForm):
     class Meta:
         model = Submission
-        fields = ['exercise', 'name', 'file']
+        fields = ['name', 'file']
 
 
 class ExersiceForm(forms.ModelForm):

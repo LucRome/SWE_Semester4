@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect, FileResponse, HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required
+from django.utils import timezone
 from .forms import FileForm, ExersiceForm
 from .models import Submission
 from courses.models import Exercise
@@ -63,17 +64,25 @@ def alter_exersice(request, id):
 
 # fileupload
 @login_required
-def upload_file(request):
+def upload_file(request, exercise_id):
+    exercise_object = Exercise.objects.get(pk=exercise_id)
     if request.method == 'POST':
-        form = FileForm(request.POST, request.FILES)
-        if form.is_valid():
-            submission = form.save(commit=False)
-            submission.user_id = request.user.id
-            if (request.user.type == 1 or request.user.type == 2):
-                submission.from_lecturer = True
-            submission.save()
-            # back to exercises overview
+        # submission deadline does not matter for lecturer and office user
+        if (request.user.type == 3 and timezone.now()
+                > exercise_object.submission_deadline):
+            # student is too late to upload redirect elsewhere
             return render(request, 'file_exchange/overview.html')
+        else:
+            form = FileForm(request.POST, request.FILES)
+            if form.is_valid():
+                submission = form.save(commit=False)
+                submission.user_id = request.user.id
+                submission.exercise_id = exercise_object.id
+                if (request.user.type == 1 or request.user.type == 2):
+                    submission.from_lecturer = True
+                submission.save()
+                # back to exercises overview
+                return render(request, 'file_exchange/overview.html')
     else:
         form = FileForm()
     return render(request, 'file_exchange/upload_file.html', {'form': form})
