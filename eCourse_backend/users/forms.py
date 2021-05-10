@@ -10,7 +10,7 @@ class UserForm(ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
         widgets = {
-            'password': HiddenInput(attrs={'id': 'defaultPWField', 'value': get_random_pw()})
+            'password': HiddenInput(attrs={'id': 'defaultPWField', 'value': ''})
         }
 
 class StudentForm(ModelForm):
@@ -19,7 +19,7 @@ class StudentForm(ModelForm):
         fields = ['username', 'first_name', 'last_name',
                   'email', 'matr_nr', 'password']
         widgets = {
-            'password': HiddenInput(attrs={'id': 'defaultPWField', 'value': get_random_pw()})
+            'password': HiddenInput(attrs={'id': 'defaultPWField', 'value': ''})
         }
         
 # useradministration: filter forms

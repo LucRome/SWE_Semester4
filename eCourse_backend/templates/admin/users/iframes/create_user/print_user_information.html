@@ -1,0 +1,33 @@
+{% comment %} 
+  realizes the output of user information,
+  after user is created
+{% endcomment %}
+
+{% load static %}
+
+<div id="user_information" style="display: none;">
+  <table>
+    <tbody>
+      {% for field in form.visible_fields %}
+        <tr>
+          <td>
+            {{field.label_tag}}
+          </td>
+          <td>
+            {{field.value}}
+          </td>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td>
+          Passwort
+        </td>
+        <td>
+         {{user_pw}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="{% static 'JS/user_data_print.js' %}"></script>
