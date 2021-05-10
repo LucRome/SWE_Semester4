@@ -110,19 +110,23 @@ def filename(path):
 
 
 @login_required
-def exercise_site(request, id):
-    if request.user.type == 2:  # dozent
-        iframe_link = 'exams_dozent'
-        base_template = 'lecturer/home_lecturer.html'
-        lecturer_id = request.user.id
-        courses = Course.objects.filter(Q(lecturer_id=lecturer_id))
-        page_obj = Paginator(courses, 10)
-    elif request.user.type == 3:  # student
-        iframe_link = 'exams_student'
-        base_template = 'student/home_student.html'
+def upload_student(request):
+    if request.method == 'POST':
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            submission = form.save(commit=False)
+            submission.user_id = request.user.id
+            if (request.user.type == 1 or request.user.type == 2):
+                submission.from_lecturer = True
+            submission.save()
+            # back to exercises overview
+            return render(request, 'file_exchange/overview.html')
+    else:
+        form = FileForm()
+    return render(request, 'file_exchange/iframes/upload_student.html', {'form': form})
 
-    context = {
-        'iframe_link': iframe_link,
-        'base_template': base_template,
-    }
-    return render(request, 'student/exercise_site.html', context)
+
+@login_required
+def exercise_site(request):
+    form = FileForm()
+    return render(request, 'file_exchange/exercise_site.html', {'form': form})
