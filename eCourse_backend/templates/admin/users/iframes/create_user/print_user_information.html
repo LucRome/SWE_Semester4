@@ -6,11 +6,12 @@
 {% load static %}
 
 <div id="user_information" style="display: none;">
-  <table>
+  <h4>User Informationen</h4>
+  <table class="table-bordered">
     <tbody>
       {% for field in form.visible_fields %}
         <tr>
-          <td>
+          <th>
             {{field.label_tag}}
           </td>
           <td>
@@ -19,7 +20,7 @@
         </tr>
       {% endfor %}
       <tr>
-        <td>
+        <th>
           Passwort
         </td>
         <td>
