@@ -10,7 +10,7 @@
 {% elif field|field_type == 'datefield' %}
   {% render_field field class="form-control input {{error_class}}" type="date"%}
 {% elif field|field_type == 'booleanfield' %}
-  {% render_field field class="form-control input {{error_class}}" type="checkbox"%}
+  {% render_field field class="form-check-input ml-2 {{error_class}}" type="checkbox"%}
 {% elif field|field_type == 'modelchoicefield' %}
   <div class="form-check p-0">
     {% render_field field class="form-control input {{error_class}}"%}
