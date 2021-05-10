@@ -9,7 +9,8 @@ from .models import Submission
 from courses.models import Exercise
 
 
-# source: https://gist.github.com/andytwoods/76f18f5ddeba9192d51dccc922086e43?fbclid=IwAR1x4GbeHLMQypWKaYPGn55r92-uCmJZqLUf4kEAGeX4DTgalt2GQUNY7oQ
+# source:
+# https://gist.github.com/andytwoods/76f18f5ddeba9192d51dccc922086e43?fbclid=IwAR1x4GbeHLMQypWKaYPGn55r92-uCmJZqLUf4kEAGeX4DTgalt2GQUNY7oQ
 class DateTimeMultiWidget(MultiWidget):
 
     def __init__(self, widgets=None, attrs=None):
@@ -43,7 +44,8 @@ class DateTimeMultiWidget(MultiWidget):
         if time_str == '':
             time_str = '00:00'
 
-        my_datetime = datetime.strptime(date_str + ' ' + time_str, "%Y-%m-%d %H:%M")
+        my_datetime = datetime.strptime(
+            date_str + ' ' + time_str, "%Y-%m-%d %H:%M")
         # making timezone aware
         return make_aware(my_datetime)
 
