@@ -65,11 +65,12 @@ def alter_exersice(request, id):
 # fileupload
 @login_required
 def upload_file(request, id):
-    exercise_object = Exercise.objects.get(pk = id)
+    exercise_object = Exercise.objects.get(pk=id)
     if request.method == 'POST':
         # submission deadline does not matter for lecturer and office user
-        if (request.user.type == 3 and timezone.now() > exercise_object.submission_deadline):
-            #student is too late to upload redirect elsewhere
+        if (request.user.type == 3 and timezone.now()
+                > exercise_object.submission_deadline):
+            # student is too late to upload redirect elsewhere
             return render(request, 'file_exchange/overview.html')
         else:
             form = FileForm(request.POST, request.FILES)
