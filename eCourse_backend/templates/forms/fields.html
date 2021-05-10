@@ -12,7 +12,7 @@
 {% elif field|field_type == 'booleanfield' %}
   {% render_field field class="form-control input {{error_class}}" type="checkbox"%}
 {% elif field|field_type == 'modelchoicefield' %}
-  <div class="form-check">
+  <div class="form-check p-0">
     {% render_field field class="form-control input {{error_class}}"%}
   </div>
 {% elif field|field_type == 'modelmultiplechoicefield' %}
@@ -27,7 +27,11 @@
         {% endfor %}
   </div>
 {% elif field|field_type == 'datetimefield' %}
-  {{field.as_p}}
-{% else %}
-  <h2>{{field|field_type}}</h2>
+  <div class="input-group">
+    {% for subfield in field %}
+      {% render_field field class="form-control input-half {{error_class}}"%}
+    {% endfor %}
+  </div>
+{% elif field|field_type == 'durationfield'%}
+    {% render_field field class="form-control input {{error_class}}" type="time"%}
 {% endif %}
