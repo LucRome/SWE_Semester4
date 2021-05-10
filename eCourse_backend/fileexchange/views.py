@@ -22,7 +22,7 @@ def overview(request):
 
 
 @login_required
-# @permission_required('courses.add_exercise', raise_exception=True)
+@permission_required('courses.add_exercise', raise_exception=True)
 def create_exercise(request):
     save_success = False
     if request.method == 'POST':
@@ -32,7 +32,7 @@ def create_exercise(request):
             save_success = True
     else:
         form = ExersiceForm()
-    
+
     context = {
         'form': form,
         'save_success': save_success
