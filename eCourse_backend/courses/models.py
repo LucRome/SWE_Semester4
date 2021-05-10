@@ -14,6 +14,11 @@ class Course(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
 
+    def __str__(self):
+        return "%s" % (self.name)
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
 
 class Exercise(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -24,3 +29,8 @@ class Exercise(models.Model):
     is_visible = models.BooleanField(default=False)
     is_evaluated = models.BooleanField(default=False)
     description = models.TextField(default=None)
+
+    def __str__(self):
+            return "%s" % (self.name)
+    def __unicode__(self):
+        return u'%s' % (self.name)
