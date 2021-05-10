@@ -64,8 +64,8 @@ def alter_exersice(request, id):
 
 # fileupload
 @login_required
-def upload_file(request, id):
-    exercise_object = Exercise.objects.get(pk=id)
+def upload_file(request, exercise_id):
+    exercise_object = Exercise.objects.get(pk=exercise_id)
     if request.method == 'POST':
         # submission deadline does not matter for lecturer and office user
         if (request.user.type == 3 and timezone.now()

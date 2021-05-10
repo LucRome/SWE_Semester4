@@ -19,7 +19,7 @@ from django.views.generic.base import TemplateView
 from .views import *
 
 urlpatterns = [
-    path('upload/<id>', upload_file, name='upload'),
+    path('upload/<exercise_id>', upload_file, name='upload'),
     path('download/<id>', download_file, name='download'),
     path('overview/', overview, name='overview'),
     path('exercises/create/', create_exercise, name='create_exersice'),
