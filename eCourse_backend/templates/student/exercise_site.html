@@ -1,0 +1,14 @@
+{% block title %}Abgabe{% endblock %}
+
+{% block content %}
+
+    <h1>Aufgabe</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+  </form>
+
+  {% include 'file_exchange/upload_file.html' %}
+
+{% block endcontent %}
