@@ -68,7 +68,7 @@ def alter_exersice(request, id):
     else:
         course_object = get_object_or_404(Exercise, pk=id)
         form = ExersiceForm(instance=course_object)
-    
+
     context = {
         'form': form,
         'update_success': update_success
