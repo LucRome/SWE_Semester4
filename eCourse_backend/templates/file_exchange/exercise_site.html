@@ -1,15 +1,21 @@
-{% extends base_template %}
-
-{% block navbar-content %}
-  {% include "student/navbar_content.html" %}
-{% endblock %}
+{% extends "student/home_student.html" %}
+{% load static %}
 
 {% block title %}Aufgabe{% endblock %}
+{% block site-title %}Aufgabe{% endblock %}
 
 {% block content %}
 
-  <button class="btn btn btn-danger" src="{% url 'download' id=1 %}">Herunterladen</button>
-  
-  <iframe src="{% url 'upload_student'%}"></iframe>
+  <div>
+  <h3>Aufgabe:</h3>
+  <a href="{% url 'download' id=eid %}">
+    <button type="button" class="btn btn btn-danger">Herunterladen</button>
+  </a>
+  </div>
+  <br>
+  <div>
+  <iframe src="{% url 'upload_student' id=eid %}" frameborder="0"></iframe>
+  <script src="{% static 'JS/iframe_size.js' %}"></script>
+  </div>
 
 {% endblock %}

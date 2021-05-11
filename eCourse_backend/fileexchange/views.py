@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from .forms import FileForm, ExersiceForm
 from .models import Submission
 from courses.models import Exercise
+from django.views.decorators.clickjacking import xframe_options_exempt
 import re
 
 # Create your views here.
@@ -110,23 +111,32 @@ def filename(path):
 
 
 @login_required
-def upload_student(request):
+@xframe_options_exempt
+def upload_student(request, id):
+    exercise_object = Exercise.objects.get(pk=id)
     if request.method == 'POST':
-        form = FileForm(request.POST, request.FILES)
-        if form.is_valid():
-            submission = form.save(commit=False)
-            submission.user_id = request.user.id
-            if (request.user.type == 1 or request.user.type == 2):
-                submission.from_lecturer = True
-            submission.save()
-            # back to exercises overview
-            return render(request, 'file_exchange/overview.html')
+        # submission deadline does not matter for lecturer and office user
+        if (request.user.type == 3 and timezone.now()
+                > exercise_object.submission_deadline):
+            # student is too late to upload redirect elsewhere
+            return render(request, 'file_exchange/iframes/upload_student.html')
+        else:
+            form = FileForm(request.POST, request.FILES)
+          #  if form.is_valid():
+          #      submission = form.save(commit=False)
+          #      submission.user_id = request.user.id
+          #      submission.exercise_id = exercise_object.id
+          #     if (request.user.type == 1 or request.user.type == 2):
+          #          submission.from_lecturer = True
+          #      submission.save()
+          #      # back to exercises overview
+          #      return render(request, 'file_exchange/overview.html')
     else:
         form = FileForm()
-    return render(request, 'file_exchange/iframes/upload_student.html', {'form': form})
+    return render(request, 'file_exchange/iframes/upload_student.html', {'form': form, })
 
 
 @login_required
-def exercise_site(request):
+def exercise_site(request, id):
     form = FileForm()
-    return render(request, 'file_exchange/exercise_site.html', {'form': form})
+    return render(request, 'file_exchange/exercise_site.html', {'form': form, "eid": id})

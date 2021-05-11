@@ -1,8 +1,7 @@
 {% extends 'iframe_template.html' %}
 
 {% block content %}
-    <h1>Abgabe</h1>
-
+  <h3>Abgabe:</h3>
   <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form.as_p }}
