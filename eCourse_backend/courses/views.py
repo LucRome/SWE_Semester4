@@ -17,7 +17,8 @@ from django.db.models import Q
 @login_required
 def detailed_course(request, id):
     #officer = 1; lecturer = 2
-    if (request.user.type == 1 or request.user.type == 2 or request.user.is_superuser):
+    if (request.user.type == 1 or request.user.type ==
+            2 or request.user.is_superuser):
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         students = course.student.all()
@@ -71,7 +72,6 @@ def course_overview(request, page=1):
         base_template = 'student/home_student.html'
     else:
         base_template = 'home/home_auth.html'
-        
 
     context = {
         'base': base_template,
