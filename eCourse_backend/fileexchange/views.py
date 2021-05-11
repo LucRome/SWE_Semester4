@@ -65,6 +65,8 @@ def delete_exercise(request, id):
                   context)
 
 # can be called by Lecturer and admin
+
+
 @login_required
 @permission_required('courses.change_exercise', raise_exception=True)
 def alter_exersice(request, id):
@@ -78,7 +80,7 @@ def alter_exersice(request, id):
     else:
         course_object = get_object_or_404(Exercise, pk=id)
         form = ExersiceForm(instance=course_object)
-    
+
     if request.user.type == 1 or request.user.is_superuser:
         base_template = 'admin/home_admin.html'
     elif request.user.type == 2:
