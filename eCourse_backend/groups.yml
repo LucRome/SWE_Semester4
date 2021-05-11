@@ -23,6 +23,7 @@ groups:
          - course.change_course
          - course.add_course
          - exercise.change_exercise
+         - exercise.delete_exercise
          - exercise.add_exercise
          - course.view_course
          - exercise.view_exercise
