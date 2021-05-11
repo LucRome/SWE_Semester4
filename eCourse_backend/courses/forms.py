@@ -8,7 +8,7 @@ class CourseForm(forms.ModelForm):
     student = forms.ModelMultipleChoiceField(
         queryset=Student.objects.all(),
         widget=forms.CheckboxSelectMultiple, label='Studierende')
-    
+
     class Meta:
         model = Course
         fields = '__all__'

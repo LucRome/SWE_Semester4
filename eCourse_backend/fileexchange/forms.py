@@ -91,5 +91,5 @@ class ExersiceForm(forms.ModelForm):
             'submission_deadline': 'Deadline',
             'is_visible': 'sichtbar',
             'is_evaluated': 'benotet',
-            'description': 'Beschreibung' 
+            'description': 'Beschreibung'
         }
