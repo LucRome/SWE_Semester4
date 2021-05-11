@@ -1,14 +1,5 @@
-{% extends 'home/home_auth.html' %}
+{% extends base %}
 
-{% block navbar-content %}
-  {% if type == 1%}
-    {% include "admin/navbar_content.html" %}
-  {% elif type == 2 %}
-    {% include "lecturer/navbar_content.html" %}
-  {% elif type == 3 %}
-    {% include "student/navbar_content.html" %}
-  {% endif %}
-{% endblock %}
 
 {% load static %}
 
