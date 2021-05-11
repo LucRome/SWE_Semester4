@@ -7,12 +7,18 @@ from .models import Course
 class CourseForm(forms.ModelForm):
     student = forms.ModelMultipleChoiceField(
         queryset=Student.objects.all(),
-        widget=forms.CheckboxSelectMultiple)
-
+        widget=forms.CheckboxSelectMultiple, label='Studierende')
+    
     class Meta:
         model = Course
         fields = '__all__'
-    # TODO: Add students in extra window or in js? Filter functions etc
+        labels = {
+            'student': 'Studierende',
+            'lecturer': 'Dozent',
+            'name': 'Kursname',
+            'start_date': 'Startdatum',
+            'end_date': 'Enddatum'
+        }
 
 
 class CourseStudentFilterForm(Form):

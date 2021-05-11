@@ -35,6 +35,11 @@ class FileForm(forms.ModelForm):
     class Meta:
         model = Submission
         fields = ['exercise', 'name', 'file']
+        labels = {
+            'exercise': 'Aufgabe',
+            'name': 'Name',
+            'file': 'Datei'
+        }
 
 
 class ExersiceForm(forms.ModelForm):
@@ -45,4 +50,14 @@ class ExersiceForm(forms.ModelForm):
             'start_time': SD_DateTimeInput(format=['%Y-%m-%d']),
             'submission_deadline': SD_DateTimeInput(format=['%Y-%m-%d']),
             'work_time_duration': DurationInput()
+        }
+        labels = {
+            'course': 'Kurs',
+            'description': 'Beschreibung',
+            'start_time': 'Startzeit',
+            'work_time_duration': 'Bearbeitungszeit',
+            'submission_deadline': 'Deadline',
+            'is_visible': 'sichtbar',
+            'is_evaluated': 'benotet',
+            'description': 'Beschreibung' 
         }

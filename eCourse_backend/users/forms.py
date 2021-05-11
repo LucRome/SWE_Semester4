@@ -6,6 +6,12 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
+        labels = {
+            'username': 'Username',
+            'first_name': 'Vorname',
+            'last_name': 'Nachname',
+            'email': 'E-Mail'
+        }
 
 
 class StudentForm(ModelForm):
@@ -13,6 +19,14 @@ class StudentForm(ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name',
                   'email', 'matr_nr']
+        labels = {
+            'username': 'Username',
+            'first_name': 'Vorname',
+            'last_name': 'Nachname',
+            'email': 'E-Mail',
+            'matr_nr': 'Matr. Nr.'
+        }
+
 
 # useradministration: filter forms
 
