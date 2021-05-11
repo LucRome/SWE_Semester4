@@ -44,7 +44,7 @@
       </div>
   
       <div id="collapse_{{course.id}}" class="collapse" role="tabpanel" aria-labelledby="heading_{{course.id}}">
-        <div class="card-body" data-src="{% url 'course_studentlist_iframe' id=course.id %}">
+        <div class="card-body" data-src="{% url 'detailed_course' id=course.id %}">
           {# Student list #}
           {# role and aria-labelledby is for schreenreaders #}
           <iframe src="" width="100%" frameborder="0" loading="lazy"></iframe>

@@ -15,9 +15,9 @@ from django.db.models import Q
 
 @xframe_options_exempt
 @login_required
-def course_student_list_iframe(request, id):
-    # TO:DO Filter students by coursename
-    if request.user.type == 1 or request.user.is_superuser:
+def detailed_course(request, id):
+    #officer = 1; lecturer = 2
+    if (request.user.type == 1 or request.user.type == 2 or request.user.is_superuser):
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         students = course.student.all()
@@ -31,26 +31,9 @@ def course_student_list_iframe(request, id):
 
         return render(
             request,
-            'courses/iframes/course_student_list.html',
+            'courses/iframes/course_lecturer_officer.html',
             context)
 
-    # student
-    if (request.user.type == 2):
-        course = get_object_or_404(Course, pk=id)
-        lecturer = course.lecturer
-        students = course.student.all()
-        # exercises
-        exercise = Exercise.objects.filter(course_id=id)
-
-        context = {
-            'lecturer': lecturer,
-            'students': students,
-            'exercise': exercise}
-
-        return render(
-            request,
-            'courses/iframes/course_lecturer.html',
-            context)
     # student
     if (request.user.type == 3):
         # exercises
@@ -86,52 +69,6 @@ def course_overview(request, page=1):
     }
 
     return render(request, 'courses/overview.html', context)
-
-
-@login_required
-def detailed_course(request, id):
-    if request.method == 'GET':
-        course = get_object_or_404(Course, pk=id)
-        print('user type ', request.user.type)
-        # office user and lecturer
-        if (request.user.type == 1 or request.user.type == 2):
-            # course members
-            lecturer_id = course.lecturer_id
-            lecturer = User.objects.get(id=lecturer_id)
-            lecturer_name = lecturer.first_name + ' ' + lecturer.last_name
-            students = list()
-            for student in course.student.all():
-                student_name = student.first_name + ' ' + student.last_name
-                students.append(student_name)
-            # exercises
-            exercise = Exercise.objects.filter(course_id=id)
-
-            # files
-            files = dir()
-            for e in exercise:
-                print(e.id)
-                files[e.id] = Submission.objects.filter(exercise=e.id)
-
-            data = {
-                'lecturer': lecturer_name,
-                'students': students,
-                'exercise': exercise,
-                'files': files}
-
-        # student
-        if (request.user.type == 3):
-            # exercises
-            exercise = Exercise.objects.filter(course_id=id)
-            print(exercise)
-
-            files = dir()
-            for e in exercise:
-                files[e.id] = Submission.objects.filter(
-                    (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
-
-            data = {'exercise': exercise, 'files': files}
-
-    return render(request, 'courses/detail.html', data)
 
 
 @login_required
