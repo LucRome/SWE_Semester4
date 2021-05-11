@@ -70,6 +70,7 @@ def alter_exersice(request, id):
         form = ExersiceForm(instance=course_object)
     
     context = {
+        'id': id,
         'form': form,
         'update_success': update_success
     }
