@@ -1,0 +1,20 @@
+{% extends "student/home_student.html" %}
+{% load static %}
+
+{% block title %}Aufgabe{% endblock %}
+{% block site-title %}Aufgabe{% endblock %}
+
+{% block content %}
+  <div>
+    <h3>Aufgabe:</h3>
+    <a href="{% url 'download' id=fileID %}">  {# fileID #}
+      <button type="button" class="btn btn btn-danger">Herunterladen</button>
+    </a>
+  </div>
+  <br>
+  <div>
+    <h3>Abgabe:</h3>
+    <iframe src="{% url 'upload_site' id=exersiceID %}" frameborder="0"></iframe>
+    <script src="{% static 'JS/iframe_size.js' %}"></script>
+  </div>
+{% endblock %}

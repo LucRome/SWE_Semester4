@@ -1,10 +1,9 @@
 {% extends 'iframe_template.html' %}
 
 {% block content %}
-  <h3>Abgabe:</h3>
   <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="btn btn btn-danger" type="submit">Abgeben</button>
+    <button class="btn btn btn-danger" type="submit">Hochladen</button>
   </form>
 {% endblock %}

@@ -109,8 +109,6 @@ def download_file(request, id):
         path)
     return response
 
-# return filename w/o os.path.basename()
-
 
 def filename(path):
     x = re.search("^upload/course_[0-9]+/exercise_[0-9]+/", path)
@@ -121,31 +119,37 @@ def filename(path):
 
 @login_required
 @xframe_options_exempt
-def upload_student(request, id):
+def upload_site(request, id):
     exercise_object = Exercise.objects.get(pk=id)
     if request.method == 'POST':
         # submission deadline does not matter for lecturer and office user
         if (request.user.type == 3 and timezone.now()
                 > exercise_object.submission_deadline):
             # student is too late to upload redirect elsewhere
-            return render(request, 'file_exchange/iframes/upload_student.html')
+            return render(request, 'file_exchange/iframes/upload_expired.html')
         else:
             form = FileForm(request.POST, request.FILES)
           #  if form.is_valid():
           #      submission = form.save(commit=False)
           #      submission.user_id = request.user.id
           #      submission.exercise_id = exercise_object.id
-          #     if (request.user.type == 1 or request.user.type == 2):
+          #      if (request.user.type == 1 or request.user.type == 2):
           #          submission.from_lecturer = True
           #      submission.save()
           #      # back to exercises overview
           #      return render(request, 'file_exchange/overview.html')
     else:
         form = FileForm()
-    return render(request, 'file_exchange/iframes/upload_student.html', {'form': form, })
+    return render(request, 'file_exchange/iframes/upload_site.html', {'form': form, })
 
 
 @login_required
-def exercise_site(request, id):
+def exersice_site(request, id):
+    file = Submission.objects.filter(Q(from_lecturer=1))
     form = FileForm()
-    return render(request, 'file_exchange/exercise_site.html', {'form': form, "eid": id})
+    if(request.user.type == 3):
+        # file from_lecturer = true
+        return render(request, 'file_exchange/student_exersice.html', {'form': form, "exersiceID": id, "fileID": })
+    if(request.user.type == 2):
+        # list of file ids
+        return render(request, 'file_exchange/lecturer_exersice.html', {'form': form, "exersiceID": id, "fileIDs":})

@@ -1,0 +1,25 @@
+{% extends "lecturer/home_lecturer.html" %}
+{% load static %}
+
+{% block title %}Aufgabe{% endblock %}
+{% block site-title %}Aufgabe{% endblock %}
+
+{% block content %}
+  <div>
+    <h3>Aufgabe:</h3>
+    <iframe src="{% url 'upload_site' id=exersiceID %}" frameborder="0"></iframe>
+    <script src="{% static 'JS/iframe_size.js' %}"></script>
+  </div><br>
+  <div>
+    <h3>Abgaben:</h3>
+    {% for fileID in fileIDs %}   {# list with fileIDs #}
+      <div> 
+        {# name of file #}
+        <h5>{{fileID.name}}</h5>
+        <a href="{% url 'download' id=fileID %}">
+          <button type="button" class="btn btn btn-danger">Herunterladen</button>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
