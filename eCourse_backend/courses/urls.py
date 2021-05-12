@@ -29,6 +29,6 @@ urlpatterns = [
     path('create/', create_course_admin, name="create_course"),
 
     path('edit/<id>', edit_course, name='edit_course'),
-    path('detailed', detailed_course, name='detailed_course'),
+    path('detailed/<id>', detailed_course, name='detailed_course'),
 
 ]

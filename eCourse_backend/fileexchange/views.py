@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
-from django.http import HttpResponseRedirect, FileResponse, HttpResponse
+from django.http import HttpResponseRedirect, FileResponse, HttpResponse, request
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
+from django.db.models import Q
 from .forms import FileForm, ExersiceForm
 from .models import Submission
 from courses.models import Exercise
@@ -145,11 +146,34 @@ def upload_site(request, id):
 
 @login_required
 def exersice_site(request, id):
-    file = Submission.objects.filter(Q(from_lecturer=1))
-    form = FileForm()
-    if(request.user.type == 3):
-        # file from_lecturer = true
-        return render(request, 'file_exchange/student_exersice.html', {'form': form, "exersiceID": id, "fileID": })
-    if(request.user.type == 2):
-        # list of file ids
-        return render(request, 'file_exchange/lecturer_exersice.html', {'form': form, "exersiceID": id, "fileIDs":})
+    files_lecturer = []
+    files_student = []
+    if (request.user.type == 1 or request.user.type == 2):
+        file = Submission.objects.filter(exercise=id, from_lecturer=1)
+        files_lecturer = help_files(file)
+        file = Submission.objects.filter(exercise=id, from_lecturer=0)
+        files_student = help_files(file)
+    elif request.user.type == 3:
+        file = (Submission.objects.filter(
+                (Q(user=request.user.id)), exercise=id))
+        files_student = help_files(file)
+        file = (Submission.objects.filter(from_lecturer=1, exercise=id))
+        files_lecturer = help_files(file)
+
+    data = {'files_student': files_student,
+            'files_lecturer': files_lecturer,
+            'exersiceID': id}
+    if request.user.type == 3:
+        return render(request, 'file_exchange/student_exersice.html', data)
+    elif (request.user.type == 1 or request.user.type == 2):
+        return render(request, 'file_exchange/lecturer_exersice.html', data)
+    else:
+        return render(request, 'file_exchange/overview.html')
+
+
+def help_files(file):
+    res = []
+    if file:
+        for f in file:
+            res.append(f)
+    return res

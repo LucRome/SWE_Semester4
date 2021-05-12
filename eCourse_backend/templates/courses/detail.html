@@ -17,7 +17,9 @@
     {% for e in exercise %} 
     <a>exercise:</a><br>
     <a> Deadline: {{e.submission_deadline}}</a><br>
-    <a> Description: {{e.description}}</a>
+    <a> Description: {{e.description}}</a><br>
+    <a> File: {{files_lecturer.0.1.id}}</a><br>
+    <a> File 2: {{files.1.id}}</a>
     {# we need to find a way to disply the nested list of files something like file.1.1.id will give the id of the first file connected to exercise 1 #}
     {% endfor %}
     

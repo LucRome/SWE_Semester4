@@ -25,6 +25,6 @@ urlpatterns = [
     path('exercises/create/', create_exercise, name='create_exersice'),
     path('exercises/alter/<id>', alter_exersice, name='alter_exersice'),
     path('exercises/delete/<id>', delete_exercise, name='deleted_exersice'),
-    path('upload-site/<id>', upload_site, name='upload_site'),
-    path('exersice-site/<id>', exersice_site, name='exersice_site'),
+    path('upload/files/<id>', upload_site, name='upload_site'),
+    path('exersice/files/<id>', exersice_site, name='exersice_site')
 ]

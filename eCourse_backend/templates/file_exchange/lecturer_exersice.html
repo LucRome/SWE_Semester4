@@ -9,7 +9,7 @@
     <h3>Aufgabe:</h3>
     <iframe src="{% url 'upload_site' id=exersiceID %}" frameborder="0"></iframe>
     <script src="{% static 'JS/iframe_size.js' %}"></script><br>
-    <h5>Hochgeladenes:</h5>
+    <h4>Hochgeladenes:</h4>
     {% for file in files_lecturer %}   {# list with all files from lecturer #}
       <div>
         <h5>{{file.name}}</h5>
