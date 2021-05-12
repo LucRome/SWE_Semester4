@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
-from django.http import HttpResponseRedirect, FileResponse, HttpResponse
+from django.http import HttpResponseRedirect, FileResponse, HttpResponse, request
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import FileForm, ExersiceForm
 from .models import Submission
@@ -97,11 +97,10 @@ def download_file(request, id):
         path)
     return response
 
-# return filename w/o os.path.basename()
-
 
 def filename(path):
     x = re.search("^upload/course_[0-9]+/exercise_[0-9]+/", path)
     path_path = x.group()
     filename = path.replace(path_path, '')
     return filename
+

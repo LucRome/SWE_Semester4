@@ -17,8 +17,7 @@ from django.db.models import Q
 @login_required
 def detailed_course(request, id):
     #officer = 1; lecturer = 2
-    if (request.user.type == 1 or request.user.type ==
-            2 or request.user.is_superuser):
+    if (request.user.type == 1 or request.user.type == 2 or request.user.is_superuser):
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         students = course.student.all()
@@ -29,7 +28,7 @@ def detailed_course(request, id):
             'lecturer': lecturer,
             'students': students,
             'exercise': exercise}
-
+ 
         return render(
             request,
             'courses/iframes/course_lecturer_officer.html',
@@ -37,16 +36,13 @@ def detailed_course(request, id):
 
     # student
     if (request.user.type == 3):
+        course = get_object_or_404(Course, pk=id)
         # exercises
         exercise = Exercise.objects.filter(course_id=id)
-        print(exercise)
 
-        files = dir()
-        for e in exercise:
-            files[e.id] = Submission.objects.filter(
-                (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
+        lecturer = course.lecturer
 
-        context = {'exercise': exercise, 'files': files}
+        context = {'exercise': exercise, 'lecturer': lecturer}
         return render(request, 'courses/iframes/course_student.html', context)
 
 
@@ -72,6 +68,7 @@ def course_overview(request, page=1):
         base_template = 'student/home_student.html'
     else:
         base_template = 'home/home_auth.html'
+        
 
     context = {
         'base': base_template,
@@ -112,7 +109,7 @@ def create_course_admin(request):
 
 
 @login_required
-@permission_required('courses.delete_course', raise_exception=True)
+@permission_required('course.delete_course', raise_exception=True)
 def delete_course(request, id):
     # TODO: use for delete course
     course_to_delete = get_object_or_404(Course, pk=id)
@@ -123,7 +120,7 @@ def delete_course(request, id):
 
 
 @login_required
-@permission_required('courses.change_course', raise_exception=True)
+@permission_required('course.change_course', raise_exception=True)
 def edit_course(request, id):
     updata_success = False
     if request.method == 'POST':

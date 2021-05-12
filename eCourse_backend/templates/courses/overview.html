@@ -23,9 +23,11 @@
           </a>
           <div class="btn-group float-right">
             <a href="{% url 'edit_course' id=course.id %}">
-              <button type="button"  class="btn btn-danger float-right">
-                bearbeiten
-              </button>
+              {% if type != 3 %}
+                <button type="button"  class="btn btn-danger float-right">
+                  bearbeiten
+                </button>
+              {% endif %}
             </a>
             <button type="button" data-toggle="collapse" href="#collapse_{{course.id}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger card-button">
               <i class="bi bi-caret-down-square-fill"></i>
