@@ -19,22 +19,29 @@ class UserTestCase(TestCase):
         self.my_admin = User.objects.create_superuser('admin', 'admin@admin.com', 'admin123')  
 
 
-    #def test_deny_anonymous_view_user(self):
+    def test_deny_anonymous_view_user(self):
         """
         Basically tests if the '@login_required' works/is set up everywhere
+        """
         self.client.logout()
 
+        """
         response = self.client.get('/users/overview', follow=True)
         self.assertRedirects(response, '/accounts/login/?next=/users/overview/',
                              status_code=301, target_status_code=200)  # 302 would be fine too
+        """
 
-        response = self.client.get('/users/create_user', follow=True)
+        """
+        response = self.client.get(reverse('user_administration'), follow=True)
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
 
-        response = self.client.get('/users/alter_user', follow=True)
+        response = self.client.get(reverse('createlecturer_admin_iframe'), follow=True)
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
 
-        response = self.client.get('/users/delete_user', follow=True)
+        response = self.client.get(reverse('deleteuser_admin_iframe'), follow=True)
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
+
+        response = self.client.get(reverse('edituser_admin_modalcontent_iframe'), follow=True)
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
         """
 
