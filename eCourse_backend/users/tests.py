@@ -25,42 +25,38 @@ class UserTestCase(TestCase):
         """
         self.client.logout()
 
-        """
-        response = self.client.get('/users/overview', follow=True)
-        self.assertRedirects(response, '/accounts/login/?next=/users/overview/',
-                             status_code=301, target_status_code=200)  # 302 would be fine too
-        """
+        # check the URLs that need no parameters
+        response = self.client.get(reverse('user_administration'))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        
+        response = self.client.get(reverse('createlecturer_admin_iframe'))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
 
         """
-        response = self.client.get(reverse('user_administration'), follow=True)
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
+        # check the URLs that need an object/ID
+        response = self.client.get(reverse('deleteuser_admin_iframe'))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
 
-        response = self.client.get(reverse('createlecturer_admin_iframe'), follow=True)
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
-
-        response = self.client.get(reverse('deleteuser_admin_iframe'), follow=True)
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
-
-        response = self.client.get(reverse('edituser_admin_modalcontent_iframe'), follow=True)
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
+        response = self.client.get(reverse('edituser_admin_modalcontent_iframe'))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
         """
 
-    """
-    def test_create_user_view(self):
-        user_form = {
+    def test_create_student_form(self):
+        student_form = {
             'username' : 'testerino',
             'first_name' : 'Testvorname',
             'last_name' : 'Testnachname',
             'email' : 'test@test.com',
             'matr_nr' : '69420'
         }
-        user = UserForm(user_form)
+        user = StudentForm(student_form)
         # There is no way (yet) the creation could fail right?
         self.assertTrue(user.is_valid())
         user.save()
 
-        self.assertIn(user, User.objects.all())
+        self.assertTrue(Student.objects.filter(username='testerino').exists())
 
+    """
     def test_create_user_view_url_check_db(self):
         my_admin = User.objects.create_superuser(
             'admin', 'admin@admin.com', 'admin123')
