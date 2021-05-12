@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required, login_required
 from django.shortcuts import redirect
 from users.models import User

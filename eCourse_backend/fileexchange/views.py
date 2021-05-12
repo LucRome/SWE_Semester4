@@ -75,7 +75,6 @@ def alter_exersice(request, id):
     }
 
     return render(request, 'file_exchange/alter_exercise.html', context)
-
 # fileupload
 
 
