@@ -2,21 +2,26 @@ from django.test import TestCase
 from http import HTTPStatus
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 
 from .models import *
 from .views import *
 
-my_admin = User.objects.create_superuser('admin', 'admin@admin.com', 'admin123') 
-self.user.save()
+from django.core.management import call_command
+
 
 # Create your tests here.
 # TESTS MUST ALWAYS START WITH "test"!
 
 class UserTestCase(TestCase):
-    def test_deny_anonymous_view_user(self):
+    def setUp(self):
+        call_command('loadperms', 'groups.yml')
+        self.my_admin = User.objects.create_superuser('admin', 'admin@admin.com', 'admin123')  
+
+
+    #def test_deny_anonymous_view_user(self):
         """
         Basically tests if the '@login_required' works/is set up everywhere
-        """
         self.client.logout()
 
         response = self.client.get('/users/overview', follow=True)
@@ -31,6 +36,7 @@ class UserTestCase(TestCase):
 
         response = self.client.get('/users/delete_user', follow=True)
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)  # 404
+        """
 
     """
     def test_create_user_view(self):
@@ -76,7 +82,7 @@ class UserTestCase(TestCase):
     """
 
     def test_create_lecturer_view(self):
-        self.client.login(username='admin', password='admin123')
+        self.client.force_login(self.my_admin)
 
         user_form = {
             'username': 'testerino3',
@@ -86,8 +92,8 @@ class UserTestCase(TestCase):
         }
 
         response = self.client.post(
-            reverse('create_lecturer_iframe'), user_form)
+            reverse('createlecturer_admin_iframe'), user_form)
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
         query_set = Lecturer.objects.all()
-        self.assertTrue(Lecturer.objects.filer(username='testerino3').exists())
+        self.assertTrue(Lecturer.objects.filter(username='testerino3').exists())
