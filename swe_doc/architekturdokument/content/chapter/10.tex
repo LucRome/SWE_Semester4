@@ -3,19 +3,19 @@ Da verschiedene Qualitätsanforderungen die Architekturentscheidungen oft maßge
 
 \section{Qualitätsbaum}
 In Abbildung \ref{fib:baum} ist der Qualitätsbaum zu sehen. Außgehend von der Qualität führt der Baum über eine bündelnde Zwischenstufe zu den konkreten Anforderungen. Diese sind als Blätter des Baumes dargestellt und mit einer Priorität versehen. Dabei bedeutet die Ziffer 1 die höchte Priorität. Die Ziffer 2 kennzeichnet Anforderungen, die nur Sekundär zum gelingen des Projektes beitragen.
-\begin{landscape}
+
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.6\textwidth]{qualitätsbaum.png}
+\includegraphics[height=0.3\textwidth]{qualitätsbaum.png}
 \caption{Qualitätsbaum im Projekt eCourse}
 \label{fib:baum}
 \end{figure}
-\end{landscape}
+
 
 \section{Qualitätsszenarien}
 \label{sec:q2}
 \subsection{Datenintegrität}
-Unter Datenintegrität versteht man die Gesamtheit aller Maßnahmen die zum Schutz der Daten in einer Datenbank beitragen. Zu den Untergeordneten Zielen der Datenintegrität gehört neben dem Schutz der Daten vor externen Einflüssen auch die Vertraulichkeit der Daten die in \ref{sec:vertrauen} behandelt wird.
+Unter Datenintegrität versteht man die Gesamtheit aller Maßnahmen die zum Schutz der Daten in einer Datenbank beitragen. Zu den Untergeordneten Zielen der Datenintegrität gehört neben dem Schutz der Daten vor externen Einflüssen auch die Vertraulichkeit der Daten die in Kapitel \ref{sec:vertrauen} behandelt wird.
 
 \subsection{Verfügbarkeit}
 Verfügbarkeit kennzeichnet sich als der Prozentsatz der Laufzeit in dem die Anwendung online lauffähig ist. Bei eCourse ist es besonders wichtig, dass die Anwendung über den Tag hinweg lauffähig ist. In der Nacht, beispielsweise zwischen 1 Uhr und 5 Uhr morgens ist die Wahrscheinlichkeit sehr gering, dass Daten ausgetauscht werden müssen. In dieser Zeit kann und darf die Verfügbarkeit geringer sein (etwa durch Wartung). Daher erhält die Verfügbarkeit im Projekt eCourse ein geringere Priorität.
@@ -31,6 +31,7 @@ Die Latenzzeit beschreibt die Zeit zwischen dem Auslösen einer Aktion und dem E
 Auch die Latenz wird als sekundäres Qualitätsziel eingestuft, da die Datenintegrität ein hoch priorisiertes Qualitätsziel ist. Um dieses Ziel zu realisieren, muss ein gewisses Maß an Rechenzeit in Kauf genommen werden.
 
 \subsection{Vertrauliche Daten}
+\label{sec:vertrauen}
 Unter vertraulichen Daten verstehen sich personenbezogene Daten, die es um jeden Preis zu schützen gilt. Daher wird dieser Punkt für die Anwendung eCourse auch hoch priorisiert, da über die Plattform unter Umständen auch sensible Daten der Hochschulangehörigen ausgetauscht werden.
 
 \subsection{konsistente Daten}
