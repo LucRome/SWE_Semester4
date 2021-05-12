@@ -1,2 +1,28 @@
 \chapter{Entwurfsentscheidungen}
-Wichtige Entscheidungen die Maßgeblich die Architektur und den Entwurf der Anwendung geprägt haben sind zum einen die verwendeten Programmiersprachen und Frameworks und zum anderen weitere verwendete Programme die zur Entwicklung beigetragen haben
+Wichtige Entscheidungen die Maßgeblich die Architektur und den Entwurf der Anwendung geprägt haben sind zum einen die verwendeten Programmiersprachen und \gls{Framework}s und zum anderen weitere Programme die zur Entwicklung beigetragen haben.
+Die Entscheidung für die verwendeten Werkzeuge ist in Tabelle \ref{tab:Entwurfsentscheidungen} festgehalten. Des Weiteren trug zu dieser Entscheidung auch bei, dass alle Werkzeuge kostenfrei sind und zumeist auch Open-Source. Dadurch sinkt auch die Gefahr von Sicherheitslücken innerhalb der Anwendung eCourse.
+
+\begin{table}
+\centering
+\begin{tabularx}{\textwidth}{|l|l|X|} 
+ \hline 
+Software/Programme/Plugins & Name & Erklärung \\ 
+\hline
+Versionierungsverwaltung & Git & Jeder Mitglied hatte schon einen Account. Hat sich in der Vergangenheit als zuverlässig erwiesen \\ 
+\hline
+Framework & Bootstrap & Einfache Form von CSS \\ 
+\hline
+ & Django & Mächtiges Python WebFramework \\ 
+\hline
+Programmiersprachen & Python & Einige Teammitglieder haben bereits Erfahrungen mit WebDevelopment in Python \\ 
+\hline
+ & HTML & Grundlegende Markup Sprache  \\ 
+\hline
+ & JavaScript & Um HTML dynamisch zu gestalten \\ 
+\hline
+Datenbank & sqlite & Bereits in Django integriert durch Abstrahierung kann DB ausgetauscht werden \\ 
+\hline
+\end{tabularx}
+\caption{Entwurfsentscheidungen im Projekt eCourse}
+\label{tab:Entwurfsentscheidungen}
+\end{table}
