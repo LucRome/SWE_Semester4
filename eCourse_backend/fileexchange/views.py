@@ -130,15 +130,14 @@ def upload_site(request, id):
             return render(request, 'file_exchange/iframes/upload_expired.html')
         else:
             form = FileForm(request.POST, request.FILES)
-          #  if form.is_valid():
-          #      submission = form.save(commit=False)
-          #      submission.user_id = request.user.id
-          #      submission.exercise_id = exercise_object.id
-          #      if (request.user.type == 1 or request.user.type == 2):
-          #          submission.from_lecturer = True
-          #      submission.save()
-          #      # back to exercises overview
-          #      return render(request, 'file_exchange/overview.html')
+            if form.is_valid():
+                submission = form.save(commit=False)
+                submission.user_id = request.user.id
+                submission.exercise_id = exercise_object.id
+                if (request.user.type == 1 or request.user.type == 2):
+                    submission.from_lecturer = True
+                submission.save()
+                return render(request, 'file_exchange/iframes/upload_site.html', {'form': form, })
     else:
         form = FileForm()
     return render(request, 'file_exchange/iframes/upload_site.html', {'form': form, })
