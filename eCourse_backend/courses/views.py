@@ -122,7 +122,7 @@ def detailed_course(request, id):
 
 @login_required
 @permission_required('courses.add_course', raise_exception=True)
-def create_course_admin(request):
+def create_course(request):
     success = False
     if request.method == 'POST':
         form = CourseForm(request.POST)
