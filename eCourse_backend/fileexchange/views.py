@@ -23,18 +23,25 @@ def overview(request):
 
 
 @login_required
-@permission_required('exercise.create_exercise', raise_exception=True)
+@permission_required('courses.add_exercise', raise_exception=True)
 def create_exercise(request):
+    save_success = False
     if request.method == 'POST':
         form = ExersiceForm(request.POST)
         if form.is_valid():
             form.save()
+            save_success = True
     else:
         form = ExersiceForm()
 
+    context = {
+        'form': form,
+        'save_success': save_success
+    }
+
     return render(request,
                   'file_exchange/create_exersice.html',
-                  {'form': form})
+                  context)
 
 
 @login_required
@@ -61,8 +68,9 @@ def alter_exersice(request, id):
 
     return render(request, 'file_exchange/alter_exercise.html', {'form': form})
 
-
 # fileupload
+
+
 @login_required
 def upload_file(request, exercise_id):
     exercise_object = Exercise.objects.get(pk=exercise_id)
@@ -100,8 +108,9 @@ def download_file(request, id):
         path)
     return response
 
-
 # return filename w/o os.path.basename()
+
+
 def filename(path):
     x = re.search("^upload/course_[0-9]+/exercise_[0-9]+/", path)
     path_path = x.group()

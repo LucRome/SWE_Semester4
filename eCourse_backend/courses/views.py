@@ -15,41 +15,50 @@ from django.db.models import Q
 
 @xframe_options_exempt
 @login_required
-@permission_required('users.manage_users', raise_exception=True)
-def course_student_list_iframe(request, id, page=1):
+def course_student_list_iframe(request, id):
     # TO:DO Filter students by coursename
-
-    if request.method == 'POST':
-        filter_form = CourseStudentFilterForm(
-            request.POST, )
-        if filter_form.is_valid():
-            # Filter
-            students = Student.objects.filter(
-                matr_nr__contains=get_value(filter_form, 'matr_nr'),
-                first_name__contains=get_value(filter_form, 'first_name'),
-                last_name__contains=get_value(filter_form, 'last_name'),
-                username__contains=get_value(filter_form, 'username'))
-    elif request.method == 'GET':
-        filter_form = CourseStudentFilterForm()
+    if (request.user.type == 1 or request.user.type == 2):
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         students = course.student.all()
+        # exercises
+        exercise = Exercise.objects.filter(course_id=id)
 
-    context = {
-        'filter_form': filter_form,
-        'lecturer': lecturer,
-        'students': students,
-    }
-    return render(request, 'courses/iframes/course_student_list.html', context)
+        # files
+        files = dir()
+        for e in exercise:
+            files[e.id] = Submission.objects.filter(exercise=e.id)
+
+        context = {
+            'lecturer': lecturer,
+            'students': students,
+            'exercise': exercise,
+            'files': files}
+
+        return render(
+            request,
+            'courses/iframes/course_student_list.html',
+            context)
+
+    # student
+    if (request.user.type == 3):
+        # exercises
+        exercise = Exercise.objects.filter(course_id=id)
+        files = dir()
+        for e in exercise:
+            files[e.id] = Submission.objects.filter(
+                (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
+
+        context = {'exercise': exercise, 'files': files}
+        return render(request, 'courses/iframes/course_student.html', context)
 
 
 @login_required
 def course_overview(request, page=1):
-
     user_id = request.user.id
     if request.method == 'GET':
         # office user has type 1 in db
-        if request.user.type == 1:
+        if request.user.type == 1 or request.user.is_superuser:
             courses = Course.objects.all()
         else:
             courses = Course.objects.filter(
@@ -61,11 +70,12 @@ def course_overview(request, page=1):
     context = {
         'page_obj': page_obj,
     }
+
     return render(request, 'courses/overview.html', context)
 
 
 @login_required
-def view_course(request, id):
+def detailed_course(request, id):
     if request.method == 'GET':
         course = get_object_or_404(Course, pk=id)
         print('user type ', request.user.type)
@@ -79,7 +89,6 @@ def view_course(request, id):
             for student in course.student.all():
                 student_name = student.first_name + ' ' + student.last_name
                 students.append(student_name)
-
             # exercises
             exercise = Exercise.objects.filter(course_id=id)
 
@@ -122,17 +131,26 @@ def create_course(request):
             form.save()
             success = True
     else:
-        form = CourseForm()
+        if request.user.type == 2:
+            form = CourseForm(initial={'lecturer': request.user.id})
+        else:
+            form = CourseForm()
+
+    if request.user.is_superuser or request.user.type == 1:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
 
     context = {
         'form': form,
-        'success': success
+        'success': success,
+        'base_template': base_template
     }
     return render(request, 'courses/create_course.html', context)
 
 
 @login_required
-@permission_required('course.delete_course', raise_exception=True)
+@permission_required('courses.delete_course', raise_exception=True)
 def delete_course(request, id):
     # TODO: use for delete course
     course_to_delete = get_object_or_404(Course, pk=id)
@@ -143,15 +161,28 @@ def delete_course(request, id):
 
 
 @login_required
-@permission_required('course.change_course', raise_exception=True)
+@permission_required('courses.change_course', raise_exception=True)
 def edit_course(request, id):
+    update_success = False
     if request.method == 'POST':
-        form = CourseForm(request.POST)
+        course_object = get_object_or_404(Course, pk=id)
+        form = CourseForm(request.POST or None, instance=course_object)
         if form.is_valid():
             form.save()
+            update_success = True
     else:
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
 
-    return render(request, 'courses/edit_course.html',
-                  {'form': form, 'courseid': id})
+    if request.user.is_superuser or request.user.type == 1:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+
+    context = {
+        'form': form,
+        'courseid': id,
+        'base_template': base_template,
+        'update_success': update_success}
+
+    return render(request, 'courses/edit_course.html', context)

@@ -4,7 +4,7 @@
 {# TODO: determine active site and set the corresponding link to active #}
 
 <ul class="navbar-nav">
-  {% comment %} Dropdown: Kurse {% endcomment %}
+  {# Dropdown: Kurse #}
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" 
       data-toggle="dropdown">
@@ -12,12 +12,12 @@
     </a>
     <div class="dropdown-menu">
       <a class="dropdown-item" href="#">Kursübersicht</a>
-      <a class="dropdown-item" href="#">Kurs anlegen</a>
+      <a class="dropdown-item" href="{% url 'create_course' %}">Kurs anlegen</a>
     </div>
   </li>
-  {% comment %} Link: Userverwaltung {% endcomment %}
+  {# Link: Create Exercise #}
   <li class="nav-item">
-    <a class="nav-link" href="#">Klausurübersicht</a>
+    <a class="nav-link" href="{% url 'create_exersice' %}">Aufgabe erstellen</a>
   </li>
 </ul>
 
