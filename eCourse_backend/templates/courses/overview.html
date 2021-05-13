@@ -1,8 +1,5 @@
-{% extends 'home/home_auth.html' %}
+{% extends base %}
 
-{% block navbar-content %}
-  {% include "admin/navbar_content.html" %}
-{% endblock %}
 
 {% load static %}
 
@@ -26,9 +23,11 @@
           </a>
           <div class="btn-group float-right">
             <a href="{% url 'edit_course' id=course.id %}">
-              <button type="button"  class="btn btn-danger float-right">
-                bearbeiten
-              </button>
+              {% if type != 3 %}
+                <button type="button"  class="btn btn-danger float-right">
+                  bearbeiten
+                </button>
+              {% endif %}
             </a>
             <button type="button" data-toggle="collapse" href="#collapse_{{course.id}}" aria-expanded="false" aria-controls="collapseOne" class="btn btn-danger card-button">
               <i class="bi bi-caret-down-square-fill"></i>
@@ -38,7 +37,7 @@
       </div>
   
       <div id="collapse_{{course.id}}" class="collapse" role="tabpanel" aria-labelledby="heading_{{course.id}}">
-        <div class="card-body" data-src="{% url 'course_studentlist_iframe' id=course.id %}">
+        <div class="card-body" data-src="{% url 'detailed_course' id=course.id %}">
           {# Student list #}
           {# role and aria-labelledby is for schreenreaders #}
           <iframe src="" width="100%" frameborder="0" loading="lazy"></iframe>

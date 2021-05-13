@@ -1,16 +1,9 @@
-{% comment %} Contains the links in the navbar {% endcomment %}
-
-{# TODO: provide urls behind the buttons#}
-{# TODO: determine active site and set the corresponding link to active #}
+{# Contains the links in the navbar #}
 
 <ul class="navbar-nav">
-  {# Link: Klausurübersicht #}
-  <li class="nav-item">
-    <a class="nav-link" href="#">Klausurübersicht</a>
-  </li>
   {# Link: Kursübersicht #}
   <li class="nav-item">
-    <a class="nav-link" href="#">Kursübersicht</a>
+    <a class="nav-link" href="{% url 'course_overview' page=1 %}">Kursübersicht</a>
   </li>
 </ul>
 
