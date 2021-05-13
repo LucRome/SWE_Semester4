@@ -1,9 +1,19 @@
 {% extends 'iframe_template.html' %}
 
 {% block content %}
+  {% if upload_success %}
+    <div class="alert alert-success alert-dismissible d-flex flex-wrap align-content-center">
+      <i class="bi bi-check-circle-fill success-icon mr-2"></i>
+      <p class="mt-0 mb-0">Datei erfolgreich hochgeladen</p>
+      <button type="button" class="close" data-dismiss="alert">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+  {% endif %}
+
   <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn btn-danger" type="submit">Hochladen</button>
+    {% include 'forms/bs4_text_form.html' with form=form %}
+    <button class="btn btn btn-logoblue" type="submit">Hochladen</button>
   </form>
 {% endblock %}

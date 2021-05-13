@@ -15,21 +15,28 @@ Userverwaltung
 
 {% block content %}
 {# Another Tab-bar to change between students and lecturers and create user #}
-<nav class="navbar navbar-expand-lg navbar-dark bg-light">
-  <ul class="nav nav-tabs" id="myTabs">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#tab_studentlist">Studentenliste</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tab_lecturerlist">Dozentenliste</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " data-toggle="tab" href="#tab_adminlist">Admin- + Mitarbeiterliste</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tab_createuser">User erstellen</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-sm navbar-dark bg-light">
+  {# toggler button #}
+  <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#collapsibleGroupBar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar navbar-collapse p-0" id="collapsibleGroupBar">    
+    <ul class="nav nav-tabs" id="myTabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#tab_studentlist">Studentenliste</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab_lecturerlist">Dozentenliste</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " data-toggle="tab" href="#tab_adminlist">Admin- + Mitarbeiterliste</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab_createuser">User erstellen</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 
 {# Tab content (tap panes) #}

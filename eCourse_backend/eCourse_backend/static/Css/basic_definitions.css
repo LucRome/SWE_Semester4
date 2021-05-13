@@ -2,6 +2,21 @@
     max-width: 400px;
 }
 
+.bg-logoblue {
+    background-color: #347fc2 !important;
+    color: white !important;
+}
+
+.btn-logoblue {
+    background-color: #347fc2 !important;
+    color: white !important;
+}
+
+.btn-logoblue:hover {
+    background-color: #2f70a8 !important;
+    color: white !important;
+}
+
 .input-half {
     max-width: 200px;
 }
@@ -10,7 +25,7 @@
     width: 40px;
 }
 .error-icon {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 /* Logo class */
