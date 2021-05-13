@@ -34,4 +34,6 @@
   </div>
 {% elif field|field_type == 'durationfield'%}
   {% render_field field class="form-control input {{error_class}}" type="time"%}
+{% elif field|field_type == 'filefield' %}
+    {% render_field field class="form-control-file {{error_class}}" type="file"%}
 {% endif %}
