@@ -45,28 +45,55 @@ def create_exercise(request):
 
 
 @login_required
-@permission_required('exercise.delete_exercise', raise_exception=True)
+@permission_required('courses.delete_exercise', raise_exception=True)
 def delete_exercise(request, id):
     exercise_to_delete = get_object_or_404(Exercise, pk=id)
-    name = exercise_to_delete.name
+    id = exercise_to_delete.id
     exercise_to_delete.delete()
+
+    if request.user.type == 1 or request.user.is_superuser:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+
+    context = {
+        'base_template': base_template,
+    }
+
     return render(request,
                   'file_exchange/deleted_exersice.html',
-                  {'name': name})
+                  context)
+
+# can be called by Lecturer and admin
 
 
 @login_required
-@permission_required('exercise.change_exercise', raise_exception=True)
+@permission_required('courses.change_exercise', raise_exception=True)
 def alter_exersice(request, id):
+    update_success = False
     if request.method == 'POST':
-        form = ExersiceForm(request.POST)
+        exercise = get_object_or_404(Exercise, pk=id)
+        form = ExersiceForm(request.POST or None, instance=exercise)
         if form.is_valid():
             form.save()
+            update_success = True
     else:
         course_object = get_object_or_404(Exercise, pk=id)
-        form = Exercise(model_to_dict(course_object))
+        form = ExersiceForm(instance=course_object)
 
-    return render(request, 'file_exchange/alter_exercise.html', {'form': form})
+    if request.user.type == 1 or request.user.is_superuser:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+
+    context = {
+        'base_template': base_template,
+        'id': id,
+        'form': form,
+        'update_success': update_success
+    }
+
+    return render(request, 'file_exchange/alter_exercise.html', context)
 
 # fileupload
 
