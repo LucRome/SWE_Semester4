@@ -119,12 +119,14 @@ def upload_file(request, id):
                 submission.save()
                 upload_success = True
                 # back to exercises overview
-                return render(
-                    request, 'file_exchange/iframes/upload_site.html', {'form': form, 'upload_success': upload_success})
+                return render(request,
+                              'file_exchange/iframes/upload_site.html',
+                              {'form': form,
+                               'upload_success': upload_success})
     else:
         form = FileForm()
-    return render(
-        request, 'file_exchange/iframes/upload_site.html', {'form': form, 'upload_success': upload_success})
+    return render(request, 'file_exchange/iframes/upload_site.html',
+                  {'form': form, 'upload_success': upload_success})
 
 
 @login_required
