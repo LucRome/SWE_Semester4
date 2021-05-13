@@ -40,9 +40,7 @@ def create_exercise(request):
         'save_success': save_success
     }
 
-    return render(request,
-                  'file_exchange/create_exersice.html',
-                  context)
+    return render(request, 'file_exchange/create_exersice.html', context)
 
 
 @login_required
@@ -138,8 +136,6 @@ def download_file(request, id):
     response['Content-Disposition'] = 'attachment; filename="%s' % filename(
         path)
     return response
-
-# return filename w/o os.path.basename()
 
 
 def filename(path):

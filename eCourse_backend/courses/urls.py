@@ -23,12 +23,11 @@ urlpatterns = [
     # course
     path('overview/page<int:page>', course_overview, name='course_overview'),
     # create course iframes
-    path('iframes/studentlist/<id>', course_student_list_iframe,
-         name='course_studentlist_iframe'),
+    path('iframes/detailed/<id>', detailed_course,
+         name='detailed_course'),
     # admin: create course
-    path('create/', create_course_admin, name="create_course"),
+    path('create/', create_course, name="create_course"),
 
     path('edit/<id>', edit_course, name='edit_course'),
-    path('detailed', detailed_course, name='detailed_course'),
 
 ]
