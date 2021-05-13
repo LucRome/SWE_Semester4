@@ -167,10 +167,12 @@ def upload_site(request, id):
                 if (request.user.type == 1 or request.user.type == 2):
                     submission.from_lecturer = True
                 submission.save()
-                return render(request, 'file_exchange/iframes/upload_site.html', {'form': form, })
+                return render(
+                    request, 'file_exchange/iframes/upload_site.html', {'form': form, })
     else:
         form = FileForm()
-    return render(request, 'file_exchange/iframes/upload_site.html', {'form': form, })
+    return render(
+        request, 'file_exchange/iframes/upload_site.html', {'form': form, })
 
 
 @login_required
