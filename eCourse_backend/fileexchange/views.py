@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
-from django.http import HttpResponseRedirect, FileResponse, HttpResponse
+from django.http import HttpResponseRedirect, FileResponse, HttpResponse, request
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
 from .forms import FileForm, ExersiceForm
 from .models import Submission
 from courses.models import Exercise
+from django.views.decorators.clickjacking import xframe_options_exempt
 import re
 
 # Create your views here.
@@ -95,19 +96,19 @@ def alter_exersice(request, id):
 
     return render(request, 'file_exchange/alter_exercise.html', context)
 
-    return render(request, 'file_exchange/alter_exercise.html', context)
 # fileupload
 
 
 @login_required
-def upload_file(request, exercise_id):
-    exercise_object = Exercise.objects.get(pk=exercise_id)
+@xframe_options_exempt
+def upload_file(request, id):
+    exercise_object = Exercise.objects.get(pk=id)
     if request.method == 'POST':
         # submission deadline does not matter for lecturer and office user
         if (request.user.type == 3 and timezone.now()
                 > exercise_object.submission_deadline):
             # student is too late to upload redirect elsewhere
-            return render(request, 'file_exchange/overview.html')
+            return render(request, 'file_exchange/iframes/upload_expired.html')
         else:
             form = FileForm(request.POST, request.FILES)
             if form.is_valid():
@@ -118,10 +119,12 @@ def upload_file(request, exercise_id):
                     submission.from_lecturer = True
                 submission.save()
                 # back to exercises overview
-                return render(request, 'file_exchange/overview.html')
+                return render(
+                    request, 'file_exchange/iframes/upload_site.html', {'form': form, })
     else:
         form = FileForm()
-    return render(request, 'file_exchange/upload_file.html', {'form': form})
+    return render(
+        request, 'file_exchange/iframes/upload_site.html', {'form': form, })
 
 
 @login_required
@@ -144,3 +147,37 @@ def filename(path):
     path_path = x.group()
     filename = path.replace(path_path, '')
     return filename
+
+
+@login_required
+def exersice_site(request, id):
+    files_lecturer = []
+    files_student = []
+    if (request.user.type == 1 or request.user.type == 2):
+        file = Submission.objects.filter(exercise=id, from_lecturer=1)
+        files_lecturer = help_files(file)
+        file = Submission.objects.filter(exercise=id, from_lecturer=0)
+        files_student = help_files(file)
+    elif request.user.type == 3:
+        file = Submission.objects.filter(user=request.user.id, exercise=id)
+        files_student = help_files(file)
+        file = (Submission.objects.filter(from_lecturer=1, exercise=id))
+        files_lecturer = help_files(file)
+
+    data = {'files_student': files_student,
+            'files_lecturer': files_lecturer,
+            'exersice_id': id}
+    if request.user.type == 3:
+        return render(request, 'file_exchange/student_exersice.html', data)
+    elif (request.user.type == 1 or request.user.type == 2):
+        return render(request, 'file_exchange/lecturer_exersice.html', data)
+    else:
+        return render(request, 'file_exchange/overview.html')
+
+
+def help_files(file):
+    res = []
+    if file:
+        for f in file:
+            res.append(f)
+    return res
