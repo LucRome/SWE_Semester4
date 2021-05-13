@@ -101,6 +101,7 @@ def alter_exersice(request, id):
 @xframe_options_exempt
 def upload_file(request, id):
     exercise_object = Exercise.objects.get(pk=id)
+    upload_success = False
     if request.method == 'POST':
         # submission deadline does not matter for lecturer and office user
         if (request.user.type == 3 and timezone.now()
@@ -116,13 +117,14 @@ def upload_file(request, id):
                 if (request.user.type == 1 or request.user.type == 2):
                     submission.from_lecturer = True
                 submission.save()
+                upload_success = True
                 # back to exercises overview
                 return render(
-                    request, 'file_exchange/iframes/upload_site.html', {'form': form, })
+                    request, 'file_exchange/iframes/upload_site.html', {'form': form, 'upload_success': upload_success})
     else:
         form = FileForm()
     return render(
-        request, 'file_exchange/iframes/upload_site.html', {'form': form, })
+        request, 'file_exchange/iframes/upload_site.html', {'form': form, 'upload_success': upload_success})
 
 
 @login_required
