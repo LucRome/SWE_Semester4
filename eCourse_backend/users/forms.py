@@ -1,18 +1,38 @@
-from django.forms import ModelForm, Form, ChoiceField, CharField, IntegerField
+from django.forms import ModelForm, Form, ChoiceField, CharField, IntegerField, PasswordInput, HiddenInput
+import string
+import random
 from users.models import User, Student, Lecturer, Office
+
+
+def get_random_pw():
+    return ''.join(
+        random.SystemRandom().choices(
+            string.ascii_uppercase +
+            string.digits,
+            k=15))
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password']
+        widgets = {
+            'password': HiddenInput(
+                attrs={
+                    'id': 'defaultPWField',
+                    'value': ''})}
 
 
 class StudentForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name',
-                  'email', 'matr_nr']
+                  'email', 'matr_nr', 'password']
+        widgets = {
+            'password': HiddenInput(
+                attrs={
+                    'id': 'defaultPWField',
+                    'value': ''})}
 
 # useradministration: filter forms
 

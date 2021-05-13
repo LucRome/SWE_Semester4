@@ -1,13 +1,13 @@
 {% extends 'lecturer/home_lecturer.html' %}
 
-{% block title %}Create Exercise{% endblock %}
-{% block site-title %}Create Exercise{% endblock %}
+{% block title %}Aufgabe Erstellen{% endblock %}
+{% block site-title %}Aufgabe Erstellen{% endblock %}
 
 {% block content %}
   {% if save_success %}
     <div class="alert alert-success alert-dismissible d-flex flex-wrap align-content-center">
       <i class="bi bi-check-circle-fill success-icon mr-2"></i>
-      <p class="mt-0 mb-0">Änderungen erfolgreich gespeichert</p>
+      <p class="mt-0 mb-0">Aufgabe erfolgreich erstellt</p>
       <button type="button" class="close" data-dismiss="alert">
         <i class="bi bi-x"></i>
       </button>
@@ -16,8 +16,7 @@
 
   <form method="post">
     {% csrf_token %}
-    {% comment %} {% include 'forms/bs4_text_form.html' with form=form %} {% endcomment %}
-    {{form.as_p}}
-    <button class="btn btn btn-danger" type="submit">User Erstellen</button>
+    {% include 'forms/bs4_text_form.html' with form=form %}
+    <button class="btn btn btn-danger" type="submit">Aufgabe Erstellen</button>
   </form>
 {% endblock %}

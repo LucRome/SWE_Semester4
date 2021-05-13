@@ -109,7 +109,7 @@ def create_course(request):
 
 
 @login_required
-@permission_required('course.delete_course', raise_exception=True)
+@permission_required('courses.delete_course', raise_exception=True)
 def delete_course(request, id):
     # TODO: use for delete course
     course_to_delete = get_object_or_404(Course, pk=id)
@@ -120,7 +120,7 @@ def delete_course(request, id):
 
 
 @login_required
-@permission_required('course.change_course', raise_exception=True)
+@permission_required('courses.change_course', raise_exception=True)
 def edit_course(request, id):
     update_success = False
     if request.method == 'POST':
