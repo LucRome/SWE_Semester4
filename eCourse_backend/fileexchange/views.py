@@ -128,7 +128,7 @@ def upload_file(request, id):
 
 
 @login_required
-def download_file(id):
+def download_file(request, id):
     file = get_object_or_404(Submission, pk=id)
     path = file.file.name
     f = open(path, 'rb').read()
