@@ -1,11 +1,5 @@
 {% extends base_template %}
 
-{% block navbar-content %}
-{% include "admin/navbar_content.html" %}
-
-
-{% endblock %}
-
 {% block title %}Kurs bearbeiten{% endblock title %}
 {% block site-title %}Kurs bearbeiten{% endblock site-title %}
 
@@ -22,11 +16,8 @@
 
   <form method="post">
     {% csrf_token %}
-    {% comment %} Button: Zurück zur Übersicht {% endcomment %}
-    <a href="{% url 'home' %}"><button class="btn btn-logoblue" type="button">Zurück</button></a>
-    {% comment %} Textbox: Kurs Daten {% endcomment %}
+    <a href="{% url 'home' %}"><button class="btn btn-danger" type="button">Zurück</button></a>
     {% include 'forms/bs4_text_form.html' with form=form %}
-    {% comment %} Button: Änderungen Speichern {% endcomment %}
     <div class="btn-group float-left">
         <a href="{% url 'delte_course' id=courseid %}">
           <button type="button"  class="btn btn-danger float-right">

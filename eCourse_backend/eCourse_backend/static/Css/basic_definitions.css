@@ -17,6 +17,10 @@
     color: white !important;
 }
 
+.input-half {
+    max-width: 200px;
+}
+
 .input-group-text {
     width: 40px;
 }

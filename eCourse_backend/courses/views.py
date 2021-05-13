@@ -15,44 +15,35 @@ from django.db.models import Q
 
 @xframe_options_exempt
 @login_required
-def course_student_list_iframe(request, id):
-    # TO:DO Filter students by coursename
-    if (request.user.type == 1 or request.user.type == 2):
+def detailed_course(request, id):
+    #office = 1; lecturer = 2
+    if (request.user.type == 1 or request.user.type ==
+            2 or request.user.is_superuser):
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
         students = course.student.all()
         # exercises
         exercise = Exercise.objects.filter(course_id=id)
 
-        # files
-        files = dir()
-        for e in exercise:
-            print(e.id)
-            files[e.id] = Submission.objects.filter(exercise=e.id)
-
         context = {
             'lecturer': lecturer,
             'students': students,
-            'exercise': exercise,
-            'files': files}
+            'exercise': exercise}
 
         return render(
             request,
-            'courses/iframes/course_student_list.html',
+            'courses/iframes/course_lecturer_officer.html',
             context)
 
     # student
     if (request.user.type == 3):
+        course = get_object_or_404(Course, pk=id)
         # exercises
         exercise = Exercise.objects.filter(course_id=id)
-        print(exercise)
 
-        files = dir()
-        for e in exercise:
-            files[e.id] = Submission.objects.filter(
-                (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
+        lecturer = course.lecturer
 
-        context = {'exercise': exercise, 'files': files}
+        context = {'exercise': exercise, 'lecturer': lecturer}
         return render(request, 'courses/iframes/course_student.html', context)
 
 
@@ -65,12 +56,23 @@ def course_overview(request, page=1):
             courses = Course.objects.all()
         else:
             courses = Course.objects.filter(
-                Q(student=user_id) | Q(lecturer_id=user_id))
+                Q(student=user_id) | Q(lecturer_id=user_id)).distinct()
 
     paginator = Paginator(courses, 10)
     page_obj = paginator.get_page(page)
 
+    if request.user.type == 1 or request.user.is_superuser:
+        base_template = 'admin/home_admin.html'
+    elif request.user.type == 2:
+        base_template = 'lecturer/home_lecturer.html'
+    elif request.user.type == 3:
+        base_template = 'student/home_student.html'
+    else:
+        base_template = 'home/home_auth.html'
+
     context = {
+        'base': base_template,
+        'type': request.user.type,
         'page_obj': page_obj,
     }
 
@@ -78,54 +80,8 @@ def course_overview(request, page=1):
 
 
 @login_required
-def detailed_course(request, id):
-    if request.method == 'GET':
-        course = get_object_or_404(Course, pk=id)
-        print('user type ', request.user.type)
-        # office user and lecturer
-        if (request.user.type == 1 or request.user.type == 2):
-            # course members
-            lecturer_id = course.lecturer_id
-            lecturer = User.objects.get(id=lecturer_id)
-            lecturer_name = lecturer.first_name + ' ' + lecturer.last_name
-            students = list()
-            for student in course.student.all():
-                student_name = student.first_name + ' ' + student.last_name
-                students.append(student_name)
-            # exercises
-            exercise = Exercise.objects.filter(course_id=id)
-
-            # files
-            files = dir()
-            for e in exercise:
-                print(e.id)
-                files[e.id] = Submission.objects.filter(exercise=e.id)
-
-            data = {
-                'lecturer': lecturer_name,
-                'students': students,
-                'exercise': exercise,
-                'files': files}
-
-        # student
-        if (request.user.type == 3):
-            # exercises
-            exercise = Exercise.objects.filter(course_id=id)
-            print(exercise)
-
-            files = dir()
-            for e in exercise:
-                files[e.id] = Submission.objects.filter(
-                    (Q(user=request.user.id) | Q(from_lecturer=1)), exercise=e.id)
-
-            data = {'exercise': exercise, 'files': files}
-
-    return render(request, 'courses/detail.html', data)
-
-
-@login_required
 @permission_required('courses.add_course', raise_exception=True)
-def create_course_admin(request):
+def create_course(request):
     success = False
     if request.method == 'POST':
         form = CourseForm(request.POST)
@@ -153,7 +109,7 @@ def create_course_admin(request):
 
 
 @login_required
-@permission_required('course.delete_course', raise_exception=True)
+@permission_required('courses.delete_course', raise_exception=True)
 def delete_course(request, id):
     # TODO: use for delete course
     course_to_delete = get_object_or_404(Course, pk=id)
@@ -164,15 +120,15 @@ def delete_course(request, id):
 
 
 @login_required
-@permission_required('course.change_course', raise_exception=True)
+@permission_required('courses.change_course', raise_exception=True)
 def edit_course(request, id):
-    updata_success = False
+    update_success = False
     if request.method == 'POST':
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(request.POST or None, instance=course_object)
         if form.is_valid():
             form.save()
-            updata_success = True
+            update_success = True
     else:
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
@@ -186,6 +142,6 @@ def edit_course(request, id):
         'form': form,
         'courseid': id,
         'base_template': base_template,
-        'update_success': updata_success}
+        'update_success': update_success}
 
     return render(request, 'courses/edit_course.html', context)
