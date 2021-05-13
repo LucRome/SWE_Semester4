@@ -33,7 +33,7 @@
   <form method="post" id="create_user_form">
     {% csrf_token %}
     {% include 'forms/bs4_text_form.html' with form=user_form %}
-    <button class="btn btn btn-danger" id="create_user_btn" type="submit">User Erstellen</button>
+    <button class="btn btn btn-logoblue" id="create_user_btn" type="submit">User Erstellen</button>
   </form>
   <script src="{% static 'JS/set_random_pw.js' %}"></script>
 {% endblock %}

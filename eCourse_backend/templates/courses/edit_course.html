@@ -16,7 +16,7 @@
 
   <form method="post">
     {% csrf_token %}
-    <a href="{% url 'home' %}"><button class="btn btn-danger" type="button">Zurück</button></a>
+    <a href="{% url 'home' %}"><button class="btn btn-logoblue" type="button">Zurück</button></a>
     {% include 'forms/bs4_text_form.html' with form=form %}
     <div class="btn-group float-left">
         <a href="{% url 'delte_course' id=courseid %}">
