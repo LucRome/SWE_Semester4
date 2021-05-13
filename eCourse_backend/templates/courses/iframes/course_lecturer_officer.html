@@ -48,7 +48,7 @@
           <td>{{e.submission_deadline}}</td>
           <td>{{e.description}}</td>
           <td>
-            <a href="#">
+            <a href="{% url 'exersice_site' id=e.id %}">
               <button type="button"  class="btn btn-danger float-right">
                 Anzeigen
               </button>
