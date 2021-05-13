@@ -3,7 +3,7 @@
 {% block content %}
   <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn btn-danger" type="submit">Hochladen</button>
+    {% include 'forms/bs4_text_form.html' with form=form %}
+    <button class="btn btn btn-logoblue" type="submit">Hochladen</button>
   </form>
 {% endblock %}

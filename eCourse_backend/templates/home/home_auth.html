@@ -13,14 +13,18 @@
     <h2 class="navbar-brand ml-auto">
       {{user.username}}
     </h2>
-    <img class="navbar-brand logo mr-0 p-0 bg-white" src="https://spng.pngfind.com/pngs/s/16-168603_download-login-icon-svg-hd-png-download.png">
-
-    {% comment %} <div class="d-flex ml-auto">
-      <h3 class="d-flex flex-wrap align-content-center text-white mr-3">
-        {{ user.username }}
-      </h3>
-      <img class="logo bg-white" src="https://spng.pngfind.com/pngs/s/16-168603_download-login-icon-svg-hd-png-download.png">
-    </div> {% endcomment %}
+    <h2 class="navbar-brand ml-md-2"> (Gruppe:
+      {% if user.type == 1 or user.is_superuser %}
+        Verwaltungsangestellte
+      {% elif user.type == 2 %}
+        Dozenten
+      {% elif user.type == 3 %}
+        Studenten
+      {% else %}
+        unbekannte Usergruppe
+      {% endif %}
+      )
+    </h2>
   {% endif %}
 {%endblock%}
 
