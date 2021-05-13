@@ -193,7 +193,7 @@ def exersice_site(request, id):
 
     data = {'files_student': files_student,
             'files_lecturer': files_lecturer,
-            'exersiceID': id}
+            'exersice_id': id}
     if request.user.type == 3:
         return render(request, 'file_exchange/student_exersice.html', data)
     elif (request.user.type == 1 or request.user.type == 2):
