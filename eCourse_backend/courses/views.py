@@ -16,7 +16,7 @@ from django.db.models import Q
 @xframe_options_exempt
 @login_required
 def detailed_course(request, id):
-    #officer = 1; lecturer = 2
+    #office = 1; lecturer = 2
     if (request.user.type == 1 or request.user.type == 2 or request.user.is_superuser):
         course = get_object_or_404(Course, pk=id)
         lecturer = course.lecturer
