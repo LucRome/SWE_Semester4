@@ -122,13 +122,13 @@ def delete_course(request, id):
 @login_required
 @permission_required('course.change_course', raise_exception=True)
 def edit_course(request, id):
-    updata_success = False
+    update_success = False
     if request.method == 'POST':
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(request.POST or None, instance=course_object)
         if form.is_valid():
             form.save()
-            updata_success = True
+            update_success = True
     else:
         course_object = get_object_or_404(Course, pk=id)
         form = CourseForm(model_to_dict(course_object))
@@ -142,6 +142,6 @@ def edit_course(request, id):
         'form': form,
         'courseid': id,
         'base_template': base_template,
-        'update_success': updata_success}
+        'update_success': update_success}
 
     return render(request, 'courses/edit_course.html', context)
