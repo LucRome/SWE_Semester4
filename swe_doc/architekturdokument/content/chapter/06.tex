@@ -1,5 +1,39 @@
-\chapter{Laufzeitsicht}
-In Kapitel \ref{sec:bausteine} wurde eine statische Sicht auf die Bausteine in der Anwendung gezeigt. Zur Laufzeit verhalten sich diese Bausteine allerdings nicht statisch sondern kommunizieren miteinander. Diese Kommunikationsbeziehungen sollen an ausgewählten Beispielen im Folgenden dargestellt werden.\\
-Ein Szenario, dass für das Projekt sehr wichtig ist, ist der Login. Dieser ist in Abbildung \ref{fib:Login} dargestellt. 
-Außerdem ist in Abbildung \ref{fib:anlegen} dargestellt wie \textcolor{magenta}{ja kein plan} angelegt wird.
-\textcolor{magenta}{hier Bilder einfügen... die muss man aber erstmal noch malen}
+\chapter{Bausteinsicht}
+\label{sec:bausteine}
+Die Bausteinsicht ist der Grundrissplan einer jeden Software. Für die Anwendung eCourse ist die Bausteinsicht in Abbildung \ref{fib:Bausteinsicht} dargestellt.
+Diese Darstellung ist eine statische Zerlegung des Systems in Bausteine. Diese Ansicht ermöglicht es vor allem die Kommunikation zwischen den Entwicklern untereinander bzw. mit dem Stakeholder zu erleichtern, da sie das System abstrahiert und dadurch von der Besprechung von Implementierungsdetails entbindet
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=1.0\textwidth]{bausteinsicht.png}
+\caption{Bausteinsicht für die Anwendung eCourse}
+\label{fib:Bausteinsicht}
+\end{figure}
+
+\section{Gesamtsystem}
+Durch eCourse soll es \gls{Studierende}n und \gls{Dozierende}n möglich sein Dateien untereinander auszutauschen. Ebenso sollen Verwaltungsangestellte einen Einblick in die ausgetauschten Dateien haben und verwaltende Tätigkeiten ausführen können. Diese drei Benutzergruppen greifen direkt auf die Anwendung eCourse zu. Es gibt keine weiteren Schnittstellen zu anderen Anwendungen, wie in Kapitel \ref{sec:kontext} bereits erläutert wurde. 
+
+\section{Überblick}
+Blickt man genauer in die Anwendung eCourse hinein, ergibt sich eine Aufteilung in \gls{Backend} und \gls{Frontend}.
+
+\subsection{Frontend}
+Das \gls{Frontend} beschreibt dabei den Teil der Anwendung, der näher am Nutzer liegt, es interagiert mit dem Benutzer. Es ist also die Schnittstelle zwischen Nutzer und der dahinter liegenden Logik der Anwendung. Alle drei Nutzergruppen haben Zugriff auf das \gls{Frontend}, wobei das \gls{Frontend} abhängig von der Nutzergruppe unterschiedlich mit dem Benutzer interagiert. Eine genaue Darstellung der Rechte die die jeweilige Nutzergruppe hat ist in \ref{fib:erlaubnis} zu finden.
+
+\subsection{Backend}
+Das \gls{Backend} ist dann im Gegensatz zum \gls{Frontend} die Logik hinter der Anwendung. Hier werden die Ergebnisse jeder Nutzerinteraktion berechnet. Genauere Details zum \gls{Backend} finden sich in Kapitel \ref{sec:Datenbank} und \ref{sec:Server}.
+
+\section{Detail}
+
+\subsection{WebInterface}
+\begin{figure}[H]
+\centering
+\includegraphics[height=1.0\textwidth]{erlaubnisdiagramm.png}
+\caption{Bausteinsicht für die Anwendung eCourse}
+\label{fib:erlaubnis}
+\end{figure}
+
+\subsection{Datenbank}
+\label{sec:Datenbank}
+
+\subsection{Server}
+\label{sec:Server}
