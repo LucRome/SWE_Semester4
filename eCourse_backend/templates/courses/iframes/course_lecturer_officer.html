@@ -48,7 +48,11 @@
           <td>{{e.submission_deadline}}</td>
           <td>{{e.description}}</td>
           <td>
-            <a href="{% url 'exersice_site' id=e.id %}">
+            {% if user.type == 1 or user.is_superuser %}
+              <a target="_top" href="{% url 'exersice_site' id=e.id %}">
+            {% else %}
+              <a href="{% url 'exersice_site' id=e.id %}">
+            {% endif %}
               <button type="button"  class="btn btn-danger float-right">
                 Anzeigen
               </button>
