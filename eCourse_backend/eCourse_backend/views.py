@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required, login_required
+from django.shortcuts import redirect
 from users.models import User
 
 # the view for the homepage
@@ -10,10 +11,10 @@ def homepage(request):
     type = request.user.type
 
     if type == 1 or request.user.is_superuser:
-        return render(request, 'admin/home_admin.html')
+        return redirect('course_overview', page=1)
     elif type == 2:
-        return render(request, 'lecturer/home_lecturer.html')
+        return redirect('course_overview', page=1)
     elif type == 3:
-        return render(request, 'student/home_student.html')
+        return redirect('course_overview', page=1)
     else:
         return render(request, 'home/home_auth.html')
