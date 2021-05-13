@@ -32,6 +32,7 @@ def user_administration(request):
 @login_required
 @permission_required('users.manage_users', raise_exception=True)
 def create_lecturer_iframe(request):
+    user_pw = ''
     save_success = False
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -41,13 +42,16 @@ def create_lecturer_iframe(request):
                 email=get_value(user_form, 'email'),
                 first_name=get_value(user_form, 'first_name'),
                 last_name=get_value(user_form, 'last_name'),
+                password=get_value(user_form, 'password')
             )
             save_success = True
+            user_pw = get_value(user_form, 'password')
     else:
         user_form = UserForm()
     context = {
         'user_form': user_form,
         'success': save_success,
+        'user_pw': user_pw
     }
 
     return render(
@@ -64,6 +68,7 @@ def create_lecturer_iframe(request):
 @permission_required('users.manage_users', raise_exception=True)
 def create_officeuser_iframe(request):
     save_success = False
+    user_pw = ''
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         if user_form.is_valid():
@@ -72,13 +77,16 @@ def create_officeuser_iframe(request):
                 email=get_value(user_form, 'email'),
                 first_name=get_value(user_form, 'first_name'),
                 last_name=get_value(user_form, 'last_name'),
+                password=get_value(user_form, 'password')
             )
             save_success = True
+            user_pw = get_value(user_form, 'password')
     else:
         user_form = UserForm()
     context = {
         'user_form': user_form,
         'success': save_success,
+        'user_pw': user_pw
     }
 
     return render(
@@ -94,6 +102,7 @@ def create_officeuser_iframe(request):
 @ permission_required('users.manage_users', raise_exception=True)
 def create_student_iframe(request):
     save_success = False
+    user_pw = ''
     if request.method == 'POST':
         user_form = StudentForm(request.POST)
         if user_form.is_valid():
@@ -103,13 +112,16 @@ def create_student_iframe(request):
                 first_name=get_value(user_form, 'first_name'),
                 last_name=get_value(user_form, 'last_name'),
                 matr_nr=get_value(user_form, 'matr_nr'),
+                password=get_value(user_form, 'password')
             )
             save_success = True
+            user_pw = get_value(user_form, 'password')
     else:
         user_form = StudentForm()
     context = {
         'user_form': user_form,
         'success': save_success,
+        'user_pw': user_pw
     }
 
     return render(
