@@ -4,14 +4,6 @@ import random
 from users.models import User, Student, Lecturer, Office
 
 
-def get_random_pw():
-    return ''.join(
-        random.SystemRandom().choices(
-            string.ascii_uppercase +
-            string.digits,
-            k=15))
-
-
 class UserForm(ModelForm):
     class Meta:
         model = User
