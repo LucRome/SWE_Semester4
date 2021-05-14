@@ -1,0 +1,14 @@
+{# Contains the links in the navbar #}
+
+<ul class="navbar-nav">
+  {# Link: Kursübersicht #}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'course_overview' page=1 %}">Kursübersicht</a>
+  </li>
+</ul>
+
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">sign-out</a>
+  </li>
+</ul>
