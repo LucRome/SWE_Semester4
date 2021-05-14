@@ -4,14 +4,6 @@ import random
 from users.models import User, Student, Lecturer, Office
 
 
-def get_random_pw():
-    return ''.join(
-        random.SystemRandom().choices(
-            string.ascii_uppercase +
-            string.digits,
-            k=15))
-
-
 class UserForm(ModelForm):
     class Meta:
         model = User
@@ -20,7 +12,16 @@ class UserForm(ModelForm):
             'password': HiddenInput(
                 attrs={
                     'id': 'defaultPWField',
-                    'value': ''})}
+                    'value': ''
+                }
+            )
+        }
+        labels = {
+            'username': 'Username',
+            'first_name': 'Vorname',
+            'last_name': 'Nachname',
+            'email': 'E-Mail'
+        }
 
 
 class StudentForm(ModelForm):
@@ -32,7 +33,17 @@ class StudentForm(ModelForm):
             'password': HiddenInput(
                 attrs={
                     'id': 'defaultPWField',
-                    'value': ''})}
+                    'value': ''
+                }
+            )
+        }
+        labels = {
+            'username': 'Username',
+            'first_name': 'Vorname',
+            'last_name': 'Nachname',
+            'email': 'E-Mail',
+            'matr_nr': 'Matr. Nr.'
+        }
 
 # useradministration: filter forms
 

@@ -15,15 +15,14 @@
     </h2>
     <h2 class="navbar-brand ml-md-2"> (Gruppe:
       {% if user.type == 1 or user.is_superuser %}
-        Verwaltungsangestellte
+        Verwaltungsangestellte)
       {% elif user.type == 2 %}
-        Dozenten
+        Dozenten)
       {% elif user.type == 3 %}
-        Studenten
+        Studenten)
       {% else %}
-        unbekannte Usergruppe
+        unbekannte Usergruppe)
       {% endif %}
-      )
     </h2>
   {% endif %}
 {%endblock%}
