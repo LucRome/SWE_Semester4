@@ -25,6 +25,9 @@ Das \gls{Backend} ist dann im Gegensatz zum \gls{Frontend} die Logik hinter der 
 \section{Detail}
 
 \subsection{WebInterface}
+Das \gls{Frontend} besteht im Wesentlichen aus einem \gls{Webinterface}. Über eine Webseite, die als \gls{Webinterface} dient, können die Benutzer verschiedene Aktivitäten ausführen. Abhnängig davon, welcher Gruppe der Benutzer angehört sind unterschiedliche Aktionen möglich. 
+Diese Aktivitäten sind in Abbildung \ref{fib:erlaubnis} dargestellt.
+
 \begin{figure}[H]
 \centering
 \includegraphics[height=1.0\textwidth]{erlaubnisdiagramm.png}
@@ -34,6 +37,10 @@ Das \gls{Backend} ist dann im Gegensatz zum \gls{Frontend} die Logik hinter der 
 
 \subsection{Datenbank}
 \label{sec:Datenbank}
+Ein Teil des \gls{Backend}s ist die Datenbank. Diese enthält alle Daten, die während des Gebrauchs der Anwendung anfallen. \\
+Im Wesentlichen stellt die Datenbank das Grundgerüst der Anwendung, auf der die Logik aufbaut.
+
 
 \subsection{Server}
 \label{sec:Server}
+Der Server stellt dann die Logik des \gls{Backend}s. Hier werden die Daten, die in der Datenbank vorliegen verarbeitet und für die Benutzer aufbereitet. 

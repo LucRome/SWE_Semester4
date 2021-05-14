@@ -1,29 +1,38 @@
-\chapter{Entwurfsentscheidungen}
-\label{sec:Entwurf}
-Wichtige Entscheidungen die Maßgeblich die Architektur und den Entwurf der Anwendung geprägt haben sind zum einen die verwendeten Programmiersprachen und \gls{Framework}s und zum anderen weitere Programme die zur Entwicklung beigetragen haben.
-Die Entscheidung für die verwendeten Werkzeuge ist in Tabelle \ref{tab:Entwurfsentscheidungen} festgehalten. Des Weiteren trug zu dieser Entscheidung auch bei, dass alle Werkzeuge kostenfrei sind und zumeist auch Open-Source. Dadurch sinkt auch die Gefahr von Sicherheitslücken innerhalb der Anwendung eCourse.
+\chapter{Qualitätsanforderungen}
+Da verschiedene Qualitätsanforderungen die Architekturentscheidungen oft maßgeblich beeinflussen, werden in diesen Kapitel die für das Projekt eCourse relevanten Qualitätsanforderungen behandelt. Die Erläuterungen zum Qualitätsbaum sind in Kapitel \ref{sec:q2} genauer aufgeführt.
 
-\begin{table}[H]
+\section{Qualitätsbaum}
+In Abbildung \ref{fib:baum} ist der Qualitätsbaum zu sehen. Außgehend von der Qualität führt der Baum über eine bündelnde Zwischenstufe zu den konkreten Anforderungen. Diese sind als Blätter des Baumes dargestellt und mit einer Priorität versehen. Dabei bedeutet die Ziffer 1 die höchte Priorität. Die Ziffer 2 kennzeichnet Anforderungen, die nur Sekundär zum gelingen des Projektes beitragen.
+
+\begin{figure}[H]
 \centering
-\begin{tabularx}{\textwidth}{|l|l|X|} 
- \hline 
-Software/Programme/Plugins & Name & Erklärung \\ 
-\hline
-Versionierungsverwaltung & Git & Jeder Mitglied hatte schon einen Account. Hat sich in der Vergangenheit als zuverlässig erwiesen \\ 
-\hline
-Framework & Bootstrap & Einfache Form von CSS \\ 
-\hline
- & Django & Mächtiges Python WebFramework \\ 
-\hline
-Programmiersprachen & Python & Einige Teammitglieder haben bereits Erfahrungen mit WebDevelopment in Python \\ 
-\hline
- & HTML & Grundlegende Markup Sprache  \\ 
-\hline
- & JavaScript & Um HTML dynamisch zu gestalten \\ 
-\hline
-Datenbank & sqlite & Bereits in Django integriert durch Abstrahierung kann DB ausgetauscht werden \\ 
-\hline
-\end{tabularx}
-\caption{Entwurfsentscheidungen im Projekt eCourse}
-\label{tab:Entwurfsentscheidungen}
-\end{table}
+\includegraphics[height=0.3\textwidth]{qualitätsbaum.png}
+\caption{Qualitätsbaum im Projekt eCourse}
+\label{fib:baum}
+\end{figure}
+
+
+\section{Qualitätsszenarien}
+\label{sec:q2}
+\subsection{Datenintegrität}
+Unter Datenintegrität versteht man die Gesamtheit aller Maßnahmen die zum Schutz der Daten in einer Datenbank beitragen. Zu den Untergeordneten Zielen der Datenintegrität gehört neben dem Schutz der Daten vor externen Einflüssen auch die Vertraulichkeit der Daten die in Kapitel \ref{sec:vertrauen} behandelt wird.
+
+\subsection{Verfügbarkeit}
+Verfügbarkeit kennzeichnet sich als der Prozentsatz der Laufzeit in dem die Anwendung online lauffähig ist. Bei eCourse ist es besonders wichtig, dass die Anwendung über den Tag hinweg lauffähig ist. In der Nacht, beispielsweise zwischen 1 Uhr und 5 Uhr morgens ist die Wahrscheinlichkeit sehr gering, dass Daten ausgetauscht werden müssen. In dieser Zeit kann und darf die Verfügbarkeit geringer sein (etwa durch Wartung). Daher erhält die Verfügbarkeit im Projekt eCourse ein geringere Priorität.
+
+\subsection{Benutzerzahl}
+Da eCourse eine Anwendung ist, die allen Angehörigen einer Hochschule zugänglich sein soll, wird Wert darauf gelegt, dass die Anwendung von vielen Personen gleichzeitig verwendet werden kann.
+
+\subsection{Datenvolumen}
+Ebenso wie bei der Benutzeranzahl, ist es auch beim Datenvolumen wichtig, dass viele Daten gleichzeitig verarbeitet werden können und die Datenbank auch eine große Menge an Daten aufnehmen kann. Dafür ist vor allem die im Hintergrund agierende Software entscheident. Diese wird allerdings vom Kunden gestellt. Daher wird das Datenvolumen nur als sekundäres Qualitätsziel eingestuft.
+
+\subsection{Latenz}
+Die Latenzzeit beschreibt die Zeit zwischen dem Auslösen einer Aktion und dem Eintreten des daraufhin erwarteten Ereignisses.
+Auch die Latenz wird als sekundäres Qualitätsziel eingestuft, da die Datenintegrität ein hoch priorisiertes Qualitätsziel ist. Um dieses Ziel zu realisieren, muss ein gewisses Maß an Rechenzeit in Kauf genommen werden.
+
+\subsection{Vertrauliche Daten}
+\label{sec:vertrauen}
+Unter vertraulichen Daten verstehen sich personenbezogene Daten, die es um jeden Preis zu schützen gilt. Daher wird dieser Punkt für die Anwendung eCourse auch hoch priorisiert, da über die Plattform unter Umständen auch sensible Daten der Hochschulangehörigen ausgetauscht werden.
+
+\subsection{konsistente Daten}
+Daten werden auf einer Datenbank dann als konsistent bezeichnet, wenn sie korrekt sind. Dies ist in einer Anwendung wie eCourse besonders wichtig, da hier \gls{bearbeitete Abgabe}n von \gls{Studierende}n mit den \gls{Dozierende}n ausgetauscht werden. Da es sich dabei auch um Prüfungsleistungen handeln kann, muss die Korrektheit der Dateien in jedem Fall gewährleistet sein.
