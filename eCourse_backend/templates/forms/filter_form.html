@@ -1,0 +1,11 @@
+{# filter form #}
+<div class="card mb-3">
+  <div class="card-header" data-toggle="collapse" data-target="#filter_body">Filter</div>
+  <div class="card-body collapse" id="filter_body">
+      <form method="post">
+        {% csrf_token %}
+        {% include 'forms/bs4_text_form.html' with form=filter_form %}
+        <button class="btn btn btn-logoblue" type="submit">Filtern</button>
+      </form>
+  </div>
+</div>

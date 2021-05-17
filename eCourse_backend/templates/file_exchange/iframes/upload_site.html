@@ -1,22 +1,19 @@
-{% extends 'lecturer/home_lecturer.html' %}
-
-{% block title %}Aufgabe Erstellen{% endblock %}
-{% block site-title %}Aufgabe Erstellen{% endblock %}
+{% extends 'iframe_template.html' %}
 
 {% block content %}
-  {% if save_success %}
+  {% if upload_success %}
     <div class="alert alert-success alert-dismissible d-flex flex-wrap align-content-center">
       <i class="bi bi-check-circle-fill success-icon mr-2"></i>
-      <p class="mt-0 mb-0">Aufgabe erfolgreich erstellt</p>
+      <p class="mt-0 mb-0">Datei erfolgreich hochgeladen</p>
       <button type="button" class="close" data-dismiss="alert">
         <i class="bi bi-x"></i>
       </button>
     </div>
   {% endif %}
 
-  <form method="post">
+  <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {% include 'forms/bs4_text_form.html' with form=form %}
-    <button class="btn btn btn-logoblue" type="submit">Aufgabe Erstellen</button>
+    <button class="btn btn btn-logoblue" type="submit">Hochladen</button>
   </form>
 {% endblock %}
