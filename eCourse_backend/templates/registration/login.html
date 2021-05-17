@@ -4,13 +4,6 @@
   Login
 {% endblock %}
 
-{% block navbar-content %}
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#">Sign up</a> {# TODO: make work #}
-    </li>
-  </ul>
-{% endblock %}
 
 {% block site-title %}
   Login
@@ -18,40 +11,13 @@
 
 
 {% block content %}
-  {% if next %}
-    {% if user.is_authenticated %}
-      <div class="container-fluid border-dark border" style="background-color: lightgray;">
-        <div class="row">
-          <div class="col-sm-1 align-content-center">
-            <span class="bi bi-exclamation-octagon-fill text-danger errorIcon"></span>
-          </div>
-          <div class="col-sm-11">
-            <h5>Your account doesn't have access to this page.</h5>
-            <h5>To proceed, please login with an account that has access.</h5>
-          </div>
-        </div>
-      </div>
-    {% else %}
-    <div class="container-fluid border-dark border" style="background-color: lightgray;">
-      <div class="row">
-        <div class="col-sm-1 align-content-center">
-          <span class="bi bi-exclamation-octagon-fill text-danger errorIcon"></span>
-        </div>
-        <div class="col-sm-11">
-          <h5>Please login to see this page.</h5>
-        </div>
-      </div>
-    </div>
-    {% endif %}
-  {% endif %}
-
-  <form method="post">
+    <form method="post">
     {% csrf_token %}
     
     {% include 'forms/bs4_text_form.html' with form=form %}
 
     <div class="container-fluid">
-      <button class="btn btn-lg btn-danger" type="submit">Login</button>
+      <button class="btn btn-lg btn-logoblue" type="submit">Login</button>
     </div>
   </form>
 
