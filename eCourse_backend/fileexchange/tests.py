@@ -31,7 +31,6 @@ class FileExchangeTestCase(TestCase):
         }
         Lecturer.objects.create(lecturer_form)
 
-
     def test_deny_anonymous_view_fileexchange(self):
         """
         Basically tests if the '@login_required' works/is set up everywhere
@@ -41,11 +40,9 @@ class FileExchangeTestCase(TestCase):
         response = self.client.get(reverse('overview'))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertRedirects(self.client.get(reverse('overview')),
-            '/accounts/login/?next=/file_exchange/overview/')
+                             '/accounts/login/?next=/file_exchange/overview/')
 
-        #response = self.client.get(reverse('create_exercise'), {}
-
-
+        # response = self.client.get(reverse('create_exercise'), {}
 
     def test_filename_view(self):
         self.assertEqual(

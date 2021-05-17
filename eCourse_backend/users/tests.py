@@ -29,55 +29,97 @@ class UserTestCase(TestCase):
         # check the URLs that need no parameters
         response = self.client.get(reverse('user_administration'))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertRedirects(self.client.get(reverse('user_administration')), '/accounts/login/?next=/users/admin/user_administration/')
+        self.assertRedirects(
+            self.client.get(
+                reverse('user_administration')),
+            '/accounts/login/?next=/users/admin/user_administration/')
 
         response = self.client.get(reverse('createlecturer_admin_iframe'))
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
-        self.assertRedirects(self.client.get(reverse('createlecturer_admin_iframe')), '/accounts/login/?next=/users/admin/iframes/create_lecturer')
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            self.client.get(
+                reverse('createlecturer_admin_iframe')),
+            '/accounts/login/?next=/users/admin/iframes/create_lecturer')
 
         # check the URLs that need an object/ID
-        response = self.client.get(reverse('createofficeuser_admin_iframe'), {
-                                   'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com'})
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
+        response = self.client.get(
+            reverse('createofficeuser_admin_iframe'), {
+                'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com'})
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertRedirects(self.client.get(reverse('createofficeuser_admin_iframe'), {
-                                    'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com'}),
+            'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com'}),
             '/accounts/login/?next=/users/admin/iframes/create_officeuser%3Fusername%3Da%26first_name%3Da%26last_name%3Da%26email%3Da%2540a.com')
 
-        response = self.client.get(reverse('createstudent_admin_iframe'), {
-                                   'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com', 'matr_nr': '420'})
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
+        response = self.client.get(
+            reverse('createstudent_admin_iframe'), {
+                'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com', 'matr_nr': '420'})
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertRedirects(self.client.get(reverse('user_administration'), {
-                                    'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com', 'matr_nr': '420'}),
+            'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com', 'matr_nr': '420'}),
             '/accounts/login/?next=/users/admin/user_administration/%3Fusername%3Da%26first_name%3Da%26last_name%3Da%26email%3Da%2540a.com%26matr_nr%3D420')
 
-        response = self.client.get(reverse('studentlist_admin_iframe', kwargs={'page': 1}))
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
-        self.assertRedirects(self.client.get(reverse('studentlist_admin_iframe', kwargs={'page': 1})),
-        '/accounts/login/?next=/users/admin/iframes/studentlist/page1')
+        response = self.client.get(
+            reverse(
+                'studentlist_admin_iframe',
+                kwargs={
+                    'page': 1}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            self.client.get(
+                reverse(
+                    'studentlist_admin_iframe',
+                    kwargs={
+                        'page': 1})),
+            '/accounts/login/?next=/users/admin/iframes/studentlist/page1')
 
-        response = self.client.get(reverse('lecturerlist_admin_iframe', kwargs={'page': 1}))
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
-        self.assertRedirects(self.client.get(reverse('lecturerlist_admin_iframe', kwargs={'page': 1})),
-        '/accounts/login/?next=/users/admin/iframes/lecturerlist/page1')
+        response = self.client.get(
+            reverse(
+                'lecturerlist_admin_iframe',
+                kwargs={
+                    'page': 1}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            self.client.get(
+                reverse(
+                    'lecturerlist_admin_iframe',
+                    kwargs={
+                        'page': 1})),
+            '/accounts/login/?next=/users/admin/iframes/lecturerlist/page1')
 
-        response = self.client.get(reverse('adminlist_admin_iframe', kwargs={'page': 1}))
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
-        self.assertRedirects(self.client.get(reverse('adminlist_admin_iframe', kwargs={'page': 1})),
-        '/accounts/login/?next=/users/admin/iframes/adminstafflist/page1')
+        response = self.client.get(
+            reverse(
+                'adminlist_admin_iframe',
+                kwargs={
+                    'page': 1}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            self.client.get(
+                reverse(
+                    'adminlist_admin_iframe',
+                    kwargs={
+                        'page': 1})),
+            '/accounts/login/?next=/users/admin/iframes/adminstafflist/page1')
 
         response = self.client.get(
             reverse('deleteuser_admin_iframe', kwargs={'id': '123'}))
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertRedirects(self.client.get(
             reverse('deleteuser_admin_iframe', kwargs={'id': '123'})),
-        '/accounts/login/?next=/users/admin/iframes/deleted_user/123')
+            '/accounts/login/?next=/users/admin/iframes/deleted_user/123')
 
         response = self.client.get(
-            reverse('edituser_admin_modalcontent_iframe', kwargs={'id': '123'}))
-        self.assertEqual(response.status_code, HTTPStatus.FOUND) 
-        self.assertRedirects(self.client.get(
-            reverse('edituser_admin_modalcontent_iframe', kwargs={'id': '123'})),
-        '/accounts/login/?next=/users/admin/iframes/edit_student/123')
+            reverse(
+                'edituser_admin_modalcontent_iframe',
+                kwargs={
+                    'id': '123'}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            self.client.get(
+                reverse(
+                    'edituser_admin_modalcontent_iframe',
+                    kwargs={
+                        'id': '123'})),
+            '/accounts/login/?next=/users/admin/iframes/edit_student/123')
 
     def test_user_administration(self):
         self.client.force_login(self.my_admin)
@@ -129,7 +171,9 @@ class UserTestCase(TestCase):
         response = self.client.post(
             reverse('createlecturer_admin_iframe'), user_form)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertFalse(Lecturer.objects.filter(last_name='Testnachnamex').exists())
+        self.assertFalse(
+            Lecturer.objects.filter(
+                last_name='Testnachnamex').exists())
 
     def test_create_officeuser_view(self):
         self.client.force_login(self.my_admin)
@@ -207,7 +251,9 @@ class UserTestCase(TestCase):
         self.assertTrue(Student.objects.filter(
             username='testerino1').exists())
         self.assertTrue(Student.objects.get(username='testerino1').type == 3)
-        self.assertTrue(Student.objects.get(username='testerino1').first_name == 'Testvorname1')
+        self.assertTrue(
+            Student.objects.get(
+                username='testerino1').first_name == 'Testvorname1')
 
         my_id = Student.objects.get(username='testerino1').id
         user_form2 = {
@@ -218,9 +264,15 @@ class UserTestCase(TestCase):
             'matr_nr': '69421000',
         }
         response = self.client.post(
-            reverse('edituser_admin_modalcontent_iframe', kwargs={'id': my_id}), user_form2)
+            reverse(
+                'edituser_admin_modalcontent_iframe',
+                kwargs={
+                    'id': my_id}),
+            user_form2)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTrue(Student.objects.get(username='testerino1').first_name == 'Ratzefatz')
+        self.assertTrue(
+            Student.objects.get(
+                username='testerino1').first_name == 'Ratzefatz')
 
     def test_delete_user_view(self):
         self.client.force_login(self.my_admin)
