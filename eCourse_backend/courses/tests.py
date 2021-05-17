@@ -4,30 +4,19 @@ from django.urls import reverse
 from django.db import IntegrityError
 
 from django.core.management import call_command
-import logging
 
+from users.models import Student
+from users.models import Lecturer
 from .models import *
 from .views import *
 
 # Create your tests here.
 class CoursesTestCase(TestCase):
+    
     def setUp(self):
         call_command('loadperms', 'groups.yml')
         self.my_admin = User.objects.create_superuser('admin', 'admin@admin.com', 'admin123')
-        self.logger = logging.getLogger('django.db.backends')
-
-        """
-        user_form = {
-            'username': 'testilon',
-            'first_name': 'Testvorname3',
-            'last_name': 'Testnachname3',
-            'email': 'test3@test.com',
-            'type': 'Lecturer'
-        }
         
-        response = self.client.post(
-            reverse('createlecturer_admin_iframe'), user_form)
-        """
     def test_courses_without_login(self):
         self.client.logout();
 
@@ -44,32 +33,55 @@ class CoursesTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
     def test_create_course_form(self):
+        s = Student(
+            username= 'testilon2',
+            first_name= 'Testvorname4',
+            last_name= 'Testnachname4',
+            email= 'test4@test.com'
+        )
+        s.save()
+        l = Lecturer(
+            username= 'testilon',
+            first_name= 'Testvorname3',
+            last_name= 'Testnachname3',
+            email= 'test3@test.com'
+        )
+        l.save()
+
         course_form = {
-            'lecturer': 'testilon',
+            'lecturer': l.id,
             'start_date': '2021-06-09',
             'end_date': '2023-06-09',
-            'student': 2,
-            'id': 5,
-            'lecturer_id': 6,
-            'name': 'TestCourse',
-            'exercise': ''
+            'student': [s.id],
+            'name': 'TestCourse'
         }
         course = CourseForm(course_form)
-        course.is_valid()
-        """
-        self.logger.error('course.errors')
-        #self.assertTrue()
-        """
-        #self.assertTrue(course.is_valid())
+        self.assertTrue(course.is_valid())
         course.save()
         
     
     def test_create_course_view(self):
         self.client.force_login(self.my_admin)
+        s = Student(
+            username= 'testilon2',
+            first_name= 'Testvorname4',
+            last_name= 'Testnachname4',
+            email= 'test4@test.com'
+        )
+        s.save()
+        l = Lecturer(
+            username= 'testilon',
+            first_name= 'Testvorname3',
+            last_name= 'Testnachname3',
+            email= 'test3@test.com'
+        )
+        l.save()
+
         course_form = {
-            'Lecturer': 'testilon',
-            'start_date': '10.12.2010',
-            'end_date': '10.12.2012',
+            'lecturer': l.id,
+            'start_date': '2021-06-09',
+            'end_date': '2023-06-09',
+            'student': [s.id],
             'name': 'TestCourse'
         }
         
@@ -79,3 +91,24 @@ class CoursesTestCase(TestCase):
 
         query_set = Course.objects.all()
         self.assertTrue(Course.objects.filter(name='TestCourse').exists())
+
+        response = self.client.post(
+            reverse('delete_course', args=(1,)))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+        query_set = Course.objects.all()
+        self.assertFalse(Course.objects.filter(name='TestCourse').exists())
+    """
+    def test_delete_course_view(self):
+        self.client.force_login(self.my_admin)
+
+        query_set = Course.objects.all()
+        self.assertTrue(Course.objects.filter(name='TestCourse').exists())
+
+        response = self.client.post(
+            reverse('delete_course', args=(1,)))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+        query_set = Course.objects.all()
+        self.assertFalse(Course.objects.filter(name='TestCourse').exists())
+    """
