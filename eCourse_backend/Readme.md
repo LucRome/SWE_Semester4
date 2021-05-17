@@ -25,9 +25,8 @@ Install with pip
 
 Execute with:
 ```
-coverage run ./*/tests.py --settings=test_sqlite --parallel=1
+coverage run --source='.' manage.py test users courses fileexchange
 ```
-oder so ähnlich. noch nicht ganz sicher tbh
 
 Generate the html report by running:
 ```
