@@ -33,14 +33,36 @@ class UserTestCase(TestCase):
         response = self.client.get(reverse('createlecturer_admin_iframe'))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
 
-        """
         # check the URLs that need an object/ID
-        response = self.client.get(reverse('deleteuser_admin_iframe'))
+        response = self.client.get(reverse('createofficeuser_admin_iframe'), {
+                                   'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com'})
         self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
 
-        response = self.client.get(reverse('edituser_admin_modalcontent_iframe'))
+        response = self.client.get(reverse('createstudent_admin_iframe'), {
+                                   'username': 'a', 'first_name': 'a', 'last_name': 'a', 'email': 'a@a.com', 'matr_nr': '420'})
         self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
-        """
+
+        response = self.client.get(reverse('studentlist_admin_iframe', kwargs={'page': 1}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
+
+        response = self.client.get(reverse('lecturerlist_admin_iframe', kwargs={'page': 1}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
+
+        response = self.client.get(reverse('adminlist_admin_iframe', kwargs={'page': 1}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
+
+        response = self.client.get(
+            reverse('deleteuser_admin_iframe', kwargs={'id': '123'}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
+
+        response = self.client.get(
+            reverse('edituser_admin_modalcontent_iframe', kwargs={'id': '123'}))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)  # 404
+
+    def test_user_administration(self):
+        self.client.force_login(self.my_admin)
+        response = self.client.get(reverse('user_administration'))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_create_student_form(self):
         student_form = {
@@ -74,6 +96,20 @@ class UserTestCase(TestCase):
         self.assertTrue(Lecturer.objects.filter(
             username='testerino3').exists())
         self.assertTrue(Lecturer.objects.get(username='testerino3').type == 2)
+
+    def test_create_lecturer_view_should_fail(self):
+        self.client.force_login(self.my_admin)
+
+        # field missing in the form -> form.is_vaild() should fail
+        user_form = {
+            'last_name': 'Testnachnamex',
+            'email': 'testx@test.com'
+        }
+
+        response = self.client.post(
+            reverse('createlecturer_admin_iframe'), user_form)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertFalse(Lecturer.objects.filter(last_name='Testnachnamex').exists())
 
     def test_create_officeuser_view(self):
         self.client.force_login(self.my_admin)
@@ -151,11 +187,20 @@ class UserTestCase(TestCase):
         self.assertTrue(Student.objects.filter(
             username='testerino1').exists())
         self.assertTrue(Student.objects.get(username='testerino1').type == 3)
+        self.assertTrue(Student.objects.get(username='testerino1').first_name == 'Testvorname1')
 
         my_id = Student.objects.get(username='testerino1').id
+        user_form2 = {
+            'username': 'testerino1',
+            'first_name': 'Ratzefatz',
+            'last_name': 'Testnachname1',
+            'email': 'test1@test.com',
+            'matr_nr': '69421000',
+        }
         response = self.client.post(
-            reverse('edituser_admin_modalcontent_iframe', kwargs={'id': my_id}))
+            reverse('edituser_admin_modalcontent_iframe', kwargs={'id': my_id}), user_form2)
         self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTrue(Student.objects.get(username='testerino1').first_name == 'Ratzefatz')
 
     def test_delete_user_view(self):
         self.client.force_login(self.my_admin)
