@@ -62,7 +62,7 @@ class CoursesTestCase(TestCase):
         self.assertTrue(course.is_valid())
         course.save()
 
-    def test_create_course_view(self):
+    def test_create_and_delete_course_view(self):
         self.client.force_login(self.my_admin)
         s = Student(
             username='testilon2',
@@ -87,30 +87,38 @@ class CoursesTestCase(TestCase):
             'name': 'TestCourse'
         }
 
+        course_form2 = {
+            'lecturer': l.id,
+            'start_date': '2021-06-09',
+            'end_date': '2023-06-09',
+            'student': [s.id],
+            'name': 'ChangedCourse'
+        }
+
         response = self.client.post(
             reverse('create_course'), course_form)
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
         query_set = Course.objects.all()
         self.assertTrue(Course.objects.filter(name='TestCourse').exists())
+        my_id = Course.objects.get(name='TestCourse').id
 
         response = self.client.post(
-            reverse('delete_course', args=(1,)))
+            reverse('edit_course', kwargs={'id': my_id}), course_form2)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTrue(Course.objects.filter(name='ChangedCourse').exists())
+
+        response = self.client.post(
+            reverse('detailed_course', args=(my_id,)))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        """
+        response = self.client.post(
+            reverse('course_overview', kwargs={'page': 1}))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        """
+        response = self.client.post(
+            reverse('delte_course', args=(my_id,)))
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
         query_set = Course.objects.all()
         self.assertFalse(Course.objects.filter(name='TestCourse').exists())
-    """
-    def test_delete_course_view(self):
-        self.client.force_login(self.my_admin)
-
-        query_set = Course.objects.all()
-        self.assertTrue(Course.objects.filter(name='TestCourse').exists())
-
-        response = self.client.post(
-            reverse('delete_course', args=(1,)))
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-
-        query_set = Course.objects.all()
-        self.assertFalse(Course.objects.filter(name='TestCourse').exists())
-    """

@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import Group
 from users.models import User
 
-USER_NUM  = range(20)
+USER_NUM = range(20)
 
 USER_GROUPS = [
     'office_users',
@@ -14,14 +14,19 @@ USER_GROUPS = [
     'student_users',
 ]
 
-__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+__location__ = os.path.realpath(
+    os.path.join(
+        os.getcwd(),
+        os.path.dirname(__file__)))
 DIR = os.path.join(__location__, 'data_names')
+
 
 def read_surenames():
     file = os.path.join(DIR, 'surenames.txt')
     with open(file) as f:
         content = [x.strip() for x in f]
     return content
+
 
 def read_prenames():
     file = os.path.join(DIR, 'prenames.csv')
@@ -30,8 +35,10 @@ def read_prenames():
         content = [lines[0] for lines in csv_reader]
     return content
 
+
 class Command(BaseCommand):
-    help = 'Create ' + str(USER_NUM) + ' random users that can be used to test the application'
+    help = 'Create ' + \
+        str(USER_NUM) + ' random users that can be used to test the application'
 
     def handle(self, *args, **options):
         first_names = read_prenames()
@@ -65,4 +72,3 @@ class Command(BaseCommand):
                 self.style.SUCCESS(
                     'Successfully created testuser of type {} with username: {}'.format(
                         t, u.username)))
-                        
