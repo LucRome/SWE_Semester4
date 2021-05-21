@@ -19,7 +19,7 @@ from django.views.generic.base import TemplateView
 from .views import *
 
 urlpatterns = [
-    path('delete/<id>', delete_course, name='delte_course'),
+    path('delete/<id>', delete_course, name='delete_course'),
     # course
     path('overview/page<int:page>', course_overview, name='course_overview'),
     # create course iframes
@@ -29,5 +29,4 @@ urlpatterns = [
     path('create/', create_course, name="create_course"),
 
     path('edit/<id>', edit_course, name='edit_course'),
-
 ]
