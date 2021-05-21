@@ -132,7 +132,8 @@ class UserTestCase(TestCase):
             'first_name': 'Testvorname',
             'last_name': 'Testnachname',
             'email': 'test@test.com',
-            'matr_nr': '69420'
+            'matr_nr': '69420',
+            'password': '1234'
         }
         user = StudentForm(student_form)
         # There is no way (yet) the creation could fail right?
@@ -148,7 +149,8 @@ class UserTestCase(TestCase):
             'username': 'testerino3',
             'first_name': 'Testvorname3',
             'last_name': 'Testnachname3',
-            'email': 'test3@test.com'
+            'email': 'test3@test.com',
+            'password': '1234'
         }
 
         response = self.client.post(
@@ -182,7 +184,8 @@ class UserTestCase(TestCase):
             'username': 'testerino4',
             'first_name': 'Testvorname4',
             'last_name': 'Testnachname4',
-            'email': 'test4@test.com'
+            'email': 'test4@test.com',
+            'password': '1234'
         }
 
         response = self.client.post(
@@ -202,6 +205,7 @@ class UserTestCase(TestCase):
             'last_name': 'Testnachname5',
             'email': 'test5@test.com',
             'matr_nr': '69420',
+            'password': '1234'
         }
 
         response = self.client.post(
@@ -242,6 +246,7 @@ class UserTestCase(TestCase):
             'last_name': 'Testnachname1',
             'email': 'test1@test.com',
             'matr_nr': '69421000',
+            'password': '1234'
         }
 
         response = self.client.post(
@@ -262,6 +267,7 @@ class UserTestCase(TestCase):
             'last_name': 'Testnachname1',
             'email': 'test1@test.com',
             'matr_nr': '69421000',
+            'password': '1234'
         }
         response = self.client.post(
             reverse(
@@ -283,6 +289,7 @@ class UserTestCase(TestCase):
             'last_name': 'Testnachname0',
             'email': 'test0@test.com',
             'matr_nr': '69420000',
+            'password': '1234'
         }
 
         response = self.client.post(

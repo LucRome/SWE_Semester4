@@ -1,4 +1,4 @@
-from eCourse_backend.users.models import Lecturer
+#from eCourse_backend.users.models import Lecturer
 from django.test import TestCase
 from django.contrib.auth.models import User
 from http import HTTPStatus
@@ -6,9 +6,13 @@ from django.urls import reverse
 
 from .views import *
 from .models import *
-
 from users.models import *
-from users.forms import UserForm, StudentForm
+
+#from users.models import *
+#from users.forms import UserForm, StudentForm
+
+from .forms import FileForm, ExersiceForm
+from courses.models import Exercise
 
 from django.core.management import call_command
 
