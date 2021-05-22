@@ -103,15 +103,22 @@ class FileExchangeTestCase(TestCase):
 
         response = self.client.get(reverse('create_exersice'), {})
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertRedirects(self.client.get(reverse('create_exersice'), {}),
-                             '/accounts/login/?next=/file_exchange/exercises/create/')
+        self.assertRedirects(
+            self.client.get(
+                reverse('create_exersice'),
+                {}),
+            '/accounts/login/?next=/file_exchange/exercises/create/')
 
         my_id = Exercise.objects.get(description='420 lodern Sie es!').id
         response = self.client.get(reverse('deleted_exersice', kwargs={
                                    'id': my_id}))
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertRedirects(self.client.get(reverse('deleted_exersice', kwargs={
-            'id': my_id})),
+        self.assertRedirects(
+            self.client.get(
+                reverse(
+                    'deleted_exersice',
+                    kwargs={
+                        'id': my_id})),
             '/accounts/login/?next=/file_exchange/exercises/delete/1')
 
         my_id = Exercise.objects.get(description='420 lodern Sie es!').id
@@ -193,10 +200,14 @@ class FileExchangeTestCase(TestCase):
         response = self.client.post(
             reverse('alter_exersice', kwargs={'id': my_id}), exercise_form)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTrue(Exercise.objects.get(id=my_id).description == 'Testexercise woohoo!')
+        self.assertTrue(
+            Exercise.objects.get(
+                id=my_id).description == 'Testexercise woohoo!')
 
     def test_alter_exercise_view_as_lecturer(self):
-        self.client.force_login(Lecturer.objects.get(username='test_fe_lecturer'))
+        self.client.force_login(
+            Lecturer.objects.get(
+                username='test_fe_lecturer'))
 
         exercise_form = {
             'description': 'Testexercise woohoo!',
@@ -217,7 +228,9 @@ class FileExchangeTestCase(TestCase):
         response = self.client.post(
             reverse('alter_exersice', kwargs={'id': my_id}), exercise_form)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTrue(Exercise.objects.get(id=my_id).description == 'Testexercise woohoo!')
+        self.assertTrue(
+            Exercise.objects.get(
+                id=my_id).description == 'Testexercise woohoo!')
 
     def test_upload_file_view(self):
         self.client.force_login(self.my_admin)
@@ -250,7 +263,9 @@ class FileExchangeTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_exercise_site_view_as_lecturer(self):
-        self.client.force_login(Lecturer.objects.get(username='test_fe_lecturer'))
+        self.client.force_login(
+            Lecturer.objects.get(
+                username='test_fe_lecturer'))
 
         self.assertTrue(Exercise.objects.filter(
             description='420 lodern Sie es!').exists())
