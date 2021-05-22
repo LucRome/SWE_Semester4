@@ -1,0 +1,35 @@
+\chapter{Risiken und technische Schulden}
+Jede Architekturentscheidung bringt Risiken mit sich. Einige allgemeine Risiken die bei der Planung einer Architektur auftreten können, sind in Tabelle \ref{tab:Risiken} zusammengefasst. In dieser Tabelle finden sich auch mögliche Risikobewältigungsstrategien. Das Team ist sich dadurch den Risiken bewusst und aktiv gegen das Eintreten der Risiken arbeiten. Weitere Risiken im Projekt finden sich im Projekthandbuch.
+
+\begin{table}
+    \centering
+    \tiny
+    \begin{tabularx}{\textwidth}[H]{|l|X|l|l|X|} 
+        \hline 
+        Ursache & Risiko & Auswirkung & Wahrscheinlichkeit & Vermeidung \\ 
+        \hline
+        Produktumfang & Komplexität wird unterschätzt & ernst & mittel &  \\ 
+        \hline
+            & Im Zeitverlauf über die Entwicklungsphasen wird keine klare Linie verfolgt sondern es gibt ständig neue und wechselnde Wünsche nach Funktionen; die an die SW gestellten Anforderungen werden kontinuierlich verändert. & niedrig &
+            gering & Kommunikation und Einhaltung des Lasten- und Pflichtenheftes \\ 
+        \hline
+            & Nicht umsetzbares Design & ernst & mittel & Kommunikation  \\ 
+        \hline
+        Systemarchitektur & Ungenügende Spezifikationen von Schnittstellen & ernst & hoch & Anforderungsanalyse \\ 
+        \hline
+            & Komponenten arbeiten nicht zusammen & ernst & mittel &  \\ 
+        \hline
+            & Komponeneten laufen nicht stabil & ernst & mittel &  \\ 
+        \hline
+            & Sicherheitslücken & ernst & mittel & Saubere Implementierung \\ 
+        \hline
+            & Testumgebung für Integrationstests sind nicht verfügbar & ernst & gering & Frühzeitig erkennen \\ 
+        \hline
+            & Implementierung unnötiger Eigenschaften und keine Entwicklung einer der Anforderung entsprechenden Eigenschaft & mitel & gering & Offenheit im Team fördern \\ 
+        \hline
+        Team & Mitarbeiter müssen sich in Tools einarbeiten & tolerierbar & hoch & Kommunikation  \\ 
+        \hline
+    \end{tabularx}
+    \caption{Risiken und technische Schulden im Projekt eCourse}
+    \label{tab:Risiken}
+\end{table}

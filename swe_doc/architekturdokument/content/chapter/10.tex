@@ -1,0 +1,38 @@
+\chapter{Qualitätsanforderungen}
+Da verschiedene Qualitätsanforderungen die Architekturentscheidungen oft maßgeblich beeinflussen, werden in diesen Kapitel die für das Projekt eCourse relevanten Qualitätsanforderungen behandelt. Die Erläuterungen zum Qualitätsbaum sind in Kapitel \ref{sec:q2} genauer aufgeführt.
+
+\section{Qualitätsbaum}
+In Abbildung \ref{fib:baum} ist der Qualitätsbaum zu sehen. Außgehend von der Qualität führt der Baum über eine bündelnde Zwischenstufe zu den konkreten Anforderungen. Diese sind als Blätter des Baumes dargestellt und mit einer Priorität versehen. Dabei bedeutet die Ziffer 1 die höchte Priorität. Die Ziffer 2 kennzeichnet Anforderungen, die nur sekundär zum Gelingen des Projektes beitragen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.3\textwidth]{qualitätsbaum.png}
+\caption{Qualitätsbaum im Projekt eCourse}
+\label{fib:baum}
+\end{figure}
+
+
+\section{Qualitätsszenarien}
+\label{sec:q2}
+\subsection{Datenintegrität}
+Unter Datenintegrität versteht man die Gesamtheit aller Maßnahmen, die zum Schutz der Daten in einer Datenbank beitragen. Zu den untergeordneten Zielen der Datenintegrität gehört neben dem Schutz der Daten vor externen Einflüssen auch die Vertraulichkeit der Daten, die in Kapitel \ref{sec:vertrauen} behandelt wird.
+
+\subsection{Verfügbarkeit}
+Die Verfügbarkeit ist als Prozentzahl zu verstehen, die das Verhältnis zwischen funktionierendem Betrieb und vergangener Zeit seit Inbetriebnahme angibt. Bei eCourse ist es besonders wichtig, dass die Anwendung über den Tag hinweg lauffähig ist. In der Nacht, beispielsweise zwischen 1 Uhr und 5 Uhr morgens, ist die Wahrscheinlichkeit sehr gering, dass Daten ausgetauscht werden müssen. Dieser Zeitraum bietet sich daher als Wartungsfenster an. Aufgrund der oben genannten Gründe ist Hochverfügbarkeit nicht die höchste Priorität.
+
+\subsection{Benutzerzahl}
+Da eCourse eine Anwendung ist, die allen Angehörigen einer Hochschule zugänglich sein soll, wird Wert darauf gelegt, dass die Anwendung von vielen Personen gleichzeitig verwendet werden kann.
+
+\subsection{Datenvolumen}
+Ebenso wie bei der Benutzeranzahl, ist es auch beim Datenvolumen wichtig, dass viele Daten gleichzeitig verarbeitet werden können und die Datenbank auch eine große Menge an Daten aufnehmen kann. Dafür ist vor allem die im Hintergrund agierende Software entscheidend. Diese wird allerdings vom Kunden gestellt. Daher wird das Datenvolumen nur als sekundäres Qualitätsziel eingestuft.
+
+\subsection{Latenz}
+Der Zeitraum zwischen dem Auslösen einer Aktion und dem Eintreten des daraufhin erwarteten Ergebnisses wird als Latenz beschrieben.
+Auch die Latenz wird als sekundäres Qualitätsziel eingestuft, da die Datenintegrität ein hoch priorisiertes Qualitätsziel ist. Um dieses Ziel zu realisieren, muss ein gewisses Maß an Rechenzeit in Kauf genommen werden.
+
+\subsection{Vertrauliche Daten}
+\label{sec:vertrauen}
+Unter vertraulichen Daten verstehen sich personenbezogene Daten, die es um jeden Preis zu schützen gilt. Daher wird dieser Punkt für die Anwendung eCourse auch hoch priorisiert, da über die Plattform unter Umständen auch sensible Daten der Hochschulangehörigen ausgetauscht werden.
+
+\subsection{konsistente Daten}
+Daten werden auf einer Datenbank dann als konsistent bezeichnet, wenn sie korrekt sind. Dies ist in einer Anwendung wie eCourse besonders wichtig, da hier \gls{bearbeitete Abgabe}n von \gls{Studierende}n mit den \gls{Dozierende}n ausgetauscht werden. Da es sich dabei auch um Prüfungsleistungen handeln kann, muss die Korrektheit der Dateien in jedem Fall gewährleistet sein.
