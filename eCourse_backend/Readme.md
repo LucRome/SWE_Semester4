@@ -25,7 +25,7 @@ Install with pip
 
 Execute with:
 ```
-coverage run --source='.' manage.py test users courses fileexchange
+coverage run --source='.' manage.py test
 ```
 
 Generate the html report by running:
