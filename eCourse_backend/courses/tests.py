@@ -111,11 +111,7 @@ class CoursesTestCase(TestCase):
         response = self.client.post(
             reverse('detailed_course', args=(my_id,)))
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        """
-        response = self.client.post(
-            reverse('course_overview', kwargs={'page': 1}))
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        """
+
         response = self.client.post(
             reverse('delte_course', args=(my_id,)))
         self.assertEqual(response.status_code, HTTPStatus.OK)

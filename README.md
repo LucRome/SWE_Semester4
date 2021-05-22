@@ -39,3 +39,7 @@ You can run the django project with the built in webserver via:
 ```
 python eCourse_backend/manage.py runserver
 ```
+
+## Running the tests and coverage
+
+How the tests and coverage are run is shown in the Readme in the folder eCourse_backend.
