@@ -1,29 +1,30 @@
-{% extends 'home/home_auth.html' %}
-
-{% block navbar-content %}
-{% include "admin/navbar_content.html" %}
-
-
-{% endblock %}
+{% extends base_template %}
 
 {% block title %}Kurs bearbeiten{% endblock title %}
 {% block site-title %}Kurs bearbeiten{% endblock site-title %}
 
 {% block content %}
-<form method="post">
-  {% csrf_token %}
-  {% comment %} Button: Zurück zur Übersicht {% endcomment %}
-  <a href="{% url 'home' %}"><button class="btn btn-danger" type="button">Zurück</button></a>
-  {% comment %} Textbox: Kurs Daten {% endcomment %}
-  {% include 'forms/bs4_text_form.html' with form=form %}
-  {% comment %} Button: Änderungen Speichern {% endcomment %}
-  <div class="btn-group float-left">
-      <a href="{% url 'delte_course' id=courseid %}">
-        <button type="button"  class="btn btn-danger float-right">
-          Löschen
-        </button>
-      </a>
-      <button class="btn btn-danger" type="submit">Speichern</button>
+  {% if update_success %}
+    <div class="alert alert-success alert-dismissible d-flex flex-wrap align-content-center">
+      <i class="bi bi-check-circle-fill success-icon mr-2"></i>
+      <p class="mt-0 mb-0">Änderungen erfolgreich gespeichert</p>
+      <button type="button" class="close" data-dismiss="alert">
+        <i class="bi bi-x"></i>
+      </button>
     </div>
-</form>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <a href="{% url 'home' %}"><button class="btn btn-logoblue" type="button">Zurück</button></a>
+    {% include 'forms/bs4_text_form.html' with form=form %}
+    <div class="d-flex">
+        <button class="btn btn-logoblue" type="submit">Speichern</button>
+        <a href="{% url 'delte_course' id=courseid %}" class="ml-auto">
+          <button type="button"  class="btn btn-danger">
+            Löschen
+          </button>
+        </a>
+      </div>
+  </form>
 {% endblock %}

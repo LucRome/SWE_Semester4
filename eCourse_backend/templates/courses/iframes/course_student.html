@@ -1,10 +1,10 @@
 {% extends 'iframe_template.html' %}
 
-{% block title %}Course Student List{% endblock %}
+{% block title %}Course Exercise List{% endblock %}
 
 {% block content %}
-  
-  
+
+  {# Lecturer #}
   <div class="table-responsive">
     <table class="table table-hover">
       <h2>Dozent</h2>
@@ -27,32 +27,35 @@
       </tbody>
     </table>
   </div>
-
-  <h2>Studenten</h2>
-  {# List (in form of a table #}
-  <div class="table-responsive">
+  
+  {# Exercise #}
+  
+    <div class="table-responsive">
     <table class="table table-hover">
+      <h2>Aufgaben</h2>
       {# table header #}
       <thead class="thead-light">
         <tr>
-          <th>Vorname</th>
-          <th>Nachname</th>
-          <th>Benutzername</th>
-          <th>Matrikel Nr.</th>
+          <th>ID</th>
+          <th>Abgabetermin</th>
+          <th>Beschreibung</th>
+          <th> </th>
         </tr>
-      </thead>
-
-      {# table body #}
+      </thead>      
       <tbody>
-        {% for student in students %}
-          <tr>
-            <td>{{student.first_name}}</td>
-            <td>{{student.last_name}}</td>
-            <td>{{student.username}}</td>
-            <td>{{student.matr_nr}}</td>
-          </tr>            
+        {% for e in exercise %}
+        <tr>
+          <td>{{e.id}}</td>
+          <td>{{e.submission_deadline}}</td>
+          <td>{{e.description}}</td>
+          <td>
+            <a target="_top" href="{% url 'exersice_site' id=e.id %}">
+              <button type="button"  class="btn btn-logoblue float-right">
+                Anzeigen
+              </button>
+            </a>
+          </td>
+        </tr>
         {% endfor %}
-      </tbody>
-    </table>
-  </div>
+      </tbody> 
 {% endblock  %}

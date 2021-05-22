@@ -9,6 +9,7 @@ $('.nav-tabs a').on('show.bs.tab', function (e) {
 
 $('iframe').on('load', function () {
     this.style.height = (this.contentDocument.body.scrollHeight + 20) + "px";
+    this.style.width = "100%";
 })
 
 $('.modal-button').on('click', function (e) {

@@ -9,18 +9,8 @@
 {% load static %}
 
 {% block content %}
-  {# filter form #}
-  <div class="card">
-    <div class="card-header">Filter</div>
-    <div class="card-body">
-      <form method="post">
-        {% csrf_token %}
-        {% include 'forms/bs4_text_form.html' with form=filter_form %}
-        <button class="btn btn btn-danger" type="submit">Filtern</button>
-      </form>
-    </div>
-  </div>
-  
+  {% include 'forms/filter_form.html' with filter_form=filter_form %}
+ 
   {# List (in form of a table #}
   <div class="table-responsive">
     <table class="table table-hover">

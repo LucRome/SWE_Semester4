@@ -1,0 +1,33 @@
+{% extends "lecturer/home_lecturer.html" %}
+{% load static %}
+
+{% block title %}Aufgabe{% endblock %}
+{% block site-title %}Aufgabe{% endblock %}
+
+{% block content %}
+  <div class="ml-md-2">
+    {# upload form #}
+    <iframe src="{% url 'upload' id=exersice_id %}" frameborder="0"></iframe>
+    <script src="{% static 'JS/iframe_size.js' %}"></script>
+    {# list with all files from lecturer #}
+    <h3>Hochgeladene Dateien:</h3>
+    {% for file in files_lecturer %}
+      <div class="d-flex">
+        <h5 class="mr-md-2">{{file.name}}</h5>
+        <a href="{% url 'download' id=file.id %}"> 
+          <button type="button" class="btn btn-sm btn-logoblue">Herunterladen</button>
+        </a>
+      </div>
+    {% endfor %}
+    {# list with all files from students #}
+    <h3 class="mt-md-2">Abgaben:</h3>
+    {% for file in files_student %}   
+      <div class="d-flex"> 
+        <h5 class="mr-md-2">{{file.name}}</h5>
+        <a href="{% url 'download' id=file.id %}">
+          <button type="button" class="btn btn-sm btn-logoblue">Herunterladen</button>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
