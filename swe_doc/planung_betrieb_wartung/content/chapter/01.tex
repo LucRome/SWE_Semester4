@@ -1,4 +1,47 @@
 %!TEX root = ../../main.tex
 
-\chapter{Projekthandbuch}
+\chapter{Einleitung}
 
+Die Anwendung eCourse wurde von Studenten der Fakultät Informatik an der DHBW Stuttgart entwickelt. Da das Entwicklungsteam die Anwendung von Grund auf implementiert hat, konnte das Team ein großes Maß an Wissen über die Anwendung gewinnen. Dieses Wissen soll bei der Übergabe vom Entwicklerteam an den Kunden übergehen. Dies geschieht im Rahmen dieses Dokumentes. 
+
+\section{Ablauf der Übergabe}
+Die Software wird offiziell am 20. Mai an den Kunden übergeben. Durch die agilen Entwicklungspraktiken ist es möglich, bereits nach dem ersten Sprint erste Projektergebnisse einzusehen. Die nötigen Informationen zur Inbetriebnahme finden sich in Kapitel \ref{sec:inbetrieb}.
+Am Tag der Übergabe wird das Produkt durch das Entwicklerteam vorgestellt. Dies beinhaltet auch eine Demonstration der Funktionalitäten der Anwendung auf der benötigten Hardware.
+
+\section{Inbetriebnahme}
+\label{sec:inbetrieb}
+Für die Inbetriebnahme ist mindestens ein Rechner notwendig. An diesen sollte zusätzlich ein Bildschirm, eine Maus und eine Tastatur angeschlossen sein. Ein Internetzugang ist für die initiale Inbetriebnahme ebenfalls von nöten.
+
+\section{Deployment}
+Um den Server zu starten müssen verschiedene Anforderungen erfüllt sein. \\
+Als Serverbetriebssystem wird Linux empfohlen. Diese Empfehlung entsteht dadurch, dass die Anwendung auf ein Linuxbetriebssystem getestet wurde.
+Außerdem sollte auf dem Server mindestens die Python Version 3.6 installiert sein. Ist Python installiert, müssen zusätzlich noch weitere Pythonpakete installiert werden. Dazu muss das Kommando \ref{lst: pakete} ausgeführt werden. 
+Um den Server zu starten muss in einem ersten Schritt ein Customizing durchgeführt werden. Dafür muss in der Datei \glqq settings.py\grqq\; (diese befindet sich im Verzeichnis \glqq eCourse\_backend\eCourse\_backend\grqq ) die Variable \textit{SECRET\_KEY} verändert werden. Die Variable sollte mit einer zufällig generierten Zeichenfolge initialisiert werden. 
+Danach müssen noch einige Kommandos in der Kommandozeile ausgeführt werden. Diese sind im Programmabschnitt \ref{lst: komandos} zu sehen. Die Kommandos müssen aus dem Ordner \textit{eCourse\_backend} heraus ausgeführt werden. \\
+
+\begin{lstlisting}[language = bash, caption = Pythonpakete installieren, label = lst: pakete]
+pip install -r requirements.txt
+\end{lstlisting}
+
+\begin{lstlisting}[language = bash, caption = Kommandozeilenanweisungen zum Starten des Servers, label = lst: komandos]
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py loadperms groups.yml
+python manage.py runserver
+\end{lstlisting}
+
+Optional können vor dem \textit{runserver} Kommando auch noch zwei Kommandos ausgeführt werden, mit denen Beispielbenutzer und Beispielkurse in die Datenbank geladen werden können. Diese Kommandofolge ist im Programmabschnitt \ref{lst: beispiel} zu sehen.
+
+\begin{lstlisting}[language = bash, caption = Kommandozeilenanweisungen zum Starten des Servers, label = lst: beispiel]
+python manage.py migrate
+python manage.py loadperms groups.yml
+python manage.py example_user
+python manage.py create_course
+python manage.py runserver
+\end{lstlisting}
+
+Für die Beispielnutzer ist als Startpasswort \glqq test123\grqq\; festgelegt.
+
+\section{Wartung}
+Werden neue Releases herausgegeben, können diese auf dem System installiert werden. Die Installation wird dann vom Entwicklerteam durchgeführt. Dafür muss auch eine geringe Downtime des Servers in Kauf genommen werden. 
+Allerdings ist nach der Entwicklung der Anwendung und mit offizieller Übergabe an den Kunden keine Wartung der Anwendung geplant.
