@@ -21,7 +21,7 @@ python manage.py migrate
 
 ## Coverage
 
-Install with pip
+Should be installed after installing the requirements.
 
 Execute with:
 ```
