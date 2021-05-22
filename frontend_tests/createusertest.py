@@ -2,17 +2,21 @@ import unittest
 from selenium import webdriver
 import warnings
 
+
 class CreateUserTest(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.driver = webdriver.Firefox(executable_path=r'C:\Program Files\Gecko\geckodriver.exe')
+        self.driver = webdriver.Firefox(
+            executable_path=r'C:\Program Files\Gecko\geckodriver.exe')
         self.driver.implicitly_wait(30)
         self.driver.maximize_window()
         self.driver.get("http://localhost:8000/accounts/login/?next=/")
-        warnings.filterwarnings(action="ignore", message="unclosed", category=ResourceWarning)
+        warnings.filterwarnings(
+            action="ignore",
+            message="unclosed",
+            category=ResourceWarning)
 
-        
         username = self.driver.find_element_by_name("username")
         password = self.driver.find_element_by_name("password")
 
@@ -22,16 +26,18 @@ class CreateUserTest(unittest.TestCase):
         username.send_keys("admin")
         password.send_keys("admin123")
 
-        self.driver.find_element_by_xpath("/html/body/main/form/div/button").click()
-        self.driver.get("http://localhost:8000/users/admin/user_administration/")
-
+        self.driver.find_element_by_xpath(
+            "/html/body/main/form/div/button").click()
+        self.driver.get(
+            "http://localhost:8000/users/admin/user_administration/")
 
     def test_createuser_officeuser_completeuser(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         username = driver.find_element_by_id("id_username")
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
@@ -51,19 +57,23 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[3]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[3]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[3]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[3]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertTrue("kpfaff@dhbw.de" in table.text and "Karolin" in table.text and "Pfaff" in table.text and "kpfaff" in table.text)
+        self.assertTrue(
+            "kpfaff@dhbw.de" in table.text and "Karolin" in table.text and "Pfaff" in table.text and "kpfaff" in table.text)
         driver.switch_to.default_content()
 
     def test_crateuser_officeuser_onlyusername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         username = driver.find_element_by_id("id_username")
 
         username.clear()
@@ -74,19 +84,22 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[3]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[3]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[3]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[3]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
         self.assertTrue("mholtzmann" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_officeuser_nousername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         username = driver.find_element_by_id("id_username")
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
@@ -105,19 +118,23 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[3]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[3]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[3]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[3]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertFalse("sfiedler@dhbw.de" in table.text and "Simone" in table.text and "Fiedler" in table.text)
+        self.assertFalse(
+            "sfiedler@dhbw.de" in table.text and "Simone" in table.text and "Fiedler" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_officeuser_invalidusername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         username = driver.find_element_by_id("id_username")
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
@@ -137,21 +154,26 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[3]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[3]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[3]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[3]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertFalse("sfiedler@dhbw.de" in table.text and "Simone" in table.text and "Fiedler" in table.text)
+        self.assertFalse(
+            "sfiedler@dhbw.de" in table.text and "Simone" in table.text and "Fiedler" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_lecturer_completeuser(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[1]").click()
-        
+
         username = driver.find_element_by_id("id_username")
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
@@ -171,21 +193,26 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[2]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[2]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[2]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[2]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertTrue("packermann@dhbw.de" in table.text and "Petra" in table.text and "Ackermann" in table.text and "packermann" in table.text)
+        self.assertTrue(
+            "packermann@dhbw.de" in table.text and "Petra" in table.text and "Ackermann" in table.text and "packermann" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_lecturer_onlyusername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[1]").click()
-        
+
         username = driver.find_element_by_id("id_username")
 
         username.clear()
@@ -196,21 +223,25 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[2]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[2]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[2]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[2]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
         self.assertTrue("mabt" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_lecturer_nousername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[1]").click()
-        
+
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
         email = driver.find_element_by_id("id_email")
@@ -227,21 +258,26 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[2]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[2]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[2]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[2]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertFalse("tjunker@dhbw.de" in table.text and "Thomas" in table.text and "Junker" in table.text)
+        self.assertFalse(
+            "tjunker@dhbw.de" in table.text and "Thomas" in table.text and "Junker" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_lecturer_invalidusername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[1]").click()
-        
+
         username = driver.find_element_by_id("id_username")
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
@@ -261,21 +297,26 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[2]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[2]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[2]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[2]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertFalse("cfinkel@dhbw.de" in table.text and "Claudia" in table.text and "Finkel" in table.text and "?cfinkel?" in table.text)
+        self.assertFalse(
+            "cfinkel@dhbw.de" in table.text and "Claudia" in table.text and "Finkel" in table.text and "?cfinkel?" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_student_completeuser(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[2]").click()
-        
+
         username = driver.find_element_by_id("id_username")
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
@@ -298,21 +339,26 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[1]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[1]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[1]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[1]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertTrue("mbaier@dhbw.de" in table.text and "Mandy" in table.text and "Baier" in table.text and "mbaier" in table.text and "690815" in table.text)
+        self.assertTrue(
+            "mbaier@dhbw.de" in table.text and "Mandy" in table.text and "Baier" in table.text and "mbaier" in table.text and "690815" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_student_onlyusername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[2]").click()
-        
+
         username = driver.find_element_by_id("id_username")
 
         username.clear()
@@ -323,21 +369,25 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[1]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[1]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[1]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[1]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
         self.assertTrue("yeisenberg" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_student_nousername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[2]").click()
-        
+
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
         email = driver.find_element_by_id("id_email")
@@ -357,21 +407,26 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[1]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[1]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[1]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[1]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertFalse("jegger@dhbw.de" in table.text and "Jessika" in table.text and "Egger" in table.text and "420420" in table.text)
+        self.assertFalse(
+            "jegger@dhbw.de" in table.text and "Jessika" in table.text and "Egger" in table.text and "420420" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_student_invalidusername(self):
         driver = self.driver
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[4]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[4]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[4]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[4]/iframe"))
         driver.find_element_by_xpath("/html/body/div/div/button").click()
         driver.find_element_by_xpath("/html/body/div/div/div/a[2]").click()
-        
+
         username = driver.find_element_by_id("id_username")
         first_name = driver.find_element_by_id("id_first_name")
         last_name = driver.find_element_by_id("id_last_name")
@@ -394,13 +449,15 @@ class CreateUserTest(unittest.TestCase):
         driver.switch_to.default_content()
 
         driver.get("http://localhost:8000/users/admin/user_administration/")
-        driver.find_element_by_xpath("/html/body/main/nav/div/ul/li[2]/a").click()
+        driver.find_element_by_xpath(
+            "/html/body/main/nav/div/ul/li[2]/a").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("/html/body/main/div/div[2]/iframe"))
+        driver.switch_to.frame(driver.find_element_by_xpath(
+            "/html/body/main/div/div[2]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
-        self.assertFalse("swirth@dhbw.de" in table.text and "Silke" in table.text and "Wirth" in table.text and "?swirth?" in table.text and "123456" in table.text)
+        self.assertFalse(
+            "swirth@dhbw.de" in table.text and "Silke" in table.text and "Wirth" in table.text and "?swirth?" in table.text and "123456" in table.text)
         driver.switch_to.default_content()
-
 
     @classmethod
     def tearDown(self):
