@@ -70,15 +70,6 @@ class FileExchangeTestCase(TestCase):
         self.assertTrue(Course.objects.filter(name='test_course_fe').exists())
 
         # create an exercise to do stuff with in the tests
-        """
-        exercise_form = {
-            'course': Course.objects.get(name='test_course_fe'),
-            'description': '420 lodern Sie es!',
-            'start_time': '2020-08-08 14:00:00',
-            'work_time_duration': '01:00:00',
-            'submission_deadline': '2020-08-08 15:15:00',
-        }
-        """
         e = Exercise(
             description='420 lodern Sie es!',
             start_time='2021-08-08 14:00:00',
@@ -121,8 +112,6 @@ class FileExchangeTestCase(TestCase):
         self.assertRedirects(self.client.get(reverse('alter_exersice', kwargs={
             'id': my_id})),
             '/accounts/login/?next=/file_exchange/exercises/alter/1')
-
-        # TODO upload_file, download_file
 
     def test_overview_view(self):
         self.client.force_login(self.my_admin)
