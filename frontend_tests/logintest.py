@@ -8,7 +8,7 @@ class LoginTest(unittest.TestCase):
     @classmethod
     def setUp(self):
         self.driver = webdriver.Firefox(
-            executable_path=r'C:\Program Files\Gecko\geckodriver.exe')
+            executable_path=r'drivers\geckodriver.exe')
         self.driver.implicitly_wait(30)
         self.driver.maximize_window()
         self.driver.get("http://localhost:8000/accounts/login/?next=/")
