@@ -34,3 +34,5 @@ coverage html
 ```
 
 Look at the created report, starting at `/htmlcov/index.html`
+
+The test coverage for the whole project is at 78%.
