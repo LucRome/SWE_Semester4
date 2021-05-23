@@ -29,5 +29,4 @@ urlpatterns = [
     path('create/', create_course, name="create_course"),
 
     path('edit/<id>', edit_course, name='edit_course'),
-
 ]
