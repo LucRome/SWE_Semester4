@@ -6,6 +6,7 @@ import warnings
 get_driver = GetGeckoDriver()
 get_driver.install()
 
+
 class LogoutTest(unittest.TestCase):
 
     @classmethod

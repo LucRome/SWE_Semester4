@@ -1,4 +1,5 @@
-# if tests fail, you may need to run tests again for real results (depending on browser configurations) 
+# if tests fail, you may need to run tests again for real results
+# (depending on browser configurations)
 
 import unittest
 from get_gecko_driver import GetGeckoDriver
@@ -7,6 +8,7 @@ import warnings
 
 get_driver = GetGeckoDriver()
 get_driver.install()
+
 
 class CreateUserTest(unittest.TestCase):
 

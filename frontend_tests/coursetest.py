@@ -8,6 +8,7 @@ import warnings
 get_driver = GetGeckoDriver()
 get_driver.install()
 
+
 class EditUserTest(unittest.TestCase):
     @classmethod
     def setUp(self):
