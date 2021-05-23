@@ -3,6 +3,7 @@ from get_gecko_driver import GetGeckoDriver
 from selenium import webdriver
 import warnings
 
+
 class LogoutTest(unittest.TestCase):
 
     @classmethod
