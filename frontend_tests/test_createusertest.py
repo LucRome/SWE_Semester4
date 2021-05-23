@@ -1,6 +1,3 @@
-# if tests fail, you may need to run tests again for real results
-# (depending on browser configurations)
-
 import unittest
 from get_gecko_driver import GetGeckoDriver
 from selenium import webdriver
@@ -29,7 +26,7 @@ class CreateUserTest(unittest.TestCase):
         username.clear()
         password.clear()
 
-        username.send_keys("admin")
+        username.send_keys("KATRIN")
         password.send_keys("admin123")
 
         self.driver.find_element_by_xpath(
@@ -190,10 +187,10 @@ class CreateUserTest(unittest.TestCase):
         last_name.clear()
         email.clear()
 
-        username.send_keys("packermann")
-        first_name.send_keys("Petra")
-        last_name.send_keys("Ackermann")
-        email.send_keys("packermann@dhbw.de")
+        username.send_keys("hilfmir")
+        first_name.send_keys("nein")
+        last_name.send_keys("nochmalnein")
+        email.send_keys("maa@dhbw.de")
 
         driver.find_element_by_id("create_user_btn").click()
         driver.switch_to.default_content()
@@ -206,7 +203,7 @@ class CreateUserTest(unittest.TestCase):
             "/html/body/main/div/div[2]/iframe"))
         table = driver.find_element_by_xpath("/html/body/div[2]/table/tbody")
         self.assertTrue(
-            "packermann@dhbw.de" in table.text and "Petra" in table.text and "Ackermann" in table.text and "packermann" in table.text)
+            "maa@dhbw.de" in table.text and "nein" in table.text and "nochmalnein" in table.text and "hilfmir" in table.text)
         driver.switch_to.default_content()
 
     def test_createuser_lecturer_onlyusername(self):

@@ -22,7 +22,7 @@ class LogoutTest(unittest.TestCase):
         username.clear()
         password.clear()
 
-        username.send_keys("admin")
+        username.send_keys("KATRIN")
         password.send_keys("admin123")
 
         self.driver.find_element_by_xpath(

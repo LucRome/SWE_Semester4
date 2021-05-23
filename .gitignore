@@ -154,3 +154,7 @@ dmypy.json
 *.fls 
 *.pdf
 
+## selenium
+
+geckodriver/
+*.log
