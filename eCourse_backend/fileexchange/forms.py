@@ -38,7 +38,7 @@ class DateTimeMultiWidget(MultiWidget):
         date_str, time_str = super().value_from_datadict(data, files, name)
         # DateField expects a single string that it can parse into a date.
 
-        if date_str == time_str == '':
+        if date_str == '' and time_str == '':
             return None
 
         if time_str == '':
