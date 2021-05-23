@@ -1,16 +1,17 @@
+# if tests fail, you may need to run tests again for real results (depending on browser configurations) 
+
 import unittest
 from get_gecko_driver import GetGeckoDriver
 from selenium import webdriver
 import warnings
 
+get_driver = GetGeckoDriver()
+get_driver.install()
 
 class CreateUserTest(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        get_driver = GetGeckoDriver()
-        get_driver.install()
-
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
         self.driver.maximize_window()
