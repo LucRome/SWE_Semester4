@@ -39,3 +39,12 @@ You can run the django project with the built in webserver via:
 ```
 python eCourse_backend/manage.py runserver
 ```
+
+## tests coverage
+
+```
+coverage run -p ./frontend_tests/frontend_tests_helper.py
+coverage run -p eCourse_backend/manage.py test ./
+coverage combine
+coverage report
+```
