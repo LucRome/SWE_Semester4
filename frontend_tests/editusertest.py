@@ -1,13 +1,15 @@
 import unittest
+from get_gecko_driver import GetGeckoDriver
 from selenium import webdriver
 import warnings
-
 
 class EditUserTest(unittest.TestCase):
     @classmethod
     def setUp(self):
-        self.driver = webdriver.Firefox(
-            executable_path=r'drivers\geckodriver.exe')
+        get_driver = GetGeckoDriver()
+        get_driver.install()
+
+        self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
         self.driver.maximize_window()
         self.driver.get("http://localhost:8000/accounts/login/?next=/")
